@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Login from "./components/Login"
-import Carta from "./components/CartinhaPessoal"
+import Cartinha from "./components/CartinhaPessoal"
 import CadastroPontos from "./components/CadastroPontos"
 function App() {
 
@@ -9,8 +9,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/cartinha" element={<Carta />}></Route>
-        <Route path="/pontos" element={<CadastroPontos />}></Route>
+        <Route path="/cartinha" element={<Cartinha />}></Route>
+        <Route path="/pontos/:id?" element={<CadastroPontos />}></Route>
       </Routes>
     </Router>
   )
