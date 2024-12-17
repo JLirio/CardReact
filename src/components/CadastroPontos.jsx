@@ -1,16 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../services/api"; // Suponha que a API tenha métodos definidos para CRUD
+import api from "../services/api"; 
 
 function CadastroPontos() {
   const navigate = useNavigate();
-  const { userId } = useParams();
-  console.log("userId: ", userId);
+  
+  let  userId  = useParams();
    // Captura o ID da URL
   const [user, setUser] = useState(null); // Estado para armazenar o usuário carregado
   
   useEffect(() => {
-    console.log(userId);
     if (userId) {
       // Se um ID for fornecido, busque o usuário
       getUserById(userId);
@@ -18,14 +17,15 @@ function CadastroPontos() {
   }, [userId]);
 
   const getUserById = async (id) => {
-    console.log(id);
-    
+
     try {
-      console.log("hehe");
       
-      const response = await api.get(`/usuarios/id=${id}`); // Chama a API para obter o usuário pelo ID
-      setUser(response.data); // Define o usuário no estado
-      console.log(response);
+      let response = await api.get(`/usuarios/${id}`); // Chama a API para obter o usuário pelo ID
+      
+      await setUser(response.data);
+      console.log(response.data);
+       // Define o usuário no estado
+      console.log(user);
       
     } catch (error) {
       console.error("Erro ao buscar usuário:", error);
@@ -69,7 +69,7 @@ function CadastroPontos() {
     if (userId) {
       // Caso o ID esteja presente, faz um PATCH para atualizar o usuário
       try {
-        await api.patch(`/usuarios/${userId}`, novoCadastro); // Atualiza o usuário existente
+        await api.put(`/usuarios/${userId}`, novoCadastro); // Atualiza o usuário existente
         console.log('Usuário atualizado com sucesso!');
         navigate('/cartinha'); // Redireciona para a página de Cartinha após atualização
       } catch (error) {
