@@ -55,7 +55,7 @@ function CartinhaPessoal() {
   const handleViewCartinha = (userId) => {
     navigate(`/pontos/${userId}`); // Redireciona para a rota /pontos/:userId
   };
-  
+
   useEffect(() => {
     getUsers();
   }, []);
