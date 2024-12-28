@@ -23,6 +23,10 @@ function CartinhaPessoal() {
     }
   }
 
+  const handleViewCartinha = (searchId) => {
+    navigate(`/pontos/${searchId}`); // Redireciona para a rota /pontos/:userId
+  };
+
   // Função para atualizar os filtros
   useEffect(() => {
     const lowerName = searchName.toLowerCase();
