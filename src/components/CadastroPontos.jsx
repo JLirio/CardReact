@@ -4,21 +4,29 @@ import api from "../services/api";
 
 function CadastroPontos() {
   const navigate = useNavigate();
-  let userId = useParams(); // Captura o ID da URL
-  const [user, setUser] = useState(null); // Estado para armazenar o usuário carregado
+  let userId = useParams();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (userId.id) {
-      console.log(userId);
-      
-      // Se um ID for fornecido, busque o usuário
       getUserById(userId);
     }
   }, [userId]);
 
+  // async function getUsers() {
+  //   try {
+  //     const response = await api.get("/usuarios");
+  //     setUsers(response.data);
+  //   } catch (error) {
+  //     console.error("Erro ao buscar usuários:", error);
+  //   }
+  // }
+
   const getUserById = async (id) => {
+    console.log(id);
+
     try {
-      let response = await api.get(`/usuarios/user/?id=${id.id}`); // Chama a API para obter o usuário pelo ID
+      const response = await api.get(`/usuarios/user/?id=${id.id}`);
       setUser(response.data);
     } catch (error) {
       console.error("Erro ao buscar usuário:", error);
@@ -32,7 +40,7 @@ function CadastroPontos() {
     const email = document.getElementById("email").value.trim();
     const vendasA = parseFloat(document.getElementById("vendasA").value.trim());
     const vendasB = parseFloat(document.getElementById("vendasB").value.trim());
-    const vendasTotais = vendasA + vendasB; // Calcula as vendas totais
+    const vendasTotais = vendasA + vendasB;
 
     let hasError = false;
 
@@ -54,96 +62,108 @@ function CadastroPontos() {
       vendasB,
     };
 
-    if (userId && userId.id) {
-      // Se estiver atualizando um usuário existente
-      try {
-        await api.put(`/usuarios/${userId.id}`, novoCadastro); // Atualiza o usuário existente
-        console.log(novoCadastro);
-        
+    try {
+      if (userId && userId.id) {
+        await api.put(`/usuarios/${userId.id}`, novoCadastro);
         console.log("Usuário atualizado com sucesso!");
-        navigate("/cartinha"); // Redireciona para a página de Cartinha após atualização
-      } catch (error) {
-        console.error("Erro ao atualizar usuário:", error);
-      }
-    } else {
-      try {
-        await api.post("/usuarios", novoCadastro); // Cria um novo usuário
+      } else {
+        await api.post("/usuarios", novoCadastro);
         console.log("Novo usuário cadastrado com sucesso!");
-        navigate("/cartinha"); // Redireciona para a página de Cartinha após criação
-      } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error);
       }
+      navigate("/cartinha");
+    } catch (error) {
+      console.error("Erro ao salvar usuário:", error);
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
-      <div id="app" className="max-w-2xl w-full bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-center text-blue-500 text-2xl font-bold mb-6">Cadastro de Pontos</h1>
-        <form id="cadastroPontosForm" onSubmit={handleCadastroPontos} className="space-y-4">
+    <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
+        <button
+          onClick={() => navigate("/")} // Redireciona para /login
+          className=" bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+        >
+          Sair
+        </button>
+      </div>
+      <div className="max-w-3xl w-full bg-white p-8 rounded-xl shadow-lg">
+        <h1 className="text-center text-purple-700 text-4xl font-extrabold mb-8">
+          Cadastro de Pontos
+        </h1>
+        <form onSubmit={handleCadastroPontos} className="space-y-6">
           <div>
-            <label htmlFor="userName" className="block text-gray-700">Nome do Usuário:</label>
+            <label htmlFor="userName" className="block text-lg font-medium text-gray-700">
+              Nome do Usuário:
+            </label>
             <input
               type="text"
               id="userName"
               name="userName"
               required
               defaultValue={user ? user.name : ""}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
             />
             <span id="errorUserName" className="text-red-500 text-sm"></span>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-gray-700">Email:</label>
+            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+              Email:
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               required
               defaultValue={user ? user.email : ""}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
             />
             <span id="errorEmail" className="text-red-500 text-sm"></span>
           </div>
 
           <div>
-            <label htmlFor="vendasA" className="block text-gray-700">Vendas Tipo A:</label>
+            <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
+              Vendas Tipo A:
+            </label>
             <input
               type="number"
               id="vendasA"
               name="vendasA"
               defaultValue={user ? user.vendasA : ""}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
           <div>
-            <label htmlFor="vendasB" className="block text-gray-700">Vendas Tipo B:</label>
+            <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
+              Vendas Tipo B:
+            </label>
             <input
               type="number"
               id="vendasB"
               name="vendasB"
               defaultValue={user ? user.vendasB : ""}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
           <div>
-            <label htmlFor="vendasTotais" className="block text-gray-700">Vendas Totais:</label>
+            <label htmlFor="vendasTotais" className="block text-lg font-medium text-gray-700">
+              Vendas Totais:
+            </label>
             <input
               type="number"
               id="vendasTotais"
               name="vendasTotais"
               value={user ? user.vendasTotais : ""}
               readOnly
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full mt-2 p-3 bg-gray-100 border border-gray-300 rounded-lg"
             />
           </div>
 
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg w-full"
+            className="w-full bg-purple-700 hover:bg-purple-800 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300"
           >
             {userId ? "Atualizar Cadastro" : "Cadastrar"}
           </button>
@@ -151,7 +171,7 @@ function CadastroPontos() {
 
         <button
           onClick={() => navigate("/cartinha")}
-          className="mt-4 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg w-full"
+          className="mt-4 w-full bg-gray-500 hover:bg-gray-600 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300"
         >
           Voltar
         </button>
