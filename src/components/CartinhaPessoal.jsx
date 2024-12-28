@@ -23,11 +23,10 @@ function CartinhaPessoal() {
     }
   }
 
-  // Função para redirecionar para a página "Cadastro de Pontos" com o userId
-  const handleViewCartinha = (seachId) => {
-    console.log(seachId);
-    
-    navigate(`/pontos/${seachId}`); // Redireciona para a rota /pontos/:userId
+
+  const handleViewCartinha = (searchId) => {
+    navigate(`/pontos/${searchId}`); // Redireciona para a rota /pontos/:userId
+
   };
 
   // Função para atualizar os filtros
