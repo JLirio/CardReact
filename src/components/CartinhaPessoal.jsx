@@ -23,8 +23,10 @@ function CartinhaPessoal() {
     }
   }
 
+
   const handleViewCartinha = (searchId) => {
     navigate(`/pontos/${searchId}`); // Redireciona para a rota /pontos/:userId
+
   };
 
   // Função para atualizar os filtros
@@ -38,7 +40,8 @@ function CartinhaPessoal() {
         (!searchName || user.name.toLowerCase().includes(lowerName)) &&
         (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
         (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
-    );
+
+    ).sort((a, b) => b.vendasTotais - a.vendasTotais);
     setFilteredUsers(results);
   }, [searchName, searchCargo, searchGroup, users]); // Atualiza os filtros dinamicamente
 
@@ -191,25 +194,25 @@ function CartinhaPessoal() {
         )}
       </div>
       <div className="mt-6 flex space-x-4 justify-center">
-          <button
-            onClick={exportarCSV}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
-          >
-            Exportar como CSV
-          </button>
-          <button
-            onClick={() => navigate("/pontos")} // Redireciona para /pontos sem o userId
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
-          >
-            Novo cadastro
-          </button>
-          <button
-            onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
-          >
-            Minha cartinha
-          </button>
-        </div>
+        <button
+          onClick={exportarCSV}
+          className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+        >
+          Exportar como CSV
+        </button>
+        <button
+          onClick={() => navigate("/pontos")} // Redireciona para /pontos sem o userId
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+        >
+          Novo cadastro
+        </button>
+        <button
+          onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+        >
+          Minha cartinha
+        </button>
+      </div>
     </div>
   );
 }
