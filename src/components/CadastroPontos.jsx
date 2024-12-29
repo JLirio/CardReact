@@ -123,7 +123,7 @@ function CadastroPontos() {
 
           <div>
             <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
-              Vendas Tipo A:
+              Vendas Jurídico
             </label>
             <input
               type="number"
@@ -136,7 +136,7 @@ function CadastroPontos() {
 
           <div>
             <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
-              Vendas Tipo B:
+              Vendas Comercial
             </label>
             <input
               type="number"

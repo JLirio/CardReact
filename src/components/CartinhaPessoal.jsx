@@ -85,7 +85,7 @@ function CartinhaPessoal() {
             onClick={() => handleViewCartinha(user.id)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
           >
-            Ver Cartinha
+            Editar
           </button>
         </td>
       </tr>
