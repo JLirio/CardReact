@@ -31,10 +31,10 @@ function FifaCard() {
     };
 
     const regexImgLink = (imgLink) => {
-        const match = imgLink?.match(/(?<=d\/)(.*?)(?=\/view\?)/);
+        let match = []
+        match = imgLink?.match(/(?<=d\/)(.*?)(?=\/view\?)/);
         const directLink = "https://drive.google.com/thumbnail?id="
         // Verifica se houve uma correspondência e retorna o valor extraído ou null
-        console.log(`${directLink}${match[0]}`)
         return match ? `${directLink}${match[0]}` : null;
     }
 
