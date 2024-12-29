@@ -30,8 +30,13 @@ function FifaCard() {
         }
     };
 
-    const userImg = 'https://i.pinimg.com/736x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg'
-
+    const regexImgLink = (imgLink) => {
+        const match = imgLink?.match(/(?<=d\/)(.*?)(?=\/view\?)/);
+        const directLink = "https://drive.google.com/thumbnail?id="
+        // Verifica se houve uma correspondência e retorna o valor extraído ou null
+        console.log(`${directLink}${match[0]}`)
+        return match ? `${directLink}${match[0]}` : null;
+    }
 
     return (
         <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen w-full flex flex-col items-center justify-center">
@@ -71,7 +76,7 @@ function FifaCard() {
                     {/* Player Image and Name */}
                     <div className="mt-4">
                         <img
-                            src={userImg}
+                            src={regexImgLink(user?.imgUser)}
                             alt={`'s Country Flag`}
                             className="mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
                         />
