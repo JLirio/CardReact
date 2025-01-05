@@ -6,6 +6,7 @@ function CadastroPontos() {
   const navigate = useNavigate();
   let userId = useParams();
   const [user, setUser] = useState(null);
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     if (userId.id) {
@@ -41,6 +42,9 @@ function CadastroPontos() {
     const vendasA = parseFloat(document.getElementById("vendasA").value.trim());
     const vendasB = parseFloat(document.getElementById("vendasB").value.trim());
     const vendasTotais = vendasA + vendasB;
+    const senha = document.getElementById("senha").value.trim();
+    const cargo = document.getElementById("cargo").value.trim();
+    const group = document.getElementById("group").value.trim();
 
     let hasError = false;
 
@@ -60,6 +64,9 @@ function CadastroPontos() {
       email,
       vendasA,
       vendasB,
+      senha,
+      cargo,
+      group,
     };
 
     try {
@@ -159,6 +166,50 @@ function CadastroPontos() {
               readOnly
               className="w-full mt-2 p-3 bg-gray-100 border border-gray-300 rounded-lg"
             />
+          </div>
+          <div>
+            <label htmlFor="senha" className="text-lg font-medium text-gray-700">
+              Atualizar senha:
+            </label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              required
+              defaultValue={user ? user.senha : ""}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+            />
+            <span id="errorEmail" className="text-red-500 text-sm"></span>
+          </div>
+
+          <div>
+            <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
+              Cargo:
+            </label>
+            <input
+              type="text"
+              id="cargo"
+              name="cargo"
+              required
+              defaultValue={user ? user.cargo : ""}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+            />
+            <span id="errorEmail" className="text-red-500 text-sm"></span>
+          </div>
+
+          <div>
+            <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
+              Equipe:
+            </label>
+            <input
+              type="text"
+              id="group"
+              name="group"
+              required
+              defaultValue={user ? user.group : ""}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+            />
+            <span id="errorEmail" className="text-red-500 text-sm"></span>
           </div>
 
           <button

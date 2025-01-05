@@ -193,6 +193,11 @@ function CartinhaPessoal() {
           </p>
         )}
       </div>
+      {/* className={
+            userInfo?.cargo === "Admin"
+              ? "px-4 py-2 border flex space-x-2 justify-center"
+              : "hidden"
+          } */}
       <div className="mt-6 flex space-x-4 justify-center">
         <button
           onClick={exportarCSV}
@@ -201,11 +206,12 @@ function CartinhaPessoal() {
           Exportar como CSV
         </button>
         <button
-          onClick={() => navigate("/pontos")} // Redireciona para /pontos sem o userId
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+          onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
+          className={userInfo.cargo === "Admin" ? "bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
         >
           Novo cadastro
         </button>
+
         <button
           onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
