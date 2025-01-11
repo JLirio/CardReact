@@ -2,6 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-stroke{
--webkit-text-stroke: 1px #eeeeee92;   
+.text-stroke {
+    -webkit-text-stroke: 1px #eeeeee92;
+}
+
+.pulse-1 {
+    box-shadow: 0 0 0 0 rgba(241, 216, 40, 0);
+    transform: scale(1.2);
+    animation: pulse-first 2s infinite;
+}
+
+.pulse-2 {
+    box-shadow: 0 0 0 0 rgba(241, 216, 40, 0);
+    transform: scale(0.3);
+    animation: pulse-second 2s infinite;
+}
+
+.pulse-3 {
+    box-shadow: 0 0 0 0 rgba(241, 216, 40, 0);
+    transform: scale(0.3);
+    animation: pulse-third 2s infinite;
+}
+
+@keyframes pulse-first {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgb(241, 218, 40, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(241, 218, 40, 0.4);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(241, 216, 40, 0);
+    }
+}
+
+@keyframes pulse-second {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgb(189, 189, 222, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(189, 189, 222, 0.4);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(189, 189, 222, 0);
+    }
+}
+
+@keyframes pulse-third {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgb(217, 137, 98, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(217, 137, 98, 0.4);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(217, 137, 98, 0);
+    }
 }
