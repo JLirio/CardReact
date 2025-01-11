@@ -84,23 +84,17 @@ function FifaCard() {
                         <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{user?.name}</h3>
                     </div>
                     {/* Stats */}
-                    <div className="mt-12 text-sm text-gray-700 grid grid-cols-3">
+                    <div className="mt-12 text-sm text-gray-700">
                         <p>
                             <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                                <p>TOTAIS</p>
-                                <p className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">{user?.vendasTotais}</p>
-                            </div>
-                        </p>
-                        <p>
-                            <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                                <p>JURI</p>
-                                <p className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">{user?.vendasA}</p>
-                            </div>
-                        </p>
-                        <p>
-                            <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                                <p>COME</p>
-                                <p className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">{user?.vendasB}</p>
+                                <p className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                                    <p>{
+                                        user?.vendasA > 0 ?
+                                            `Jurídico: ${user?.vendasA}` :
+                                            `Comercial: ${user?.vendasB}`
+                                    }</p>
+
+                                </p>
                             </div>
                         </p>
 
