@@ -135,23 +135,26 @@ function CartinhaPessoal() {
   }, [filteredUsers])
 
   const renderTableRows = () => {
-
-
+    
     console.log(filteredUsers.length);
 
     return filteredUsers.map((user, index) => {
       // Determinando a cor de fundo para os 3 primeiros lugares
-      let rowClass = "hover:bg-yellow-100 transition duration-300"; // Classe padrão
+      let rowClass = `bg--500`; // Classe padrão
       if (index === 0) {
-        rowClass = "bg-gold-500"; // Primeiro lugar
+        rowClass = `bg-yellow-300`; // Primeiro lugar
       } else if (index === 1) {
-        rowClass = "bg-silver-500"; // Segundo lugar
+        rowClass = "bg-gray-300"; // Segundo lugar
       } else if (index === 2) {
-        rowClass = "bg-bronze-500"; // Terceiro lugar
+        rowClass = "bg-amber-600"; // Terceiro lugar
       }
 
       return (
-        <tr key={user.id} className={rowClass}>
+        <tr
+          key={user.id}
+          className={
+            `hover:cursor-pointer transition duration-300 ${rowClass}`
+          }>
           {/* Alterando ID para posição */}
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {index === 0 ? `👑${index + 1}`
