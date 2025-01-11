@@ -5,7 +5,8 @@ import api from "../services/api";
 function CadastroPontos() {
   const navigate = useNavigate();
   let userId = useParams();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
+  const [sellerType, setSellerType] = useState('')
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
@@ -34,14 +35,19 @@ function CadastroPontos() {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      setSellerType(user?.vendasA > 0 ? 'juridico' : 'comercial')
+    }
+  }, [user])
+
   const handleCadastroPontos = async (e) => {
     e.preventDefault();
 
     const userName = document.getElementById("userName").value.trim();
     const email = document.getElementById("email").value.trim();
-    const vendasA = parseFloat(document.getElementById("vendasA").value.trim());
-    const vendasB = parseFloat(document.getElementById("vendasB").value.trim());
-    const vendasTotais = vendasA + vendasB;
+    let vendasA = parseFloat(document.getElementById("vendasA").value.trim());
+    let vendasB = parseFloat(document.getElementById("vendasB").value.trim());
     const senha = document.getElementById("senha").value.trim();
     const cargo = document.getElementById("cargo").value.trim();
     const group = document.getElementById("group").value.trim();
@@ -58,6 +64,12 @@ function CadastroPontos() {
     }
 
     if (hasError) return;
+
+    if (sellerType === 'juridico' && vendasA > 0) {
+      vendasB = 0
+    } else if (sellerType === 'comercial' && vendasB > 0) {
+      vendasA = 0
+    }
 
     const novoCadastro = {
       name: userName,
@@ -129,44 +141,47 @@ function CadastroPontos() {
           </div>
 
           <div>
-            <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
-              Vendas Jurídico
+            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+              Tipo de Vendedor
             </label>
-            <input
-              type="number"
-              id="vendasA"
-              name="vendasA"
-              defaultValue={user ? user.vendasA : ""}
+            <select
               className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+              onChange={(e) => setSellerType(e.target.value)}
+              value={sellerType}
+            >
+              <option value="juridico">Jurídico</option>
+              <option value="comercial">Comercial</option>
+            </select>
           </div>
 
           <div>
-            <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
-              Vendas Comercial
-            </label>
-            <input
-              type="number"
-              id="vendasB"
-              name="vendasB"
-              defaultValue={user ? user.vendasB : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
+            <div className={sellerType === 'juridico' ? 'block' : 'hidden'}>
+              <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
+                Vendas Jurídico
+              </label>
+              <input
+                type="number"
+                id="vendasA"
+                name="vendasA"
+                defaultValue={user ? user.vendasA : ""}
+                className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
+            <div className={sellerType === 'comercial' ? 'block' : 'hidden'}>
+              <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
+                Vendas Comercial
+              </label>
+              <input
+                type="number"
+                id="vendasB"
+                name="vendasB"
+                defaultValue={user ? user.vendasB : ""}
+                className={`w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500`}
+              />
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="vendasTotais" className="block text-lg font-medium text-gray-700">
-              Vendas Totais:
-            </label>
-            <input
-              type="number"
-              id="vendasTotais"
-              name="vendasTotais"
-              value={user ? user.vendasTotais : ""}
-              readOnly
-              className="w-full mt-2 p-3 bg-gray-100 border border-gray-300 rounded-lg"
-            />
-          </div>
           <div>
             <label htmlFor="senha" className="text-lg font-medium text-gray-700">
               Atualizar senha:

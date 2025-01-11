@@ -207,7 +207,6 @@ function CartinhaPessoal() {
 
   };
 
-
   const exportarCSV = () => {
     const csvHeader = "ID,Nome,Email,Vendas Jurico,Vendas Comercial,Vendas Totais,Cargo\n";
     const csvRows = users
@@ -324,8 +323,6 @@ function CartinhaPessoal() {
         )}
       </div>
 
-
-
       <div className="absolute  top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
         <button
           onClick={() => navigate("/")} // Redireciona para /login
@@ -382,7 +379,7 @@ function CartinhaPessoal() {
 
         {/* Tabela */}
         {filteredUsers.length > 0 ? (
-          <table className="min-w-full bg-white rounded-lg shadow-md ">
+          <table className="min-w-full bg-white rounded-lg shadow-md overflow-y-scroll">
             <thead>
               <tr className="bg-purple-600 text-white ">
                 <th className="px-4 py-2 text-center font-bold">#</th>
@@ -410,7 +407,7 @@ function CartinhaPessoal() {
                 </th>
               </tr>
             </thead>
-            <tbody>{renderTableRows()}</tbody>
+            <tbody className="w-[200px]">{renderTableRows()}</tbody>
           </table>
 
         ) : (
