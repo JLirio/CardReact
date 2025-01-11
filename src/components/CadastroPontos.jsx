@@ -95,7 +95,7 @@ function CadastroPontos() {
       </div>
       <div className="max-w-3xl w-full bg-white p-8 rounded-xl shadow-lg">
         <h1 className="text-center text-purple-700 text-4xl font-extrabold mb-8">
-          Cadastro de Pontos
+          Atualizar Usuario
         </h1>
         <form onSubmit={handleCadastroPontos} className="space-y-6">
           <div>
