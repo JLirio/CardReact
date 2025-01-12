@@ -13,10 +13,15 @@ function FifaCard() {
     let userId = userInfo.id;
     const [user, setUser] = useState(null);
 
+    const premmium = 12
+    const platium = 9
+    const esmerald = 6
 
     useEffect(() => {
         if (userId) {
             getUserById(userId);
+            console.log(user);
+
         }
     }, [userId]);
 
@@ -56,7 +61,18 @@ function FifaCard() {
                 </button>
             </div>
             <Tilt>
-                <div className="relative bg-gradient-to-t from-[#3c6ef6bb] to-[#fc33b2a8] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4">
+                <div
+                    className={
+                        platium > user?.vendasTotais && user?.vendasTotais > esmerald
+                            ? "relative bg-gradient-to-t from-[#3f6780e6] to-[#90ff83] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
+                            : premmium > user?.vendasTotais && user?.vendasTotais > platium
+                                ? "relative bg-gradient-to-t from-[#87cefae6] to-[#989393d1] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
+                                : user?.vendasTotais > premmium
+                                    ? "relative bg-gradient-to-t from-[#ff8383] to-[#ffdf34] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
+                                    : "relative bg-gradient-to-t from-[#3c6ef6bb] to-[#fc33b2a8] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
+                    }
+                >
+
                     {/* Rating */}
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
                         {user?.group}

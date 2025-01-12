@@ -134,7 +134,7 @@ function CartinhaPessoal() {
   useEffect(() => {
     function createPaginationList() {
 
-      const paginationCap = 5
+      const paginationCap = 7
       let paginationList = []
 
       for (let i = 0; i < filteredUsers.length; i += paginationCap) {
@@ -154,6 +154,7 @@ function CartinhaPessoal() {
     const referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers
 
     return referenceList.map((user, index) => {
+      
       // Determinando a cor de fundo para os 3 primeiros lugares
       let rowClass = `bg--500`; // Classe padrão
       if (index === 0) {
@@ -262,85 +263,85 @@ function CartinhaPessoal() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
-      <div className="flex items-end justify-center space-x-10 mb-6">
-        {/* Segundo colocado */}
-        {topThree[1] && (
-          <Tilt>
-            <div className="relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-4 w-72 text-center transition hover:scale-105 cursor-pointer pulse-2">
-              {/* Position */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                🥈
-                #2
-              </div>
-              {/* Details */}
-              <div className="mt-6">
-                <img
-                  src={regexImgLink(topThree[1].imgUser) || "default_image_url"}
-                  alt="User"
-                  className="w-12 h-12 mx-auto rounded-full object-cover"
-                />
-                <p className="text-sm font-bold uppercase text-gray-800 my-2">
-                  {topThree[1].name || "Não informado"}
-                </p>
-                <p className="text-sm text-gray-600">{topThree[1].cargo || "Cargo não informado"}</p>
-              </div>
-            </div>
-          </Tilt>
-        )}
+<div className="bg-gradient-to-br from-blue-400 via-purple-400 to-blue-200 min-h-screen flex flex-col items-center  justify-center px-4">
+  {/* Ranking Section */}
+  <div className="flex flex-wrap items-end justify-center space-y-6 md:space-y-0 md:space-x-10 mb-6 mt-6">
+    {/* Segundo colocado */}
+    {topThree[1] && (
+      <Tilt>
+        <div className="relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-2">
+          {/* Position */}
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+            🥈
+            #2
+          </div>
+          {/* Details */}
+          <div className="mt-6">
+            <img
+              src={regexImgLink(topThree[1].imgUser) || "default_image_url"}
+              alt="User"
+              className="w-12 h-12 mx-auto rounded-full object-cover"
+            />
+            <p className="text-sm font-bold uppercase text-gray-800 my-2">
+              {topThree[1].name || "Não informado"}
+            </p>
+            <p className="text-sm text-gray-600">{topThree[1].cargo || "Cargo não informado"}</p>
+          </div>
+        </div>
+      </Tilt>
+    )}
 
-        {/* Primeiro colocado */}
-        {topThree[0] && (
-          <Tilt>
-            <div className="relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-105 cursor-pointer mb-8 pulse-1">
-              {/* Position */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                👑
-                #1
-              </div>
-              {/* Details */}
-              <div className="mt-6">
-                <img
-                  src={regexImgLink(topThree[0].imgUser) || "default_image_url"}
-                  alt="User"
-                  className="w-12 h-12 mx-auto rounded-full object-cover"
-                />
-                <p className="text-sm font-bold uppercase text-gray-800 my-2">
-                  {topThree[0].name || "Não informado"}
-                </p>
-                <p className="text-sm text-gray-600">{topThree[0].cargo || "Cargo não informado"}</p>
-              </div>
-            </div>
-          </Tilt>
-        )}
+    {/* Primeiro colocado */}
+    {topThree[0] && (
+      <Tilt>
+        <div className="relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-full md:w-80 text-center transition hover:scale-105 cursor-pointer mb-8 pulse-1">
+          {/* Position */}
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+            👑
+            #1
+          </div>
+          {/* Details */}
+          <div className="mt-6">
+            <img
+              src={regexImgLink(topThree[0].imgUser) || "default_image_url"}
+              alt="User"
+              className="w-12 h-12 mx-auto rounded-full object-cover"
+            />
+            <p className="text-sm font-bold uppercase text-gray-800 my-2">
+              {topThree[0].name || "Não informado"}
+            </p>
+            <p className="text-sm text-gray-600">{topThree[0].cargo || "Cargo não informado"}</p>
+          </div>
+        </div>
+      </Tilt>
+    )}
 
-        {/* Terceiro colocado */}
-        {topThree[2] && (
-          <Tilt>
-            <div className="relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-4 w-72 text-center transition hover:scale-105 cursor-pointer pulse-3">
-              {/* Position */}
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                🥉
-                #3
-              </div>
-              {/* Details */}
-              <div className="mt-6">
-                <img
-                  src={regexImgLink(topThree[2].imgUser) || "default_image_url"}
-                  alt="User"
-                  className="w-12 h-12 mx-auto rounded-full object-cover"
-                />
-                <p className="text-sm font-bold uppercase text-gray-800 my-2">
-                  {topThree[2].name || "Não informado"}
-                </p>
-                <p className="text-sm text-gray-600">{topThree[2].cargo || "Cargo não informado"}</p>
-              </div>
-            </div>
-          </Tilt>
-        )}
-      </div>
-
-      <div className="absolute  top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
+    {/* Terceiro colocado */}
+    {topThree[2] && (
+      <Tilt>
+        <div className="relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-3">
+          {/* Position */}
+          <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+            🥉
+            #3
+          </div>
+          {/* Details */}
+          <div className="mt-6">
+            <img
+              src={regexImgLink(topThree[2].imgUser) || "default_image_url"}
+              alt="User"
+              className="w-12 h-12 mx-auto rounded-full object-cover"
+            />
+            <p className="text-sm font-bold uppercase text-gray-800 my-2">
+              {topThree[2].name || "Não informado"}
+            </p>
+            <p className="text-sm text-gray-600">{topThree[2].cargo || "Cargo não informado"}</p>
+          </div>
+        </div>
+      </Tilt>
+    )}
+  </div>
+  <div className="absolute  top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
         <button
           onClick={() => navigate("/")} // Redireciona para /login
           className=" bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
@@ -348,16 +349,13 @@ function CartinhaPessoal() {
           Sair
         </button>
       </div>
-      <div
-        id="app"
-        className="max-w-6xl w-full bg-white p-8 rounded-lg shadow-2xl overflow-x-auto"
-      >
-        <h1 className="flex-1 h-16 col-span-2 text-center text-purple-600 text-3xl font-extrabold mb-8">
-          Ranking de Vendas
-        </h1>
 
-        {/* Filtros */}
-        <div className="flex space-x-4 mb-6 justify-center">
+  {/* Table Section */}
+  <div id="app" className="max-w-full md:max-w-6xl w-full bg-white p-4 md:p-8 rounded-lg shadow-2xl overflow-x-auto">
+    <h1 className="text-center text-purple-600 text-2xl md:text-3xl font-extrabold mb-4">
+      Ranking de Vendas
+    </h1>
+    <div className="flex flex-wrap justify-center gap-4 mb-6">
           <input
             type="text"
             placeholder="Filtrar por Nome"
@@ -442,15 +440,15 @@ function CartinhaPessoal() {
                 <li
                   key={index}
                   onClick={() => setCurrentPage(index)}
-                  className={`my-4 text-2xl cursor-pointer hover:border-[#9333ea] px-4 border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#9333ea]' : ''}`}>{index + 1}
+                  className={`my-2 text-2xl cursor-pointer hover:border-[#9333ea] px-3 border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#9333ea]' : ''}`}>{index + 1}
                 </li>
               ))
             }
           </ul>
         </div>
 
-        <div className="text-center p-2 text-xl flex justify-center items-center">
-          <div className="border-2 border-[#8b3cd49d] flex justify-center items-center px-4 py-1 rounded-md shadow-md">
+        <div className="text-center text-xl flex justify-center items-center">
+          <div className="border-2 border-[#8b3cd49d] flex justify-center items-center px-2 py-1 rounded-md shadow-md">
             <p className="mr-2 font-semibold">
               Total Vendido:
             </p>
@@ -464,7 +462,7 @@ function CartinhaPessoal() {
               ? "px-4 py-2 border flex space-x-2 justify-center"
               : "hidden"
           } */}
-      <div className="mt-6 flex space-x-4 justify-center">
+      <div className="mt-5  flex space-x-4 justify-center">
         <button
           onClick={exportarCSV}
           className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
