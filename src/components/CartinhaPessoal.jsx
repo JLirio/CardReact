@@ -5,8 +5,6 @@ import Usuarios from '../models/Usuario';
 import { Tilt } from "react-tilt";
 
 
-
-
 function CartinhaPessoal() {
   // top 3 consts
   const [topThree, setTopThree] = useState([]);
@@ -27,6 +25,8 @@ function CartinhaPessoal() {
   // tabela consts
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]); // Estado para usuários filtrados
+  const [pagination, setPagination] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
   const [searchName, setSearchName] = useState(""); // Filtro por nome
   const [searchCargo, setSearchCargo] = useState(""); // Filtro por cargo
   const [searchFilter, setSearchFilter] = useState("totais");
@@ -48,11 +48,8 @@ function CartinhaPessoal() {
       console.error("Erro ao buscar usuários:", error);
     }
   }
-
-
   const handleViewCartinha = (searchId) => {
     navigate(`/pontos/${searchId}`); // Redireciona para a rota /pontos/:userId
-
   };
 
   // Função para atualizar os filtros
@@ -134,11 +131,29 @@ function CartinhaPessoal() {
 
   }, [filteredUsers])
 
-  const renderTableRows = () => {
-    
-    console.log(filteredUsers.length);
+  useEffect(() => {
+    function createPaginationList() {
 
-    return filteredUsers.map((user, index) => {
+      const paginationCap = 5
+      let paginationList = []
+
+      for (let i = 0; i < filteredUsers.length; i += paginationCap) {
+        const slot = filteredUsers.slice(i, i + paginationCap)
+        paginationList.push(slot)
+      }
+
+      setPagination(paginationList)
+    }
+
+    createPaginationList()
+
+  }, [filteredUsers])
+
+  const renderTableRows = () => {
+
+    const referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers
+
+    return referenceList.map((user, index) => {
       // Determinando a cor de fundo para os 3 primeiros lugares
       let rowClass = `bg--500`; // Classe padrão
       if (index === 0) {
@@ -149,6 +164,8 @@ function CartinhaPessoal() {
         rowClass = "bg-amber-600"; // Terceiro lugar
       }
 
+      currentPage > 0 ? rowClass = 'bg-white' : ''
+
       return (
         <tr
           key={user.id}
@@ -157,10 +174,11 @@ function CartinhaPessoal() {
           }>
           {/* Alterando ID para posição */}
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-            {index === 0 ? `👑${index + 1}`
-              : index === 1 ? `🥈${index + 1}`
-                : index === 2 ? `🥉${index + 1}`
-                  : `#${index + 1}`}
+            {
+              currentPage > 0 ?
+              pagination.slice(0, currentPage).reduce((acc, page) => acc + page.length, 0) + (index + 1) :
+              index + 1
+            }
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {user.name || "Não informado"}
@@ -237,7 +255,6 @@ function CartinhaPessoal() {
       try {
         await api.delete(`/usuarios/${id}`); // Chama a API para excluir
         setUsers(users.filter((user) => user.id !== id)); // Remove o usuário localmente
-        console.log(`Usuário ${id} excluído com sucesso!`);
       } catch (error) {
         console.error("Erro ao excluir usuário:", error);
       }
@@ -416,7 +433,23 @@ function CartinhaPessoal() {
           </p>
         )}
 
-        <div className="text-center mt-2 p-2 text-xl flex justify-center items-center">
+        <div
+          className="flex justify-center items-center"
+        >
+          <ul className="flex justify-center">
+            {
+              pagination.map((page, index) => (
+                <li
+                  key={index}
+                  onClick={() => setCurrentPage(index)}
+                  className={`my-4 text-2xl cursor-pointer hover:border-[#9333ea] px-4 border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#9333ea]' : ''}`}>{index + 1}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div className="text-center p-2 text-xl flex justify-center items-center">
           <div className="border-2 border-[#8b3cd49d] flex justify-center items-center px-4 py-1 rounded-md shadow-md">
             <p className="mr-2 font-semibold">
               Total Vendido:
