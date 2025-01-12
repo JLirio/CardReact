@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import api from "../services/api"; // Suponha que você tenha configurado a API
-
 import { useState } from "react";
-
 
 const getUserInfo = async () => {
   const token = localStorage.getItem('token');
@@ -67,6 +65,7 @@ function Login() {
             type="text"
             id="username"
             name="username"
+            placeholder="examplo@mail.com"
             required
             className="w-full p-3 mb-4 border rounded-lg border-gray-300"
           />
@@ -78,6 +77,7 @@ function Login() {
             type="password"
             id="password"
             name="password"
+            placeholder="Senha do seu usuário"
             required
             className="w-full p-3 mb-4 border rounded-lg border-gray-300"
           />
