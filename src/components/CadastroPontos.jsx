@@ -5,28 +5,21 @@ import api from "../services/api";
 function CadastroPontos() {
   const navigate = useNavigate();
   let userId = useParams();
+
+  const [selectedFile, setSelectedfile] = useState('')
   const [user, setUser] = useState(null)
   const [sellerType, setSellerType] = useState('')
+
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     if (userId.id) {
       getUserById(userId);
+      console.log(selectedFile)
     }
   }, [userId]);
 
-  // async function getUsers() {
-  //   try {
-  //     const response = await api.get("/usuarios");
-  //     setUsers(response.data);
-  //   } catch (error) {
-  //     console.error("Erro ao buscar usuários:", error);
-  //   }
-  // }
-
   const getUserById = async (id) => {
-    console.log(id);
-
     try {
       const response = await api.get(`/usuarios/user/?id=${id.id}`);
       setUser(response.data);
@@ -40,6 +33,32 @@ function CadastroPontos() {
       setSellerType(user?.vendasA > 0 ? 'juridico' : 'comercial')
     }
   }, [user])
+
+
+  const handleFileChange = (event) => {
+    setSelectedfile(event.target.files[0])
+    console.log(event.target.files[0])
+  }
+
+  const uploadGoogleDriveFile = async () => {
+
+    const uploadData = new FormData()
+    uploadData.append('image', selectedFile)
+
+    try {
+
+      const response = await api.post("/usuarios/img-user", uploadData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+
+      return response.data?.imageUrl
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   const handleCadastroPontos = async (e) => {
     e.preventDefault();
@@ -71,15 +90,30 @@ function CadastroPontos() {
       vendasA = 0
     }
 
-    const novoCadastro = {
-      name: userName,
-      email,
-      vendasA,
-      vendasB,
-      senha,
-      cargo,
-      group,
-    };
+    let novoCadastro = {}
+
+    if (selectedFile !== '') {
+      novoCadastro = {
+        name: userName,
+        email,
+        vendasA,
+        vendasB,
+        senha,
+        cargo,
+        group,
+        imgUser: await uploadGoogleDriveFile()
+      }
+    } else {
+      novoCadastro = {
+        name: userName,
+        email,
+        vendasA,
+        vendasB,
+        senha,
+        cargo,
+        group,
+      }
+    }
 
     try {
       if (userId && userId.id) {
@@ -94,6 +128,7 @@ function CadastroPontos() {
       console.error("Erro ao salvar usuário:", error);
     }
   };
+
 
   return (
     <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
@@ -110,123 +145,155 @@ function CadastroPontos() {
           Atualizar Usuario
         </h1>
         <form onSubmit={handleCadastroPontos} className="space-y-6">
-          <div>
-            <label htmlFor="userName" className="block text-lg font-medium text-gray-700">
-              Nome do Usuário:
-            </label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              required
-              defaultValue={user ? user.name : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
-            <span id="errorUserName" className="text-red-500 text-sm"></span>
-          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-2">
+              <div className="my-2">
+                <label htmlFor="userName" className="block text-lg font-medium text-gray-700">
+                  Nome do Usuário:
+                </label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  required
+                  defaultValue={user ? user.name : ""}
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+                <span id="errorUserName" className="text-red-500 text-sm"></span>
+              </div>
 
-          <div>
-            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              defaultValue={user ? user.email : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
-            <span id="errorEmail" className="text-red-500 text-sm"></span>
-          </div>
+              <div className="my-2">
+                <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  defaultValue={user ? user.email : ""}
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+                <span id="errorEmail" className="text-red-500 text-sm"></span>
+              </div>
 
-          <div>
-            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
-              Tipo de Vendedor
-            </label>
-            <select
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-              onChange={(e) => setSellerType(e.target.value)}
-              value={sellerType}
-            >
-              <option value="juridico">Jurídico</option>
-              <option value="comercial">Comercial</option>
-            </select>
-          </div>
+              <div className="my-2">
+                <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+                  Tipo de Vendedor
+                </label>
+                <select
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  onChange={(e) => setSellerType(e.target.value)}
+                  value={sellerType}
+                >
+                  <option value="juridico">Jurídico</option>
+                  <option value="comercial">Comercial</option>
+                </select>
+              </div>
 
-          <div>
-            <div className={sellerType === 'juridico' ? 'block' : 'hidden'}>
-              <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
-                Vendas Jurídico
-              </label>
-              <input
-                type="number"
-                id="vendasA"
-                name="vendasA"
-                defaultValue={user ? user.vendasA : ""}
-                className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-              />
+              <div>
+                <div className={sellerType === 'juridico' ? 'block' : 'hidden'}>
+                  <label htmlFor="vendasA" className="block text-lg font-medium text-gray-700">
+                    Vendas Jurídico
+                  </label>
+                  <input
+                    type="number"
+                    id="vendasA"
+                    name="vendasA"
+                    defaultValue={user ? user.vendasA : ""}
+                    className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                  />
+                </div>
+
+                <div className={sellerType === 'comercial' ? 'block' : 'hidden'}>
+                  <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
+                    Vendas Comercial
+                  </label>
+                  <input
+                    type="number"
+                    id="vendasB"
+                    name="vendasB"
+                    defaultValue={user ? user.vendasB : ""}
+                    className={`w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500`}
+                  />
+                </div>
+              </div>
+
             </div>
+            <div c className="my-2" lassName="px-2">
+              <div>
+                <label htmlFor="senha" className="text-lg font-medium text-gray-700">
+                  Atualizar senha:
+                </label>
+                <input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  required
+                  defaultValue={user ? user.senha : ""}
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+                <span id="errorEmail" className="text-red-500 text-sm"></span>
+              </div>
 
-            <div className={sellerType === 'comercial' ? 'block' : 'hidden'}>
-              <label htmlFor="vendasB" className="block text-lg font-medium text-gray-700">
-                Vendas Comercial
-              </label>
-              <input
-                type="number"
-                id="vendasB"
-                name="vendasB"
-                defaultValue={user ? user.vendasB : ""}
-                className={`w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500`}
-              />
+              <div className="my-2">
+                <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
+                  Cargo:
+                </label>
+                <input
+                  type="text"
+                  id="cargo"
+                  name="cargo"
+                  required
+                  defaultValue={user ? user.cargo : ""}
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+                <span id="errorEmail" className="text-red-500 text-sm"></span>
+              </div>
+
+              <div className="my-2">
+                <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
+                  Equipe:
+                </label>
+                <input
+                  type="text"
+                  id="group"
+                  name="group"
+                  required
+                  defaultValue={user ? user.group : ""}
+                  className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                />
+                <span id="errorEmail" className="text-red-500 text-sm"></span>
+              </div>
+
+              <div className="my-2">
+                <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
+                  Nova foto de usuário (opcional):
+                </label>
+                <div className="border-dashed border-2 mt-1 border-gray-300 rounded-md p-4 text-center relative cursor-pointer hover:border-[#6b21a8] transition-colors">
+                  <input
+                    type="file"
+                    name="files"
+                    className="absolute opacity-0 cursor-pointer"
+                    onChange={handleFileChange}
+                  />
+                  <div>
+                    {
+                      selectedFile !== '' ?
+                        (
+                          <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
+                        ) : (
+                          <p className="text-sm text-gray-500">
+                            Arraste uma imagem ou <span className="text-[#6b21a8]">Escolha do Computador</span>
+                          </p>
+                        )
+                    }
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
-
-          <div>
-            <label htmlFor="senha" className="text-lg font-medium text-gray-700">
-              Atualizar senha:
-            </label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              required
-              defaultValue={user ? user.senha : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
-            <span id="errorEmail" className="text-red-500 text-sm"></span>
-          </div>
-
-          <div>
-            <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
-              Cargo:
-            </label>
-            <input
-              type="text"
-              id="cargo"
-              name="cargo"
-              required
-              defaultValue={user ? user.cargo : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
-            <span id="errorEmail" className="text-red-500 text-sm"></span>
-          </div>
-
-          <div>
-            <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
-              Equipe:
-            </label>
-            <input
-              type="text"
-              id="group"
-              name="group"
-              required
-              defaultValue={user ? user.group : ""}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-            />
-            <span id="errorEmail" className="text-red-500 text-sm"></span>
-          </div>
-
           <button
             type="submit"
             className="w-full bg-purple-700 hover:bg-purple-800 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300"
