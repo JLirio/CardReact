@@ -101,18 +101,18 @@ function FifaCard() {
                     </div>
                     {/* Stats */}
                     <div className="mt-12 text-sm text-gray-700">
-                        <p>
+                        <div>
                             <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                                <p className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                                <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                                     <p>{
                                         user?.vendasA > 0 ?
                                             `Jurídico: ${user?.vendasA}` :
                                             `Comercial: ${user?.vendasB}`
                                     }</p>
 
-                                </p>
+                                </div>
                             </div>
-                        </p>
+                        </div>
 
                     </div>
                 </div>

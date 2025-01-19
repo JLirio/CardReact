@@ -93,6 +93,17 @@ function Login() {
           <p className="text-red-500 text-center mt-4">{errorMessage}</p>
         )}
       </div>
+      <footer className=" fixed text-white py-6 -bottom-5 flex right-1">
+        <div className="container mx-auto flex justify-between items-center px-4">
+          <p className="text-sm">
+            &copy; 2025 CardReact. Todos os direitos reservados.
+          </p>
+          {/* <div className="flex space-x-6">
+            <a href="#" className="hover:text-purple-400 transition-colors">Política de Privacidade</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">Termos de Serviço</a>
+          </div> */}
+        </div>
+      </footer>
     </div>
   );
 }

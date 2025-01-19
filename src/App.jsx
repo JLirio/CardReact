@@ -6,11 +6,19 @@ import Cadastrar from "./components/CadastrarUser"
 import UserInf from "./components/UserInfoDisplay"
 import CadastroPontos from "./components/CadastroPontos"
 import FifaCard from "./components/Fifacard"
+import { useEffect, useState } from "react";
 
 
 function App() {
+  const [volume, setVolume] = useState(0.2);
+  useEffect(() => {
+    const audio = document.getElementById("background-audio");
+    audio.volume = volume; // Ajuste o volume com o estado
+  }, [volume]);
   return (
+    
     <Router>
+      <audio id="background-audio" src="./background-music.mp3" autoPlay loop hidden />
       <Routes>
         {/* Rota para Login */}
         <Route path="/" element={<Login />} />
