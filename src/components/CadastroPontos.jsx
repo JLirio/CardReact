@@ -230,7 +230,7 @@ function CadastroPontos() {
                   id="senha"
                   name="senha"
                   required
-                  defaultValue={user ? user.senha : ""}
+                  defaultValue={user}
                   className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                 />
                 <span id="errorEmail" className="text-red-500 text-sm"></span>
