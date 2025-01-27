@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import Modal from "./Modal";
 
 function CadastroPontos() {
   const navigate = useNavigate();
