@@ -9,6 +9,7 @@ function CadastroPontos() {
   const [selectedFile, setSelectedfile] = useState('')
   const [user, setUser] = useState(null)
   const [sellerType, setSellerType] = useState('')
+  const [isFetchig, setIsFetching] = useState(false)
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -61,6 +62,8 @@ function CadastroPontos() {
   }
 
   const handleCadastroPontos = async (e) => {
+
+    setIsFetching(true)
     e.preventDefault();
 
     const userName = document.getElementById("userName").value.trim();
@@ -123,6 +126,7 @@ function CadastroPontos() {
         await api.post("/usuarios", novoCadastro);
         console.log("Novo usuário cadastrado com sucesso!");
       }
+      setIsFetching(false)
       navigate("/cartinha");
     } catch (error) {
       console.error("Erro ao salvar usuário:", error);
@@ -296,9 +300,10 @@ function CadastroPontos() {
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-700 hover:bg-purple-800 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300"
+            className={`w-full ${isFetchig ? `bg-slate-600 hover:bg-slate-600` : `bg-purple-700 hover:bg-purple-800`} text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300`}
+            disabled={isFetchig}
           >
-            {userId ? "Atualizar Cadastro" : "Cadastrar"}
+            {isFetchig ? 'Atualizando' : 'Atualizar Cadastro'}
           </button>
         </form>
 
