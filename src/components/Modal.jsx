@@ -13,20 +13,22 @@ export default function Modal({
     const [newSalesValue, setNewSalesValue] = useState(0)
 
     useEffect(() => {
-        setNewSalesValue(currentUserInModal?.vendasA === 0 ? currentUserInModal?.vendasB : currentUserInModal?.vendasA)
+        // setNewSalesValue(currentUserInModal?.vendasA === 0 ? currentUserInModal?.vendasB : currentUserInModal?.vendasA)
+        // console.log(currentUserInModal);
+        
     }, [currentUserInModal])
 
 
     async function updateSales(userId, vendasA, vendasB) {
         try {
-
-            const reponse = await api.put(`/usuarios/${userId}`, {
+            
+            const reponse = await api.put(`/usuarios/update/${userId}`, {
                 vendasA,
                 vendasB
             })
 
-            console.log(reponse.data)
-
+            
+            closeModal(visible)
         } catch (error) {
             console.error(error)
         }
