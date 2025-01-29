@@ -46,6 +46,8 @@ function CartinhaPessoal() {
   const [searchCargo, setSearchCargo] = useState(""); // Filtro por cargo
   const [searchFilter, setSearchFilter] = useState("totais");
   const [searchGroup, setSearchGroup] = useState(""); // Filtro por equipe
+  const [modalVisibility, setModalVisibility] = useState(false)
+  const [currentUserInModal, setCurrentUserInModal] = useState("")
 
   const [isModalVisible, setModalVisible] = useState(false)
 
@@ -58,6 +60,19 @@ function CartinhaPessoal() {
   };
 
   let filterTotais = false;
+
+  function closeModal(visibility) {
+    console.log(visibility)
+    if (visibility) {
+      setModalVisibility(false)
+      setCurrentUserInModal("")
+    }
+  }
+
+  function openAddSalesModal(user) {
+    setCurrentUserInModal(user)
+    setModalVisibility(true)
+  }
 
   // Função para buscar usuários da API
   async function getUsers() {
@@ -240,6 +255,12 @@ function CartinhaPessoal() {
             >
               Editar
             </button>
+            <button
+              onClick={() => openAddSalesModal(user)}
+              className="bg-green-600 hover:bg-green-700 text-white font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            >
+              + Venda
+            </button>
           </td>
         </tr>
       );
@@ -286,7 +307,7 @@ function CartinhaPessoal() {
 
   function closeModal(visibility) {
     console.log(visibility)
-    
+
     if (visibility) {
       setModalVisible(false)
     }
