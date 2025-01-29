@@ -66,6 +66,17 @@ function CartinhaPessoal() {
     if (visibility) {
       setModalVisibility(false)
       setCurrentUserInModal("")
+      getUsers()
+      const audio = document.getElementById("cash-audio");
+      if (audio) {
+        audio.play()
+          .then(() => {
+            console.log("Música tocando!");
+          })
+          .catch((error) => {
+            console.error("Erro ao reproduzir música:", error);
+          });
+      }
     }
   }
 
@@ -146,6 +157,10 @@ function CartinhaPessoal() {
   useEffect(() => {
     getUsers();
     contReloader = 2
+    const intervalId = setInterval(getUsers, 120000);
+
+    // Limpa o intervalo quando o componente for desmontado
+    return () => clearInterval(intervalId);
   }, [contReloader == 1]);
 
   // Renderizar linhas da tabela
@@ -315,7 +330,7 @@ function CartinhaPessoal() {
 
   return (
     <>
-
+      <audio id="cash-audio" src="./cash.mp3" hidden></audio>
       <Modal
         title={'Hello World'}
         message={'Modal craido com sucesso'}
@@ -326,6 +341,12 @@ function CartinhaPessoal() {
 
       <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-blue-200 min-h-screen flex flex-col items-center  justify-center px-4">
 
+        <div className="fixed border-2 border-[#8b3cd49d] left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
+          <p className="mr-2 font-semibold">
+            Total Vendido:
+          </p>
+          <b className="text-white font-semibold">{totalJaVendido}</b>
+        </div>
         <div className="fixed flex-col py-4 right-1 flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
