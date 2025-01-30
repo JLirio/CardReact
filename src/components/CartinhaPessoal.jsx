@@ -304,12 +304,11 @@ function CartinhaPessoal() {
     const csvRows = users
       .map((user) =>
         [
-          user.id,
           user.name || "Não informado",
           user.email || "Não informado",
-          user.vendasA || "Não informado",
-          user.vendasB || "Não informado",
-          user.vendasTotais || 0,
+          (user.vendasA ?? 0).toFixed(2),
+          (user.vendasB ?? 0).toFixed(2),
+          (user.vendasTotais ?? 0).toFixed(2),
           user.cargo || "Não informado",
         ].join(",")
       )
