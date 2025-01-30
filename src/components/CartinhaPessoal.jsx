@@ -258,10 +258,10 @@ function CartinhaPessoal() {
             {user.group || "Não informado"}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-            {user.vendasA || 0}
+          {(user.vendasA ?? 0).toFixed(2)}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-            {user.vendasB || 0}
+          {(user.vendasB ?? 0).toFixed(2)}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {user.cargo || "Não informado"}
