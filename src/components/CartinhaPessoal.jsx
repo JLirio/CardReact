@@ -401,7 +401,7 @@ function CartinhaPessoal() {
                 {/* Club and Position */}
                 <div className="mt-6">
                   <img
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAbEP9_UogxxGxImR5hlQcg5fR73yIFlH3U0uBv3yGVeLFUJGrOb-glHEfy04&s=10"}
+                    src={"./public/horus-2.jpeg"}
                     alt="Club Logo"
                     className="w-12 h-12 mx-auto rounded-full object-cover"
                   />
@@ -453,7 +453,7 @@ function CartinhaPessoal() {
                 {/* Club and Position */}
                 <div className="mt-6">
                   <img
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAbEP9_UogxxGxImR5hlQcg5fR73yIFlH3U0uBv3yGVeLFUJGrOb-glHEfy04&s=10"}
+                    src={"./public/horus-2.jpeg"}
                     alt="Club Logo"
                     className="w-12 h-12 mx-auto rounded-full object-cover"
                   />
@@ -504,7 +504,7 @@ function CartinhaPessoal() {
                 {/* Club and Position */}
                 <div className="mt-6">
                   <img
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAbEP9_UogxxGxImR5hlQcg5fR73yIFlH3U0uBv3yGVeLFUJGrOb-glHEfy04&s=10"}
+                    src={"./public/horus-2.jpeg"}
                     alt="Club Logo"
                     className="w-12 h-12 mx-auto rounded-full object-cover"
                   />
