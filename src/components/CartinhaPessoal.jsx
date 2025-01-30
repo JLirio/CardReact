@@ -8,7 +8,7 @@ import Modal from "./Modal";
 
 function CartinhaPessoal() {
   const [showTable, setShowTable] = useState(false);
-
+  const [podio, setPodio] = useState([])
   const options = [
     { value: "juridicas", label: "Vendas Jurídicas" },
     { value: "totais", label: "Vendas Totais" },
@@ -26,6 +26,25 @@ function CartinhaPessoal() {
   // Função para popular top 3
   const populateTopThree = (results) => {
     const topResults = results.slice(0, 3);
+    
+    if((topResults[0]?.name !== podio[0]?.name  || 
+      topResults[1]?.name !== podio[1]?.name ||
+      topResults[2]?.name !== podio[2]?.name) && podio.length > 0){
+
+      
+      const audio = document.getElementById("passingby-audio");
+      if (audio) {
+        audio.play()
+          .then(() => {
+          })
+          .catch((error) => {
+            console.error("Erro ao reproduzir música:", error);
+          });
+      }
+    }
+    if(topResults[0] != null){
+      setPodio(topResults)
+    }
     setTopThree(topResults);
   };
 
@@ -60,7 +79,6 @@ function CartinhaPessoal() {
   let filterTotais = false;
 
   function closeModal(visibility) {
-    console.log(visibility)
     if (visibility) {
       setModalVisibility(false)
       setCurrentUserInModal("")
@@ -69,7 +87,6 @@ function CartinhaPessoal() {
       if (audio) {
         audio.play()
           .then(() => {
-            console.log("Música tocando!");
           })
           .catch((error) => {
             console.error("Erro ao reproduzir música:", error);
@@ -322,6 +339,7 @@ function CartinhaPessoal() {
 
     <>
       <audio id="cash-audio" src="./cash.mp3" hidden></audio>
+      <audio id="passingby-audio" src="./f1-passingby.mp3" hidden></audio>
       <Modal
         visible={modalVisibility}
         title={"Adicionar Vendas"}
