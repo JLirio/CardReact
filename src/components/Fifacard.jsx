@@ -80,7 +80,7 @@ function FifaCard() {
                     {/* Club and Position */}
                     <div className="mt-6">
                         <img
-                            src={"./public/horus-2.jpeg"}
+                            src={"https://i.imgur.com/AZynwEp.jpeg"}
                             alt="Club Logo"
                             className="w-12 h-12 mx-auto rounded-full object-cover"
                         />
