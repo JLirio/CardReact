@@ -300,7 +300,7 @@ function CartinhaPessoal() {
   };
 
   const exportarCSV = () => {
-    const csvHeader = "ID,Nome,Email,Vendas Jurico,Vendas Comercial,Vendas Totais,Cargo\n";
+    const csvHeader = "Nome,Email,Vendas Jurico,Vendas Comercial,Vendas Totais,Cargo\n";
     const csvRows = users
       .map((user) =>
         [
