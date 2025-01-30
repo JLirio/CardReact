@@ -26,12 +26,12 @@ function CartinhaPessoal() {
   // Função para popular top 3
   const populateTopThree = (results) => {
     const topResults = results.slice(0, 3);
-    
-    if((topResults[0]?.name !== podio[0]?.name  || 
-      topResults[1]?.name !== podio[1]?.name ||
-      topResults[2]?.name !== podio[2]?.name) && podio.length > 0){
 
-      
+    if ((topResults[0]?.name !== podio[0]?.name ||
+      topResults[1]?.name !== podio[1]?.name ||
+      topResults[2]?.name !== podio[2]?.name) && podio.length > 0) {
+
+
       const audio = document.getElementById("passingby-audio");
       if (audio) {
         audio.play()
@@ -42,7 +42,7 @@ function CartinhaPessoal() {
           });
       }
     }
-    if(topResults[0] != null){
+    if (topResults[0] != null) {
       setPodio(topResults)
     }
     setTopThree(topResults);
@@ -258,10 +258,10 @@ function CartinhaPessoal() {
             {user.group || "Não informado"}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-          {(user.vendasA ?? 0).toFixed(2)}
+            {(user.vendasA ?? 0).toFixed(2)}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-          {(user.vendasB ?? 0).toFixed(2)}
+            {(user.vendasB ?? 0).toFixed(2)}
           </td>
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {user.cargo || "Não informado"}
@@ -479,8 +479,8 @@ function CartinhaPessoal() {
                       <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                         <p>{
                           topThree[0].vendasA > 0 ?
-                            `Jurídico: ${topThree[0].vendasA}` :
-                            `Comercial: ${topThree[0].vendasB}`
+                            `Jurídico: ${(topThree[0].vendasA).toFixed(2)}` :
+                            `Comercial: ${(topThree[0].vendasB).toFixed(2)}`
                         }</p>
 
                       </div>
@@ -530,8 +530,8 @@ function CartinhaPessoal() {
                       <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                         <p>{
                           topThree[2].vendasA > 0 ?
-                            `Jurídico: ${topThree[2].vendasA}` :
-                            `Comercial: ${topThree[2].vendasB}`
+                            `Jurídico: ${(topThree[2].vendasA).toFixed(2)}` :
+                            `Comercial: ${(topThree[2].vendasB).toFixed(2)}`
                         }</p>
 
                       </div>
