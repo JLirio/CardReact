@@ -427,8 +427,8 @@ function CartinhaPessoal() {
                       <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                         <p>{
                           topThree[1].vendasA > 0 ?
-                            `Jurídico: ${topThree[1].vendasA}` :
-                            `Comercial: ${topThree[1].vendasB}`
+                            `Jurídico: ${(topThree[1].vendasA).toFixed(2)}` :
+                            `Comercial: ${(topThree[1].vendasB).toFixed(2)}`
                         }</p>
 
                       </div>
