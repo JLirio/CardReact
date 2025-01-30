@@ -354,7 +354,7 @@ function CartinhaPessoal() {
           <p className="mr-2 font-semibold">
             Total Vendido:
           </p>
-          <b className="text-white font-semibold">{totalJaVendido}</b>
+          <b className="text-white font-semibold">{(totalJaVendido).toFixed(2)}</b>
         </div>
         <div className="fixed flex-col py-4 right-1 flex justify-between min-h-screen items-end">
           <button
