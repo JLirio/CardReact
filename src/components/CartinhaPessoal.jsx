@@ -545,36 +545,32 @@ function CartinhaPessoal() {
 
         </div>
 
-{/* Subpódio */}
-<div className="mt-12">
-  <ul className="grid grid-cols-2 gap-4 md:grid-cols-4">
-    {topThree.slice(3).map((player, index) => (
-      <li
-        key={index}
-        className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
-      >
-        <img
-          src={regexImgLink(player.imgUser)}
-          alt={player.name}
-          className="w-7 h-7 rounded-full object-cover"
-        />
+        {/* Subpódio */}
+        <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50">
+          <ul className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {topThree.slice(3).map((player, index) => (
+              <li
+                key={index}
+                className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
+              >
+                <img
+                  src={regexImgLink(player.imgUser)}
+                  alt={player.name}
+                  className="w-7 h-7 rounded-full object-cover"
+                />
 
-        <span className="font-semibold text-left flex-grow mx-2">
-          {player.name}
-        </span>
-        
-        <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
-      </li>
-    ))}
-  </ul>
-</div>
+                <span className="font-semibold text-left flex-grow mx-2">
+                  {player.name}
+                </span>
 
+                <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-
-
-
-        {/* filtro */}
-        <div className="fixed bottom-4  flex justify-center mt-10 p-4">
+        {/* Filtro */}
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center w-full z-50 p-4">
           <ul className="flex space-x-4">
             {options.map((option) => (
               <li
