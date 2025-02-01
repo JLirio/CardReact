@@ -25,7 +25,7 @@ function CartinhaPessoal() {
 
   // Função para popular top 3
   const populateTopThree = (results) => {
-    const topResults = results.slice(0, 3);
+    const topResults = results.slice(0, 7);
 
     if ((topResults[0]?.name !== podio[0]?.name ||
       topResults[1]?.name !== podio[1]?.name ||
@@ -402,7 +402,7 @@ function CartinhaPessoal() {
                   <img
                     src={"https://i.imgur.com/AZynwEp.jpeg"}
                     alt="Club Logo"
-                    className="w-12 h-12 mx-auto rounded-full object-cover"
+                    className="w-16 h-16 mx-auto rounded-full object-cover"
                   />
                   <div className="flex justify-center items-center">
                     <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
@@ -454,7 +454,7 @@ function CartinhaPessoal() {
                   <img
                     src={"https://i.imgur.com/AZynwEp.jpeg"}
                     alt="Club Logo"
-                    className="w-12 h-12 mx-auto rounded-full object-cover"
+                    className="w-16 h-16 mx-auto rounded-full object-cover"
                   />
                   <div className="flex justify-center items-center">
                     <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
@@ -505,7 +505,7 @@ function CartinhaPessoal() {
                   <img
                     src={"https://i.imgur.com/AZynwEp.jpeg"}
                     alt="Club Logo"
-                    className="w-12 h-12 mx-auto rounded-full object-cover"
+                    className="w-16 h-16 mx-auto rounded-full object-cover"
                   />
                   <div className="flex justify-center items-center">
                     <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
@@ -545,6 +545,34 @@ function CartinhaPessoal() {
 
         </div>
 
+{/* Subpódio */}
+<div className="mt-12">
+  <ul className="grid grid-cols-2 gap-4 md:grid-cols-4">
+    {topThree.slice(3).map((player, index) => (
+      <li
+        key={index}
+        className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
+      >
+        <img
+          src={regexImgLink(player.imgUser)}
+          alt={player.name}
+          className="w-7 h-7 rounded-full object-cover"
+        />
+
+        <span className="font-semibold text-left flex-grow mx-2">
+          {player.name}
+        </span>
+        
+        <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
+
+
+
         {/* filtro */}
         <div className="fixed bottom-4  flex justify-center mt-10 p-4">
           <ul className="flex space-x-4">
@@ -572,6 +600,7 @@ function CartinhaPessoal() {
           </ul>
         </div>
 
+        {/* table modal */}
         <div className="flex flex-col items-center p-4">
 
 
@@ -708,7 +737,7 @@ function CartinhaPessoal() {
           )}
         </div>
 
-        {/* Table Section */}
+
 
         <footer className=" fixed text-white py-6 -bottom-5 flex right-1">
           <div className="container mx-auto flex justify-between items-center px-4">
