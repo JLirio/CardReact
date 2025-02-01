@@ -7,8 +7,33 @@ import Modal from "./Modal";
 
 
 function CartinhaPessoal() {
+  let contReloader = 1;
+  let filterTotais = false;
+  const navigate = useNavigate();
+
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  const [pagination, setPagination] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
+
+  const [searchName, setSearchName] = useState("");
+  const [searchCargo, setSearchCargo] = useState("");
+  const [searchFilter, setSearchFilter] = useState("totais");
+  const [searchGroup, setSearchGroup] = useState("");
+
+  const [modalVisibility, setModalVisibility] = useState(false)
+  const [currentUserInModal, setCurrentUserInModal] = useState("")
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [totalJaVendido, setTotalJaVendido] = useState(0);
+
   const [showTable, setShowTable] = useState(false);
   const [podio, setPodio] = useState([])
+  const [podioTotais, setPodioTotais] = useState([]);
+  const [podioJuridicas, setPodioJuridicas] = useState([]);
+  const [podioComerciais, setPodioComerciais] = useState([]);
+
   const options = [
     { value: "juridicas", label: "Vendas Jurídicas" },
     { value: "totais", label: "Vendas Totais" },
@@ -21,33 +46,60 @@ function CartinhaPessoal() {
 
   // top 3 consts
   const [topThree, setTopThree] = useState([]);
-  let contReloader = 1;
 
-  // Função para popular top 3
+
+
+
   const populateTopThree = (results) => {
     const topResults = results.slice(0, 7);
-
-    if ((topResults[0]?.name !== podio[0]?.name ||
-      topResults[1]?.name !== podio[1]?.name ||
-      topResults[2]?.name !== podio[2]?.name) && podio.length > 0) {
-
-
-      const audio = document.getElementById("passingby-audio");
-      if (audio) {
-        audio.play()
-          .then(() => {
-          })
-          .catch((error) => {
-            console.error("Erro ao reproduzir música:", error);
-          });
+  
+    if (searchFilter === "totais") {
+      if (podioTotais.length === 0) {
+        setPodioTotais(topResults); // Primeira vez, só define
+      } else if (hasPodiumChanged(topResults, podioTotais)) {
+        setPodioTotais(topResults);
+        playAudio();
+      }
+    } else if (searchFilter === "juridicas") {
+      if (podioJuridicas.length === 0) {
+        setPodioJuridicas(topResults);
+      } else if (hasPodiumChanged(topResults, podioJuridicas)) {
+        setPodioJuridicas(topResults);
+        playAudio();
+      }
+    } else if (searchFilter === "comerciais") {
+      if (podioComerciais.length === 0) {
+        setPodioComerciais(topResults);
+      } else if (hasPodiumChanged(topResults, podioComerciais)) {
+        setPodioComerciais(topResults);
+        playAudio();
       }
     }
-    if (topResults[0] != null) {
-      setPodio(topResults)
-    }
+  
     setTopThree(topResults);
   };
+  
+  // 🔍 Verifica se houve mudança no TOP 3
+  const hasPodiumChanged = (newPodium, oldPodium) => {
+    return (
+      newPodium.length >= 3 &&
+      (newPodium[0]?.name !== oldPodium[0]?.name ||
+        newPodium[1]?.name !== oldPodium[1]?.name ||
+        newPodium[2]?.name !== oldPodium[2]?.name)
+    );
+  };
+  
+  const playAudio = () => {
+    const audio = document.getElementById("passingby-audio");
+    if (audio) {
+      audio.play().catch((error) => {
+        console.error("Erro ao reproduzir música:", error);
+      });
+    }
+  };
 
+
+  // regex img
   const regexImgLink = (imgLink) => {
     let match = []
     match = imgLink?.match(/(?<=d\/)(.*?)(?=\/view\?)/);
@@ -57,26 +109,13 @@ function CartinhaPessoal() {
   }
 
   // tabela consts
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]); // Estado para usuários filtrados
-  const [pagination, setPagination] = useState([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [searchName, setSearchName] = useState(""); // Filtro por nome
-  const [searchCargo, setSearchCargo] = useState(""); // Filtro por cargo
-  const [searchFilter, setSearchFilter] = useState("totais");
-  const [searchGroup, setSearchGroup] = useState(""); // Filtro por equipe
-  const [modalVisibility, setModalVisibility] = useState(false)
-  const [currentUserInModal, setCurrentUserInModal] = useState("")
 
-  const navigate = useNavigate();
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const [totalJaVendido, setTotalJaVendido] = useState(0);
 
   const handleSelect = (value) => {
     setSearchFilter(value);
   };
 
-  let filterTotais = false;
+
 
   function closeModal(visibility) {
     if (visibility) {
@@ -105,14 +144,67 @@ function CartinhaPessoal() {
     try {
       const response = await api.get("/usuarios");
       setUsers(response.data);
-      setFilteredUsers(response.data); // Inicializa o estado filtrado com todos os usuários
+      setFilteredUsers(response.data);
+      console.log(response.data);
+
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
     }
   }
+
+  // ver minha cartinha
   const handleViewCartinha = (searchId) => {
-    navigate(`/pontos/${searchId}`); // Redireciona para a rota /pontos/:userId
+    navigate(`/pontos/${searchId}`);
   };
+
+  function filtersList() {
+    const lowerName = searchName.toLowerCase();
+    const lowerCargo = searchCargo.toLowerCase();
+    const lowerGroup = searchGroup.toLowerCase();
+
+    let results = [];
+
+    if (searchFilter === "totais") {
+      results = users
+        .filter(
+          (user) =>
+            (!searchName || user.name.toLowerCase().includes(lowerName)) &&
+            (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+        )
+        .sort((a, b) => b.vendasTotais - a.vendasTotais);
+
+      setFilteredUsers(results);
+      populateTopThree(results, "totais");
+
+    } else if (searchFilter === "juridicas") {
+      results = users
+        .filter(
+          (user) =>
+            (!searchName || user.name.toLowerCase().includes(lowerName)) &&
+            (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+        )
+        .sort((a, b) => b.vendasA - a.vendasA);
+
+      setFilteredUsers(results);
+      populateTopThree(results, "juridicas");
+
+    } else if (searchFilter === "comerciais") {
+      results = users
+        .filter(
+          (user) =>
+            (!searchName || user.name.toLowerCase().includes(lowerName)) &&
+            (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+        )
+        .sort((a, b) => b.vendasB - a.vendasB);
+
+      setFilteredUsers(results);
+      populateTopThree(results, "comerciais");
+    }
+  }
+
 
   // Função para atualizar os filtros
   useEffect(() => {
@@ -120,66 +212,18 @@ function CartinhaPessoal() {
 
   }, [searchName, searchCargo, searchGroup, searchFilter, users]); // Atualiza os filtros dinamicamente
 
-  function filtersList() {
-    const lowerName = searchName.toLowerCase();
-    const lowerCargo = searchCargo.toLowerCase();
-    const lowerGroup = searchGroup.toLowerCase();
-
-
-    if (searchFilter == "totais") {
-      const results = users.filter(
-        (user) =>
-          (!searchName || user.name.toLowerCase().includes(lowerName)) &&
-          (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-          (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
-
-      ).sort((a, b) => b.vendasTotais - a.vendasTotais);
-      setFilteredUsers(results);
-      populateTopThree(results);
-
-
-    } else if (searchFilter == "juridicas") {
-      const results = users.filter(
-        (user) =>
-          (!searchName || user.name.toLowerCase().includes(lowerName)) &&
-          (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-          (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
-
-      ).sort((a, b) => b.vendasA - a.vendasA);
-      setFilteredUsers(results);
-      populateTopThree(results);
-
-      filterTotais = true;
-
-    } else if (searchFilter == "comerciais") {
-      const results = users.filter(
-        (user) =>
-          (!searchName || user.name.toLowerCase().includes(lowerName)) &&
-          (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-          (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
-
-      ).sort((a, b) => b.vendasB - a.vendasB);
-      setFilteredUsers(results);
-      populateTopThree(results);
-
-
-    }
-
-
-  }
-
-
+  //atualizacao automatica por tempo 
   useEffect(() => {
     getUsers();
     contReloader = 2
-    const intervalId = setInterval(getUsers, 120000);
+    const intervalId = setInterval(getUsers, 90000);
 
     // Limpa o intervalo quando o componente for desmontado
     return () => clearInterval(intervalId);
   }, [contReloader == 1]);
 
-  // Renderizar linhas da tabela
 
+  // calculo total 
   useEffect(() => {
 
     function calcTotalVendido() {
@@ -196,9 +240,6 @@ function CartinhaPessoal() {
 
     calcTotalVendido()
 
-  }, [filteredUsers])
-
-  useEffect(() => {
     function createPaginationList() {
 
       const paginationCap = 7
@@ -213,9 +254,45 @@ function CartinhaPessoal() {
     }
 
     createPaginationList()
-
   }, [filteredUsers])
 
+  // export csv
+  const exportarCSV = () => {
+    const csvHeader = "Nome,Email,Vendas Jurico,Vendas Comercial,Vendas Totais,Cargo\n";
+    const csvRows = users
+      .map((user) =>
+        [
+          user.name || "Não informado",
+          user.email || "Não informado",
+          (user.vendasA ?? 0).toFixed(2),
+          (user.vendasB ?? 0).toFixed(2),
+          (user.vendasTotais ?? 0).toFixed(2),
+          user.cargo || "Não informado",
+        ].join(",")
+      )
+      .join("\n");
+    const csvContent = csvHeader + csvRows;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "usuarios.csv";
+    link.click();
+  };
+
+  // Função para excluir usuário na API
+  async function excluirUsuarioAPI(id) {
+    const confirmacao = confirm("Tem certeza que deseja excluir este usuário?");
+    if (confirmacao) {
+      try {
+        await api.delete(`/usuarios/${id}`); // Chama a API para excluir
+        setUsers(users.filter((user) => user.id !== id)); // Remove o usuário localmente
+      } catch (error) {
+        console.error("Erro ao excluir usuário:", error);
+      }
+    }
+  }
+
+  // renderizacao da tabela
   const renderTableRows = () => {
 
     const referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers
@@ -299,41 +376,7 @@ function CartinhaPessoal() {
 
   };
 
-  const exportarCSV = () => {
-    const csvHeader = "Nome,Email,Vendas Jurico,Vendas Comercial,Vendas Totais,Cargo\n";
-    const csvRows = users
-      .map((user) =>
-        [
-          user.name || "Não informado",
-          user.email || "Não informado",
-          (user.vendasA ?? 0).toFixed(2),
-          (user.vendasB ?? 0).toFixed(2),
-          (user.vendasTotais ?? 0).toFixed(2),
-          user.cargo || "Não informado",
-        ].join(",")
-      )
-      .join("\n");
-    const csvContent = csvHeader + csvRows;
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "usuarios.csv";
-    link.click();
-  };
-
-  // Função para excluir usuário na API
-  async function excluirUsuarioAPI(id) {
-    const confirmacao = confirm("Tem certeza que deseja excluir este usuário?");
-    if (confirmacao) {
-      try {
-        await api.delete(`/usuarios/${id}`); // Chama a API para excluir
-        setUsers(users.filter((user) => user.id !== id)); // Remove o usuário localmente
-      } catch (error) {
-        console.error("Erro ao excluir usuário:", error);
-      }
-    }
-  }
-
+  // pag return
   return (
 
     <>
