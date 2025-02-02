@@ -68,9 +68,12 @@ function CartinhaPessoal() {
         playAudio();
       }
     } else if (searchFilter === "comerciais") {
+      console.log(hasPodiumChanged(topResults, podioComerciais));
       if (podioComerciais.length === 0) {
         setPodioComerciais(topResults);
       } else if (hasPodiumChanged(topResults, podioComerciais)) {
+        
+        
         setPodioComerciais(topResults);
         playAudio();
       }
@@ -81,6 +84,9 @@ function CartinhaPessoal() {
   
   // 🔍 Verifica se houve mudança no TOP 3
   const hasPodiumChanged = (newPodium, oldPodium) => {
+    console.log(newPodium);
+    console.log(oldPodium);
+    
     return (
       newPodium.length >= 3 &&
       (newPodium[0]?.name !== oldPodium[0]?.name ||
