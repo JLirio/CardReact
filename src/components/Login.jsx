@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const getUserInfo = async () => {
   const token = localStorage.getItem('token');
-  console.log(token);
 
   if (token) {
     try {
@@ -12,7 +11,6 @@ const getUserInfo = async () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userData = await response.data;
-      console.log(userData);
       
       localStorage.setItem("userInfo", JSON.stringify(userData));
       return userData; // Dados do usuário
