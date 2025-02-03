@@ -505,7 +505,7 @@ function CartinhaPessoal() {
               {/* Primeiro colocado */}
               {topThree[0] && (
                 <Tilt>
-                  <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-full md:w-80
+                  <div className="hover:border-4 relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-full md:w-80
        text-center transition hover:scale-105 hover:border-white cursor-pointer mb-12 pulse-1 ">
                     {/* Position */}
 
@@ -609,7 +609,7 @@ function CartinhaPessoal() {
         </div>
 
         {/* Subpódio */}
-        <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+        {!showTable && (<div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
           <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
             {topThree.slice(3).map((player, index) => (
               <li
@@ -630,7 +630,10 @@ function CartinhaPessoal() {
               </li>
             ))}
           </ul>
-        </div>
+        </div>)
+
+        }
+        
 
         {/* Filtro */}
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center w-full z-50 p-4 ">
@@ -665,7 +668,7 @@ function CartinhaPessoal() {
 
 
           {showTable && (
-            <div id="app" className="shadow-lg rounded-lg overflow-hidden border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
+            <div id="app" className="shadow-lg overflow-hidden border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
               <h1 className="text-center text-white mt-2 text-2xl md:text-3xl font-extrabold mb-4">
                 Ranking de Vendas
               </h1>
