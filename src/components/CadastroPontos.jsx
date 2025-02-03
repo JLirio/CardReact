@@ -87,9 +87,9 @@ function CadastroPontos() {
 
     if (hasError) return;
 
-    if (sellerType === 'juridico' && vendasA > 0) {
+    if (sellerType === 'juridico' && vendasA >= 0) {
       vendasB = 0
-    } else if (sellerType === 'comercial' && vendasB > 0) {
+    } else if (sellerType === 'comercial' && vendasB >= 0) {
       vendasA = 0
     }
 
