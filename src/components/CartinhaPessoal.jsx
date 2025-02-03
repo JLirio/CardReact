@@ -444,162 +444,168 @@ function CartinhaPessoal() {
 
 
         {/* Ranking Section */}
-        <div className="flex flex-wrap items-end justify-center space-y-6 md:space-y-0 md:space-x-10 mb-10 mt-6 ">
+        <div className="flex flex-wrap items-end justify-center space-y-6 md:space-y-0 md:space-x-10 mb-10 mt-6">
 
-          {/* Segundo colocado */}
-          {topThree[1] && (
-            <Tilt>
-              <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-2">
-                {/* Position */}
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                  🥈
-                </div>
-                {/* Club and Position */}
-                <div className="mt-6">
-                  <img
-                    src={"https://i.imgur.com/AZynwEp.jpeg"}
-                    alt="Club Logo"
-                    className="w-16 h-16 mx-auto rounded-full object-cover"
-                  />
-                  <div className="flex justify-center items-center">
-                    <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
-                      {topThree[1].cargo}
-                    </p>
-                  </div>
-                </div>
-                {/* Player Image and Name */}
-                <div className="mt-4">
-                  <img
-                    src={regexImgLink(topThree[1].imgUser)}
-                    alt={`'s Country Flag`}
-                    className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
-                  />
-                  <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[1].name}</h3>
-                </div>
-                {/* Stats */}
-                <div className="mt-12 text-sm text-gray-700">
-                  <div>
-                    <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                      <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
-                        <p>{
-                          topThree[1].vendasA > 0 ?
-                            `Jurídico: ${(topThree[1].vendasA).toFixed(2)}` :
-                            `Comercial: ${(topThree[1].vendasB).toFixed(2)}`
-                        }</p>
+          {/* Verifica se topThree está vazio ou indefinido */}
+          {(!topThree || topThree.length === 0) ? (
+            <h1 className="text-2xl font-semibold text-gray-600">Sem vendedores cadastrados</h1>
+          ) : (
 
+            <>
+              {/* Segundo colocado */}
+              {topThree[1] && (
+                <Tilt>
+                  <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-2">
+                    {/* Position */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                      🥈
+                    </div>
+                    {/* Club and Position */}
+                    <div className="mt-6">
+                      <img
+                        src={"https://i.imgur.com/AZynwEp.jpeg"}
+                        alt="Club Logo"
+                        className="w-16 h-16 mx-auto rounded-full object-cover"
+                      />
+                      <div className="flex justify-center items-center">
+                        <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
+                          {topThree[1].cargo}
+                        </p>
                       </div>
                     </div>
+                    {/* Player Image and Name */}
+                    <div className="mt-4">
+                      <img
+                        src={regexImgLink(topThree[1].imgUser)}
+                        alt={`'s Country Flag`}
+                        className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
+                      />
+                      <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[1].name}</h3>
+                    </div>
+                    {/* Stats */}
+                    <div className="mt-12 text-sm text-gray-700">
+                      <div>
+                        <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
+                          <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                            <p>{
+                              topThree[1].vendasA > 0 ?
+                                `Jurídico: ${(topThree[1].vendasA).toFixed(2)}` :
+                                `Comercial: ${(topThree[1].vendasB).toFixed(2)}`
+                            }</p>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
+                </Tilt>
+              )}
 
-                </div>
-              </div>
-            </Tilt>
-          )}
-
-          {/* Primeiro colocado */}
-          {topThree[0] && (
-            <Tilt>
-              <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-full md:w-80
+              {/* Primeiro colocado */}
+              {topThree[0] && (
+                <Tilt>
+                  <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-4 w-full md:w-80
        text-center transition hover:scale-105 hover:border-white cursor-pointer mb-12 pulse-1 ">
-                {/* Position */}
+                    {/* Position */}
 
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                  👑
-                </div>
-                {/* Club and Position */}
-                <div className="mt-6">
-                  <img
-                    src={"https://i.imgur.com/AZynwEp.jpeg"}
-                    alt="Club Logo"
-                    className="w-16 h-16 mx-auto rounded-full object-cover"
-                  />
-                  <div className="flex justify-center items-center">
-                    <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
-                      {topThree[0].cargo}
-                    </p>
-                  </div>
-                </div>
-                {/* Player Image and Name */}
-                <div className="mt-4  ">
-                  <img
-                    src={regexImgLink(topThree[0].imgUser)}
-                    alt={`'s Country Flag`}
-                    className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
-                  />
-                  <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[0].name}</h3>
-                </div>
-                {/* Stats */}
-                <div className="mt-12 text-sm text-gray-700">
-                  <div>
-                    <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                      <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
-                        <p>{
-                          topThree[0].vendasA > 0 ?
-                            `Jurídico: ${(topThree[0].vendasA).toFixed(2)}` :
-                            `Comercial: ${(topThree[0].vendasB).toFixed(2)}`
-                        }</p>
-
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                      👑
+                    </div>
+                    {/* Club and Position */}
+                    <div className="mt-6">
+                      <img
+                        src={"https://i.imgur.com/AZynwEp.jpeg"}
+                        alt="Club Logo"
+                        className="w-16 h-16 mx-auto rounded-full object-cover"
+                      />
+                      <div className="flex justify-center items-center">
+                        <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
+                          {topThree[0].cargo}
+                        </p>
                       </div>
                     </div>
-                  </div>
+                    {/* Player Image and Name */}
+                    <div className="mt-4  ">
+                      <img
+                        src={regexImgLink(topThree[0].imgUser)}
+                        alt={`'s Country Flag`}
+                        className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
+                      />
+                      <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[0].name}</h3>
+                    </div>
+                    {/* Stats */}
+                    <div className="mt-12 text-sm text-gray-700">
+                      <div>
+                        <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
+                          <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                            <p>{
+                              topThree[0].vendasA > 0 ?
+                                `Jurídico: ${(topThree[0].vendasA).toFixed(2)}` :
+                                `Comercial: ${(topThree[0].vendasB).toFixed(2)}`
+                            }</p>
 
-                </div>
-              </div>
-            </Tilt>
-          )}
-
-          {/* Terceiro colocado */}
-          {topThree[2] && (
-            <Tilt>
-              <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-3">
-                {/* Position */}
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
-                  🥉
-                </div>
-
-                {/* Club and Position */}
-                <div className="mt-6">
-                  <img
-                    src={"https://i.imgur.com/AZynwEp.jpeg"}
-                    alt="Club Logo"
-                    className="w-16 h-16 mx-auto rounded-full object-cover"
-                  />
-                  <div className="flex justify-center items-center">
-                    <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
-                      {topThree[2].cargo}
-                    </p>
-                  </div>
-                </div>
-                {/* Player Image and Name */}
-                <div className="mt-4">
-                  <img
-                    src={regexImgLink(topThree[2].imgUser)}
-                    alt={`'s Country Flag`}
-                    className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
-                  />
-                  <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[2].name}</h3>
-                </div>
-                {/* Stats */}
-                <div className="mt-12 text-sm text-gray-700">
-                  <div>
-                    <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                      <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
-                        <p>{
-                          topThree[2].vendasA > 0 ?
-                            `Jurídico: ${(topThree[2].vendasA).toFixed(2)}` :
-                            `Comercial: ${(topThree[2].vendasB).toFixed(2)}`
-                        }</p>
-
+                          </div>
+                        </div>
                       </div>
+
                     </div>
                   </div>
+                </Tilt>
+              )}
 
-                </div>
-              </div>
-            </Tilt>
+              {/* Terceiro colocado */}
+              {topThree[2] && (
+                <Tilt>
+                  <div className="hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-4 w-full md:w-72 text-center transition hover:scale-105 cursor-pointer pulse-3">
+                    {/* Position */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                      🥉
+                    </div>
+
+                    {/* Club and Position */}
+                    <div className="mt-6">
+                      <img
+                        src={"https://i.imgur.com/AZynwEp.jpeg"}
+                        alt="Club Logo"
+                        className="w-16 h-16 mx-auto rounded-full object-cover"
+                      />
+                      <div className="flex justify-center items-center">
+                        <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
+                          {topThree[2].cargo}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Player Image and Name */}
+                    <div className="mt-4">
+                      <img
+                        src={regexImgLink(topThree[2].imgUser)}
+                        alt={`'s Country Flag`}
+                        className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
+                      />
+                      <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[2].name}</h3>
+                    </div>
+                    {/* Stats */}
+                    <div className="mt-12 text-sm text-gray-700">
+                      <div>
+                        <div className="font-bold rounded-md p-1 bg-[#ffd9005b shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
+                          <div className="text-2xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                            <p>{
+                              topThree[2].vendasA > 0 ?
+                                `Jurídico: ${(topThree[2].vendasA).toFixed(2)}` :
+                                `Comercial: ${(topThree[2].vendasB).toFixed(2)}`
+                            }</p>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </Tilt>
+              )}
+            </>
           )}
-
-
         </div>
 
         {/* Subpódio */}
@@ -651,6 +657,7 @@ function CartinhaPessoal() {
               </li>
             ))}
           </ul>
+
         </div>
 
         {/* table modal */}
