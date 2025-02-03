@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+/* Define o tamanho fixo para o body */
+body {
+  width: 2075px !important;
+  height: 950px !important;
+  margin: 0 !important;
+  overflow: hidden !important; /* Impede a rolagem */
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
