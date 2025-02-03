@@ -52,7 +52,7 @@ function CartinhaPessoal() {
 
   const populateTopThree = (results) => {
     const topResults = results.slice(0, 7);
-  
+
     if (searchFilter === "totais") {
       if (podioTotais.length === 0) {
         setPodioTotais(topResults); // Primeira vez, só define
@@ -71,19 +71,19 @@ function CartinhaPessoal() {
       if (podioComerciais.length === 0) {
         setPodioComerciais(topResults);
       } else if (hasPodiumChanged(topResults, podioComerciais)) {
-        
-        
+
+
         setPodioComerciais(topResults);
         playAudio();
       }
     }
-  
+
     setTopThree(topResults);
   };
-  
+
   // 🔍 Verifica se houve mudança no TOP 3
   const hasPodiumChanged = (newPodium, oldPodium) => {
-    
+
     return (
       newPodium.length >= 3 &&
       (newPodium[0]?.name !== oldPodium[0]?.name ||
@@ -91,7 +91,7 @@ function CartinhaPessoal() {
         newPodium[2]?.name !== oldPodium[2]?.name)
     );
   };
-  
+
   const playAudio = () => {
     const audio = document.getElementById("passingby-audio");
     if (audio) {
@@ -167,13 +167,19 @@ function CartinhaPessoal() {
 
     let results = [];
 
+    const isCargoMatch = (user) => {
+      const cargoNormalized = user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") || cargoNormalized?.includes("admin");
+    };
+
     if (searchFilter === "totais") {
       results = users
         .filter(
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
+            isCargoMatch(user) // Apenas jurídicos e comerciais
         )
         .sort((a, b) => b.vendasTotais - a.vendasTotais);
 
@@ -186,7 +192,8 @@ function CartinhaPessoal() {
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
+            isCargoMatch(user) && user.cargo.toLowerCase().includes("jurídico")
         )
         .sort((a, b) => b.vendasA - a.vendasA);
 
@@ -199,7 +206,8 @@ function CartinhaPessoal() {
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup))
+            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
+            isCargoMatch(user) && user.cargo.toLowerCase().includes("comercial")
         )
         .sort((a, b) => b.vendasB - a.vendasB);
 
@@ -295,14 +303,21 @@ function CartinhaPessoal() {
     }
   }
 
-  // renderizacao da tabela
   const renderTableRows = () => {
+    let referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers;
 
-    const referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers
+    // Filtra os usuários com base no searchFilter
+    if (searchFilter === "juridicas") {
+      referenceList = referenceList.filter(user =>
+        user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("juridico")
+      )
+    } else if (searchFilter === "comerciais") {
+      referenceList = referenceList.filter(user =>
+        user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("comercial")
+      );
+    }
 
     return referenceList.map((user, index) => {
-
-      // Determinando a cor de fundo para os 3 primeiros lugares
       let rowClass = `bg--500`; // Classe padrão
       if (index === 0) {
         rowClass = `bg-yellow-300`; // Primeiro lugar
@@ -312,7 +327,7 @@ function CartinhaPessoal() {
         rowClass = "bg-amber-600"; // Terceiro lugar
       }
 
-      currentPage > 0 ? rowClass = 'bg-white' : ''
+      currentPage > 0 ? rowClass = 'bg-white' : '';
 
       return (
         <tr
@@ -331,9 +346,6 @@ function CartinhaPessoal() {
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {user.name || "Não informado"}
           </td>
-          {/* <td className="px-4 py-2 border text-center font-semibold text-gray-800">
-            {user.email || "Não informado"}
-          </td> */}
           <td className="px-4 py-2 border text-center font-semibold text-gray-800">
             {user.group || "Não informado"}
           </td>
@@ -375,9 +387,8 @@ function CartinhaPessoal() {
         </tr>
       );
     });
-
-
   };
+
 
   // pag return
   return (
@@ -592,8 +603,8 @@ function CartinhaPessoal() {
         </div>
 
         {/* Subpódio */}
-        <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50">
-          <ul className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+          <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
             {topThree.slice(3).map((player, index) => (
               <li
                 key={index}
@@ -602,10 +613,10 @@ function CartinhaPessoal() {
                 <img
                   src={regexImgLink(player.imgUser)}
                   alt={player.name}
-                  className="w-7 h-7 rounded-full object-cover"
+                  className="w-7 h-7 md:w-5 md:h-5 rounded-full object-cover"
                 />
 
-                <span className="font-semibold text-left flex-grow mx-2">
+                <span className="font-semibold text-left flex-grow mx-2 sm:text-xl md:text-2xl lg:text-xs ">
                   {player.name}
                 </span>
 
@@ -616,13 +627,13 @@ function CartinhaPessoal() {
         </div>
 
         {/* Filtro */}
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center w-full z-50 p-4">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center w-full z-50 p-4 ">
           <ul className="flex space-x-4">
             {options.map((option) => (
               <li
                 key={option.value}
                 className={`relative cursor-pointer text-lg uppercase font-semibold px-4 py-2 rounded-lg 
-        transition-all duration-300 
+        transition-all duration-300 sm:text-xl md:text-2xl lg:text-xs
         ${searchFilter === option.value
                     ? "bg-purple-700 text-white"
                     : "bg-purple-600 text-gray-200 hover:bg-purple-700 hover:text-white"

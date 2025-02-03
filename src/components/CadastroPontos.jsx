@@ -65,7 +65,7 @@ function CadastroPontos() {
 
     setIsFetching(true)
     e.preventDefault();
-
+    const senhaInput = document.getElementById("senha").value.trim();
     const userName = document.getElementById("userName").value.trim();
     const email = document.getElementById("email").value.trim();
     let vendasA = parseFloat(document.getElementById("vendasA").value.trim());
@@ -93,29 +93,23 @@ function CadastroPontos() {
       vendasA = 0
     }
 
-    let novoCadastro = {}
-
+    let novoCadastro = {
+      name: userName,
+      email,
+      vendasA,
+      vendasB,
+      cargo,
+      group,
+    };
+    
+    
+    if (senhaInput) {
+      novoCadastro.senha = senhaInput;
+    }
+    
+    
     if (selectedFile !== '') {
-      novoCadastro = {
-        name: userName,
-        email,
-        vendasA,
-        vendasB,
-        senha,
-        cargo,
-        group,
-        imgUser: await uploadGoogleDriveFile()
-      }
-    } else {
-      novoCadastro = {
-        name: userName,
-        email,
-        vendasA,
-        vendasB,
-        senha,
-        cargo,
-        group,
-      }
+      novoCadastro.imgUser = await uploadGoogleDriveFile();
     }
 
     try {
@@ -233,8 +227,7 @@ function CadastroPontos() {
                   type="password"
                   id="senha"
                   name="senha"
-                  required
-                  defaultValue={user}
+                  placeholder="Digite uma nova senha (se quiser alterar)"
                   className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                 />
                 <span id="errorEmail" className="text-red-500 text-sm"></span>
