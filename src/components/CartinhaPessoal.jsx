@@ -169,7 +169,7 @@ function CartinhaPessoal() {
 
     const isCargoMatch = (user) => {
       const cargoNormalized = user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") || cargoNormalized?.includes("admin");
+      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") ||  cargoNormalized?.includes("admin")|| cargoNormalized?.includes("lider");
     };
 
     if (searchFilter === "totais") {
