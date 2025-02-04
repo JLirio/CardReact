@@ -169,7 +169,7 @@ function CartinhaPessoal() {
 
     const isCargoMatch = (user) => {
       const cargoNormalized = user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") ||  cargoNormalized?.includes("admin")|| cargoNormalized?.includes("lider");
+      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") || cargoNormalized?.includes("admin") || cargoNormalized?.includes("lider");
     };
 
     if (searchFilter === "totais") {
@@ -193,7 +193,7 @@ function CartinhaPessoal() {
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
             (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
-            isCargoMatch(user) && (user.cargo.toLowerCase().includes("jurídico")||user.cargo.toLowerCase().includes("juridico"))
+            isCargoMatch(user) && (user.cargo.toLowerCase().includes("jurídico") || user.cargo.toLowerCase().includes("juridico"))
         )
         .sort((a, b) => b.vendasA - a.vendasA);
 
@@ -360,7 +360,7 @@ function CartinhaPessoal() {
           </td>
           <td
             className={
-              userInfo?.cargo === "Admin"
+              userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
                 ? "px-4 py-2 border flex space-x-2 justify-center"
                 : "hidden"
             }
@@ -389,9 +389,9 @@ function CartinhaPessoal() {
     });
   };
 
-// 
-// 
-// 
+  // 
+  // 
+  // 
 
   // pag return
   return (
@@ -667,7 +667,7 @@ function CartinhaPessoal() {
                       <th className="px-4 py-2 text-center font-bold">Cargo</th>
                       <th
                         className={
-                          userInfo?.cargo === "Admin"||userInfo?.cargo === "Lider"||userInfo?.cargo === "Supervisor"
+                          userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
                             ? "px-4 py-2 text-center font-bold"
                             : "hidden"
                         }
