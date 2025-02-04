@@ -68,8 +68,11 @@ function CadastroPontos() {
     const senhaInput = document.getElementById("senha").value.trim();
     const userName = document.getElementById("userName").value.trim();
     const email = document.getElementById("email").value.trim();
-    let vendasA = parseFloat(document.getElementById("vendasA").value.trim());
-    let vendasB = parseFloat(document.getElementById("vendasB").value.trim());
+
+    // Aqui convertendo a vírgula para ponto e depois para número
+    let vendasA = parseFloat(document.getElementById("vendasA").value.replace(',', '.').trim());
+    let vendasB = parseFloat(document.getElementById("vendasB").value.replace(',', '.').trim());
+
     const senha = document.getElementById("senha").value.trim();
     const cargo = document.getElementById("cargo").value.trim();
     const group = document.getElementById("group").value.trim();
@@ -101,13 +104,11 @@ function CadastroPontos() {
       cargo,
       group,
     };
-    
-    
+
     if (senhaInput) {
       novoCadastro.senha = senhaInput;
     }
-    
-    
+
     if (selectedFile !== '') {
       novoCadastro.imgUser = await uploadGoogleDriveFile();
     }
@@ -195,11 +196,12 @@ function CadastroPontos() {
                     Vendas Jurídico
                   </label>
                   <input
-                    type="number"
+                    type="text" // Mudado para "text" para aceitar vírgula
                     id="vendasA"
                     name="vendasA"
                     defaultValue={user ? user.vendasA : ""}
                     className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    placeholder="Digite as vendas"
                   />
                 </div>
 
@@ -208,13 +210,15 @@ function CadastroPontos() {
                     Vendas Comercial
                   </label>
                   <input
-                    type="number"
+                    type="text" // Mudado para "text" para aceitar vírgula
                     id="vendasB"
                     name="vendasB"
                     defaultValue={user ? user.vendasB : ""}
-                    className={`w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500`}
+                    className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+                    placeholder="Digite as vendas"
                   />
                 </div>
+
               </div>
 
             </div>
@@ -306,7 +310,7 @@ function CadastroPontos() {
         >
           Voltar
         </button>
-      </div>
+      </div >
       <footer className=" fixed text-white py-6 -bottom-5 flex right-1">
         <div className="container mx-auto flex justify-between items-center px-4">
           <p className="text-sm">
@@ -318,7 +322,7 @@ function CadastroPontos() {
           </div> */}
         </div>
       </footer>
-    </div>
+    </div >
   );
 }
 
