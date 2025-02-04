@@ -667,7 +667,7 @@ function CartinhaPessoal() {
                       <th className="px-4 py-2 text-center font-bold">Cargo</th>
                       <th
                         className={
-                          userInfo?.cargo === "Admin"
+                          userInfo?.cargo === "Admin"||userInfo?.cargo === "Lider"||userInfo?.cargo === "Supervisor"
                             ? "px-4 py-2 text-center font-bold"
                             : "hidden"
                         }
