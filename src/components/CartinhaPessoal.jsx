@@ -193,7 +193,7 @@ function CartinhaPessoal() {
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
             (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
-            isCargoMatch(user) && user.cargo.toLowerCase().includes("jurídico")
+            isCargoMatch(user) && (user.cargo.toLowerCase().includes("jurídico")||user.cargo.toLowerCase().includes("juridico"))
         )
         .sort((a, b) => b.vendasA - a.vendasA);
 
