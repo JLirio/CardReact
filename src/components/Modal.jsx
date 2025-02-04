@@ -38,7 +38,7 @@ export default function Modal({
         let vendasBChange = 0;
 
         // Verifica o cargo do usuário para aplicar o valor em vendasA ou vendasB
-        if (currentUserInModal?.cargo.toLowerCase().includes("jurídico")) {
+        if (currentUserInModal?.cargo.toLowerCase().includes("jurídico") || currentUserInModal?.cargo.toLowerCase().includes("juridico")) {
             vendasAChange = Number(newSalesValue); // Agrega o valor em vendasA
         } else if (currentUserInModal?.cargo.toLowerCase().includes("comercial")) {
             vendasBChange = Number(newSalesValue); // Agrega o valor em vendasB
