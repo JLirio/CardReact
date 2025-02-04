@@ -4,54 +4,57 @@ import { useState } from "react";
 
 function CadastrarUser() {
 
-  const [selectedFile, setSelectedfile] = useState('')
+  const [selectedFile, setSelectedfile] = useState('');
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     group: "",
     imgUser: "",
-    vendasA: 0,
-    vendasB: 0,
+    vendasA: "",
+    vendasB: "",
     cargo: "",
     senha: "",
   });
-
-
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    console.log(typeof (e.target.value))
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const uploadData = new FormData()
+  const handleCurrencyInput = (e, id) => {
+    const value = e.target.value;
+    const formattedValue = value
+      .replace(/\./g, '')  // Remove os pontos
+      .replace(',', '.');  // Substitui a vírgula por ponto
+    setFormData({
+      ...formData,
+      [id]: formattedValue
+    });
+  };
+
+  const uploadData = new FormData();
 
   const handleFileChange = (event) => {
-    setSelectedfile(event.target.files[0])
-    console.log(event.target.files[0])
-
+    setSelectedfile(event.target.files[0]);
+    console.log(event.target.files[0]);
   }
 
   const uploadGoogleDriveFile = async () => {
-
-    uploadData.append('image', selectedFile)
+    uploadData.append('image', selectedFile);
 
     try {
-
       const response = await api.post("/usuarios/img-user", uploadData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-
-      return response.data?.imageUrl
-
+      return response.data?.imageUrl;
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
@@ -59,12 +62,12 @@ function CadastrarUser() {
     e.preventDefault();
 
     try {
+      formData.imgUser = await uploadGoogleDriveFile();
+      // Garantindo que os valores de vendasA e vendasB sejam convertidos para número
+      formData.vendasA = parseFloat(formData.vendasA);
+      formData.vendasB = parseFloat(formData.vendasB);
 
-      formData.imgUser = await uploadGoogleDriveFile()
-      formData.vendasA = parseFloat(formData.vendasA)
-      formData.vendasB = parseFloat(formData.vendasB)
-
-      console.log(formData)
+      console.log(formData);
       const response = await api.post("/usuarios", formData);
       console.log("Usuário cadastrado com sucesso:", response.data);
       navigate("/cartinha"); // Redirecionar após o cadastro bem-sucedido
@@ -74,8 +77,6 @@ function CadastrarUser() {
     }
   };
 
-
-
   return (
     <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
       <div id="app" className="bg-white p-6 rounded-lg shadow-md">
@@ -84,7 +85,6 @@ function CadastrarUser() {
           id="registerForm"
           onSubmit={handleSubmit}
         >
-
           <div className="grid grid-cols-2 my-4">
             <div className="m-1">
               <label htmlFor="name" className="block text-gray-700 mb-2">
@@ -125,6 +125,7 @@ function CadastrarUser() {
                 required
                 className="w-full p-3 mb-4 border rounded-lg border-gray-300"
               />
+
               <label htmlFor="imgUser" className="block text-gray-700 mb-2">
                 Imagem de Usuário:
               </label>
@@ -138,29 +139,29 @@ function CadastrarUser() {
                 />
                 <div>
                   {
-                    selectedFile !== '' ?
-                      (
-                        <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
-                      ) : (
-                        <p className="text-sm text-gray-500">
-                          Arraste uma imagem ou <span className="text-blue-600">Escolha do Computador</span>
-                        </p>
-                      )
+                    selectedFile !== '' ? (
+                      <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
+                    ) : (
+                      <p className="text-sm text-gray-500">
+                        Arraste uma imagem ou <span className="text-blue-600">Escolha do Computador</span>
+                      </p>
+                    )
                   }
                 </div>
               </div>
 
             </div>
+
             <div className="m-1">
               <label htmlFor="vendasA" className="block text-gray-700 mb-2">
                 Vendas Jurídico:
               </label>
               <input
-                type="number"
+                type="text"  // Mudado de "number" para "text"
                 id="vendasA"
                 name="vendasA"
                 value={formData.vendasA}
-                onChange={handleChange}
+                onChange={(e) => handleCurrencyInput(e, 'vendasA')}
                 required
                 className="w-full p-3 mb-4 border rounded-lg border-gray-300"
               />
@@ -169,11 +170,11 @@ function CadastrarUser() {
                 Vendas Comercial:
               </label>
               <input
-                type="number"
+                type="text"  // Mudado de "number" para "text"
                 id="vendasB"
                 name="vendasB"
                 value={formData.vendasB}
-                onChange={handleChange}
+                onChange={(e) => handleCurrencyInput(e, 'vendasB')}
                 required
                 className="w-full p-3 mb-4 border rounded-lg border-gray-300"
               />
@@ -207,7 +208,6 @@ function CadastrarUser() {
           </div>
 
           <div className="flex justify-center items-center flex-col">
-
             <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg">
               Cadastrar
             </button>
@@ -228,10 +228,6 @@ function CadastrarUser() {
           <p className="text-sm">
             &copy; 2025 CardReact. Todos os direitos reservados.
           </p>
-          {/* <div className="flex space-x-6">
-            <a href="#" className="hover:text-purple-400 transition-colors">Política de Privacidade</a>
-            <a href="#" className="hover:text-purple-400 transition-colors">Termos de Serviço</a>
-          </div> */}
         </div>
       </footer>
     </div>
