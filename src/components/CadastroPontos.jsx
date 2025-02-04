@@ -196,13 +196,16 @@ function CadastroPontos() {
                     Vendas Jurídico
                   </label>
                   <input
-                    type="text" // Mudado para "text" para aceitar vírgula
+                    type="text"
                     id="vendasA"
                     name="vendasA"
                     defaultValue={user ? user.vendasA : ""}
                     className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                     placeholder="Digite as vendas"
+                    inputMode="decimal"
+                    pattern="[0-9]+([,\.][0-9]+)?"
                   />
+
                 </div>
 
                 <div className={sellerType === 'comercial' ? 'block' : 'hidden'}>
@@ -210,13 +213,16 @@ function CadastroPontos() {
                     Vendas Comercial
                   </label>
                   <input
-                    type="text" // Mudado para "text" para aceitar vírgula
+                    type="text"
                     id="vendasB"
                     name="vendasB"
                     defaultValue={user ? user.vendasB : ""}
                     className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
                     placeholder="Digite as vendas"
+                    inputMode="decimal"
+                    pattern="[0-9]+([,\.][0-9]+)?"
                   />
+
                 </div>
 
               </div>
