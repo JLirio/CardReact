@@ -13,9 +13,9 @@ function FifaCard() {
     let userId = userInfo.id;
     const [user, setUser] = useState(null);
 
-    const premmium = 12
-    const platium = 9
-    const esmerald = 6
+    const premmium = 1200
+    const platium = 500
+    const esmerald = 300
 
     useEffect(() => {
         if (userId) {
@@ -45,17 +45,17 @@ function FifaCard() {
     }
 
     return (
-        <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen w-full flex flex-col items-center justify-center">
+        <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen w-full flex flex-col items-center justify-center">
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
                 <button
                     onClick={() => navigate("/cartinha")} // Redireciona para /login
-                    className=" bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                    className=" bg-orange-400 hover:bg-yellow-300 hover:text-black text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
                 >
                     Voltar
                 </button>
                 <button
                     onClick={() => navigate("/")} // Redireciona para /login
-                    className=" bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                    className="  bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
                 >
                     Sair
                 </button>
@@ -69,20 +69,23 @@ function FifaCard() {
                                 ? "relative bg-gradient-to-t from-[#87cefae6] to-[#989393d1] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
                                 : user?.vendasTotais > premmium
                                     ? "relative bg-gradient-to-t from-[#ff8383] to-[#ffdf34] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
-                                    : "relative bg-gradient-to-t from-[#3c6ef6bb] to-[#fc33b2a8] rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
+                                    : "relative bg-gradient-to-t from-black  to-orange-300 rounded-xl shadow-xl p-4 w-80 text-center transition hover:scale-[1.05] cursor-pointer hover:border-4"
                     }
                 >
 
                     {/* Rating */}
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg  flex items-center justify-center">
+                    <p className="mx-2 my-1">
                         {user?.group}
+
+                    </p>
                     </div>
                     {/* Club and Position */}
                     <div className="mt-6">
                         <img
                             src={"https://i.imgur.com/AZynwEp.jpeg"}
                             alt="Club Logo"
-                            className="w-12 h-12 mx-auto rounded-full object-cover"
+                            className="w-16 h-16 mx-auto rounded-full object-cover"
                         />
                         <div className="flex justify-center items-center">
                             <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
@@ -97,7 +100,7 @@ function FifaCard() {
                             alt={`'s Country Flag`}
                             className="mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[200px] h-[200px] object-fill cursor-pointer"
                         />
-                        <h3 className="text-2xl my-4 font-bold text-[#2C2C2C] capitalize">{user?.name}</h3>
+                        <h3 className="text-2xl my-4 font-bold text-[#FFF] capitalize">{user?.name}</h3>
                     </div>
                     {/* Stats */}
                     <div className="mt-12 text-sm text-gray-700">

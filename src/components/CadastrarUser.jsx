@@ -78,9 +78,9 @@ function CadastrarUser() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
       <div id="app" className="bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-center text-blue-500 text-2xl font-bold mb-4">Cadastro</h1>
+        <h1 className="text-center text-[#0b0908] text-2xl font-bold mb-4">Cadastro</h1>
         <form
           id="registerForm"
           onSubmit={handleSubmit}
@@ -140,10 +140,10 @@ function CadastrarUser() {
                 <div>
                   {
                     selectedFile !== '' ? (
-                      <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
+                      <p className="text-sm text-[#dba24d] font-semibold">Você adicionou {selectedFile.name}</p>
                     ) : (
                       <p className="text-sm text-gray-500">
-                        Arraste uma imagem ou <span className="text-blue-600">Escolha do Computador</span>
+                        Arraste uma imagem ou <span className="text-[#dba24d]">Escolha do Computador</span>
                       </p>
                     )
                   }
@@ -208,7 +208,7 @@ function CadastrarUser() {
           </div>
 
           <div className="flex justify-center items-center flex-col">
-            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg">
+            <button type="submit" className="w-full bg-[#e7b56a] hover:bg-[#dba24d] text-black font-bold py-3 px-6 rounded-lg">
               Cadastrar
             </button>
             <button

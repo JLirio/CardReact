@@ -333,10 +333,10 @@ function CartinhaPessoal() {
         <tr
           key={user.id}
           className={
-            `hover:cursor-pointer transition duration-300 ${rowClass}`
+            `hover:cursor-pointer transition duration-300 ${rowClass} `
           }>
           {/* Alterando ID para posição */}
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 border text-center font-semibold text-gray-800 ">
             {
               currentPage > 0 ?
                 pagination.slice(0, currentPage).reduce((acc, page) => acc + page.length, 0) + (index + 1) :
@@ -367,19 +367,19 @@ function CartinhaPessoal() {
           >
             <button
               onClick={() => excluirUsuarioAPI(user.id)}
-              className=" bg-red-500 hover:bg-red-700 text-white font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className=" bg-[#0b0908] hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               Excluir
             </button>
             <button
               onClick={() => handleViewCartinha(user.id)}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className="bg-orange-500 hover:bg-yellow-400 hover:text-black text-white  font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               Editar
             </button>
             <button
               onClick={() => openAddSalesModal(user)}
-              className="bg-green-600 hover:bg-green-700 text-white font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className="bg-orange-400 hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               + Venda
             </button>
@@ -389,6 +389,9 @@ function CartinhaPessoal() {
     });
   };
 
+// 
+// 
+// 
 
   // pag return
   return (
@@ -405,25 +408,25 @@ function CartinhaPessoal() {
         currentUserInModal={currentUserInModal}
       />
 
-      <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-blue-200 min-h-screen flex flex-col items-center  justify-center px-4">
+      <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center  justify-center px-4">
 
-        <div className="fixed border-2 border-[#8b3cd49d] left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
-          <p className="mr-2 font-semibold">
+        <div className="fixed border-2 border-orange-300 left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
+          <p className="mr-2 font-semibold text-white">
             Total Vendido:
           </p>
-          <b className="text-white font-semibold">{(totalJaVendido).toFixed(2)}</b>
+          <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
         </div>
         <div className="fixed flex-col py-4 right-1 flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
-            className=" bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className=" bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
           >
             Sair
           </button>
 
           <button
             onClick={toggleTable} // Redireciona para /login
-            className=" bg-orange-500 hover:bg-yellow-600 hover:text-black text-white font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className=" bg-orange-400 hover:bg-yellow-600 hover:text-black text-white font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -579,14 +582,14 @@ function CartinhaPessoal() {
                 className={`relative cursor-pointer text-lg uppercase font-semibold px-4 py-2 rounded-lg 
         transition-all duration-300 sm:text-xl md:text-2xl lg:text-xs
         ${searchFilter === option.value
-                    ? "bg-purple-700 text-white"
-                    : "bg-purple-600 text-gray-200 hover:bg-purple-700 hover:text-white"
+                    ? "bg-black text-white"
+                    : "bg-[#0b0908] text-gray-200 hover:bg-[#0b0908] hover:text-white"
                   }`}
                 onClick={() => handleSelect(option.value)}
               >
                 {option.label}
                 <span
-                  className={`absolute left-0 bottom-0 h-1 w-full bg-pink-500 transition-transform duration-300 
+                  className={`absolute left-0 bottom-0 h-1 w-full bg-[#dba24d] transition-transform duration-300 
         ${searchFilter === option.value
                       ? "transform scale-x-100"
                       : "transform scale-x-0 hover:scale-x-100"
@@ -600,7 +603,6 @@ function CartinhaPessoal() {
 
         {/* table modal */}
         <div className="flex flex-col items-center p-4">
-
 
           {showTable && (
             <div id="app" className="shadow-lg overflow-hidden border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
@@ -646,9 +648,9 @@ function CartinhaPessoal() {
 
               {/* Tabela */}
               {filteredUsers.length > 0 ? (
-                <table className="min-w-full bg-white rounded-lg shadow-md overflow-y-scroll">
+                <table className="min-w-full bg-white rounded-lg shadow-md overflow-y-scroll ">
                   <thead>
-                    <tr className="bg-purple-600 text-white ">
+                    <tr className="bg-[#0b0908] text-white ">
                       <th className="px-4 py-2 text-center font-bold">#</th>
                       <th className="px-4 py-2 text-center font-bold">Nome</th>
                       {/* <th className="px-4 py-2 text-center font-bold">Email</th> */}
@@ -674,7 +676,7 @@ function CartinhaPessoal() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="w-[200px]">{renderTableRows()}</tbody>
+                  <tbody className="w-[200px] ">{renderTableRows()}</tbody>
                 </table>
 
               ) : (
@@ -694,7 +696,7 @@ function CartinhaPessoal() {
                       <li
                         key={index}
                         onClick={() => setCurrentPage(index)}
-                        className={`my-2 text-2xl cursor-pointer hover:border-[#9333ea] px-3 text-slate-500 border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-slate-50' : ''}`}>{index + 1}
+                        className={`my-2 text-2xl cursor-pointer hover:border-[#dba24d] px-3 text-black border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#dba24d]' : ''}`}>{index + 1}
                       </li>
                     ))
                   }
@@ -702,30 +704,30 @@ function CartinhaPessoal() {
               </div>
 
               <div className="text-center text-xl flex justify-center items-center mt-10">
-                <div className="border-2 border-[#8b3cd49d] flex justify-center items-center px-2 py-1 rounded-md shadow-md">
+                <div className="border-2 border-[#dba24d] flex justify-center items-center px-2 py-1 rounded-md shadow-md">
                   <p className="mr-2 font-semibold">
                     Total Vendido:
                   </p>
-                  <b className="text-white font-semibold">{totalJaVendido}</b>
+                  <b className="text-[#dba24d] font-semibold">{totalJaVendido}</b>
                 </div>
               </div>
               <div className="mt-5  flex space-x-4 justify-center">
                 <button
                   onClick={exportarCSV}
-                  className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                  className="bg-orange-500 hover:bg-yellow-400 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
                 >
                   Exportar como CSV
                 </button>
                 <button
                   onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
-                  className={userInfo?.cargo === "Admin" ? "bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
+                  className={userInfo?.cargo === "Admin" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
                 >
                   Novo cadastro
                 </button>
 
                 <button
                   onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                  className="bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
                 >
                   Minha cartinha
                 </button>

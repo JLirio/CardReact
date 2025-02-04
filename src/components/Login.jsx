@@ -52,9 +52,9 @@ function Login() {
 
 
   return (
-    <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
       <div id="app" className="max-w-sm w-full bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-center text-blue-500 text-2xl font-bold mb-4">Login</h1>
+        <h1 className="text-center text-black text-2xl font-bold mb-4">Login</h1>
         <form onSubmit={handleLogin}>
           <label htmlFor="username" className="block text-gray-700 mb-2">
             Usuário:
@@ -82,7 +82,7 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg"
+            className="w-full bg-[#e7b56a] hover:bg-[#dba24d] text-black hover:text-white font-bold py-3 px-6 rounded-lg"
           >
             Entrar
           </button>

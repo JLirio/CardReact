@@ -130,7 +130,7 @@ function CadastroPontos() {
 
 
   return (
-    <div className="bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
         <button
           onClick={() => navigate("/")} // Redireciona para /login
@@ -140,7 +140,7 @@ function CadastroPontos() {
         </button>
       </div>
       <div className="max-w-3xl w-full bg-white p-8 rounded-xl shadow-lg">
-        <h1 className="text-center text-purple-700 text-4xl font-extrabold mb-8">
+        <h1 className="text-center text-[#0b0908] text-4xl font-extrabold mb-8">
           Atualizar Usuario
         </h1>
         <form onSubmit={handleCadastroPontos} className="space-y-6">
@@ -291,7 +291,7 @@ function CadastroPontos() {
                           <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
                         ) : (
                           <p className="text-sm text-gray-500">
-                            Arraste uma imagem ou <span className="text-[#6b21a8]">Escolha do Computador</span>
+                            Arraste uma imagem ou <span className="text-orange-300">Escolha do Computador</span>
                           </p>
                         )
                     }
@@ -303,7 +303,7 @@ function CadastroPontos() {
           </div>
           <button
             type="submit"
-            className={`w-full ${isFetchig ? `bg-slate-600 hover:bg-slate-600` : `bg-purple-700 hover:bg-purple-800`} text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300`}
+            className={`w-full ${isFetchig ? `bg-slate-600 hover:bg-slate-600` : `bg-[#e7b56a] hover:bg-[#dba24d] text-black hover:text-white`}  text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300`}
             disabled={isFetchig}
           >
             {isFetchig ? 'Atualizando' : 'Atualizar Cadastro'}

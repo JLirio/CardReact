@@ -54,7 +54,7 @@ export default function Modal({
                 <div className="w-[30%] bg-white p-8 rounded-md shadow-md">
                     <div className="flex justify-start items-center gap-4">
                         <h1 className="text-2xl font-semibold">{title}</h1>
-                        <p className="px-1 border border-blue-500 rounded-xl w-[40%] text-center">{currentUserInModal?.name}</p>
+                        <p className="px-1 border border-[#e7b56a]  rounded-xl w-[40%] text-center">{currentUserInModal?.name}</p>
                     </div>
 
                     <p className="text-lg py-2">{message}</p>
@@ -69,7 +69,7 @@ export default function Modal({
                     </div>
                     <div className="flex justify-center items-center my-2 gap-2">
                         <button
-                            className="p-2 w-[60%] bg-blue-500 cursor-pointer rounded-md text-white font-semibold text-lg transition hover:scale-[1.02]"
+                            className="p-2 w-[60%] bg-[#e7b56a] hover:bg-[#dba24d] text-white cursor-pointer rounded-md  font-semibold text-lg transition hover:scale-[1.02]"
                             onClick={handleUpdate} // Agora usa a função handleUpdate
                         >
                             {buttonTitle}
