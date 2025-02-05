@@ -57,24 +57,44 @@ function CartinhaPessoal() {
       if (podioTotais.length === 0) {
         setPodioTotais(topResults); // Primeira vez, só define
       } else if (hasPodiumChanged(topResults, podioTotais)) {
+        if(topResults[0]?.name !== podioTotais[0]?.name ||
+          topResults[1]?.name !== podioTotais[1]?.name ||
+          topResults[2]?.name !== podioTotais[2]?.name){
+            playAudio("f1");
+            
+        }else{
+          playAudio()
+        }
+        
         setPodioTotais(topResults);
-        playAudio();
       }
     } else if (searchFilter === "juridicas") {
       if (podioJuridicas.length === 0) {
         setPodioJuridicas(topResults);
       } else if (hasPodiumChanged(topResults, podioJuridicas)) {
+        if(topResults[0]?.name !== podioJuridicas[0]?.name ||
+          topResults[1]?.name !== podioJuridicas[1]?.name ||
+          topResults[2]?.name !== podioJuridicas[2]?.name){
+            playAudio("f1");
+        }else{
+          playAudio()
+        }
         setPodioJuridicas(topResults);
-        playAudio();
       }
     } else if (searchFilter === "comerciais") {
       if (podioComerciais.length === 0) {
         setPodioComerciais(topResults);
       } else if (hasPodiumChanged(topResults, podioComerciais)) {
 
-
+        if(topResults[0]?.name !== podioComerciais[0]?.name ||
+          topResults[1]?.name !== podioComerciais[1]?.name ||
+          topResults[2]?.name !== podioComerciais[2]?.name){
+            playAudio("f1");
+        }else{
+          playAudio()
+        }
         setPodioComerciais(topResults);
-        playAudio();
+        
       }
     }
 
@@ -88,16 +108,30 @@ function CartinhaPessoal() {
       newPodium.length >= 3 &&
       (newPodium[0]?.name !== oldPodium[0]?.name ||
         newPodium[1]?.name !== oldPodium[1]?.name ||
-        newPodium[2]?.name !== oldPodium[2]?.name)
+        newPodium[2]?.name !== oldPodium[2]?.name ||
+        newPodium[3]?.name !== oldPodium[3]?.name ||
+        newPodium[4]?.name !== oldPodium[4]?.name ||
+        newPodium[5]?.name !== oldPodium[5]?.name ||
+        newPodium[6]?.name !== oldPodium[6]?.name)
     );
   };
 
-  const playAudio = () => {
-    const audio = document.getElementById("passingby-audio");
-    if (audio) {
-      audio.play().catch((error) => {
-        console.error("Erro ao reproduzir música:", error);
-      });
+  const playAudio = (audio) => {
+    if(audio =="f1"){
+      const audio = document.getElementById("passingby-audio");
+      if (audio) {
+        audio.play().catch((error) => {
+          console.error("Erro ao reproduzir música:", error);
+        });
+      }
+
+    }else{
+      const audio = document.getElementById("cash-audio");
+      if (audio) {
+        audio.play().catch((error) => {
+          console.error("Erro ao reproduzir música:", error);
+        });
+      }
     }
   };
 
@@ -148,7 +182,6 @@ function CartinhaPessoal() {
       const response = await api.get("/usuarios");
       setUsers(response.data);
       setFilteredUsers(response.data);
-      console.log(response.data);
 
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
