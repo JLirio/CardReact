@@ -474,7 +474,14 @@ function CartinhaPessoal() {
                     <div className="mt-12 text-sm text-gray-700">
                       <div className="font-bold rounded-md p-1 bg-[#e1e0d936] shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
                         <p className="text-xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
-                          {topThree[1].vendasA > 0 ? `Jurídico: ${(topThree[1].vendasA).toFixed(2)}` : `Comercial: ${(topThree[1].vendasB).toFixed(2)}`}
+                          {topThree[1].vendasA === topThree[1].vendasB
+                            ? topThree[1].cargo.toLowerCase().includes("jurídico") || topThree[1].cargo.toLowerCase().includes("juridico")
+                              ? `Jurídico: ${(topThree[1].vendasA).toFixed(2)}`
+                              : `Comercial: ${(topThree[1].vendasB).toFixed(2)}`
+                            : topThree[1].vendasA > 0
+                              ? `Jurídico: ${(topThree[1].vendasA).toFixed(2)}`
+                              : `Comercial: ${(topThree[1].vendasB).toFixed(2)}`
+                          }
                         </p>
                       </div>
                     </div>
