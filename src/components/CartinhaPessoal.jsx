@@ -61,6 +61,7 @@ function CartinhaPessoal() {
           topResults[1]?.name !== podioTotais[1]?.name ||
           topResults[2]?.name !== podioTotais[2]?.name){
             playAudio("f1");
+            playAudio()
             
         }else{
           playAudio()
@@ -76,6 +77,7 @@ function CartinhaPessoal() {
           topResults[1]?.name !== podioJuridicas[1]?.name ||
           topResults[2]?.name !== podioJuridicas[2]?.name){
             playAudio("f1");
+            playAudio()
         }else{
           playAudio()
         }
@@ -90,6 +92,7 @@ function CartinhaPessoal() {
           topResults[1]?.name !== podioComerciais[1]?.name ||
           topResults[2]?.name !== podioComerciais[2]?.name){
             playAudio("f1");
+            playAudio()
         }else{
           playAudio()
         }
@@ -748,7 +751,7 @@ function CartinhaPessoal() {
                   <p className="mr-2 font-semibold">
                     Total Vendido:
                   </p>
-                  <b className="text-[#dba24d] font-semibold">{totalJaVendido}</b>
+                  <b className="text-[#dba24d] font-semibold">{(totalJaVendido).toFixed(2)}</b>
                 </div>
               </div>
               <div className="mt-5  flex space-x-4 justify-center">
@@ -760,7 +763,7 @@ function CartinhaPessoal() {
                 </button>
                 <button
                   onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
-                  className={userInfo?.cargo === "Admin" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
+                  className={ userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
                 >
                   Novo cadastro
                 </button>
