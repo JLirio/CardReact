@@ -52,7 +52,8 @@ function CartinhaPessoal() {
 
   const populateTopThree = (results) => {
     const topResults = results.slice(0, 7);
-
+    console.log(topResults);
+    
     if (searchFilter === "totais") {
       if (podioTotais.length === 0) {
         setPodioTotais(topResults); // Primeira vez, só define
@@ -115,7 +116,15 @@ function CartinhaPessoal() {
         newPodium[3]?.name !== oldPodium[3]?.name ||
         newPodium[4]?.name !== oldPodium[4]?.name ||
         newPodium[5]?.name !== oldPodium[5]?.name ||
-        newPodium[6]?.name !== oldPodium[6]?.name)
+        newPodium[6]?.name !== oldPodium[6]?.name ||
+
+        newPodium[0]?.vendasTotais !== oldPodium[0]?.vendasTotais ||
+        newPodium[1]?.vendasTotais !== oldPodium[1]?.vendasTotais ||
+        newPodium[2]?.vendasTotais !== oldPodium[2]?.vendasTotais ||
+        newPodium[3]?.vendasTotais !== oldPodium[3]?.vendasTotais ||
+        newPodium[4]?.vendasTotais !== oldPodium[4]?.vendasTotais ||
+        newPodium[5]?.vendasTotais !== oldPodium[5]?.vendasTotais ||
+        newPodium[6]?.vendasTotais !== oldPodium[6]?.vendasTotais)
     );
   };
 
