@@ -51,101 +51,82 @@ function CartinhaPessoal() {
 
 
   const populateTopThree = (results) => {
-    const topResults = results.slice(0, 7);
-    console.log(topResults);
-    
     if (searchFilter === "totais") {
       if (podioTotais.length === 0) {
-        setPodioTotais(topResults); // Primeira vez, só define
-      } else if (hasPodiumChanged(topResults, podioTotais)) {
-        if(topResults[0]?.name !== podioTotais[0]?.name ||
-          topResults[1]?.name !== podioTotais[1]?.name ||
-          topResults[2]?.name !== podioTotais[2]?.name){
-            playAudio("f1");
-            playAudio()
-            
-        }else{
-          playAudio()
+        setPodioTotais(results);
+      } else if (hasPodiumChanged(results, podioTotais)) {
+        if (results[0]?.name !== podioTotais[0]?.name ||
+          results[1]?.name !== podioTotais[1]?.name ||
+          results[2]?.name !== podioTotais[2]?.name) {
+          playAudio("f1");
+          playAudio();
+        } else {
+          playAudio();
         }
-        
-        setPodioTotais(topResults);
+        setPodioTotais(results);
       }
     } else if (searchFilter === "juridicas") {
       if (podioJuridicas.length === 0) {
-        setPodioJuridicas(topResults);
-      } else if (hasPodiumChanged(topResults, podioJuridicas)) {
-        if(topResults[0]?.name !== podioJuridicas[0]?.name ||
-          topResults[1]?.name !== podioJuridicas[1]?.name ||
-          topResults[2]?.name !== podioJuridicas[2]?.name){
-            playAudio("f1");
-            playAudio()
-        }else{
-          playAudio()
+        setPodioJuridicas(results);
+      } else if (hasPodiumChanged(results, podioJuridicas)) {
+        if (results[0]?.name !== podioJuridicas[0]?.name ||
+          results[1]?.name !== podioJuridicas[1]?.name ||
+          results[2]?.name !== podioJuridicas[2]?.name) {
+          playAudio("f1");
+          playAudio();
+        } else {
+          playAudio();
         }
-        setPodioJuridicas(topResults);
+        setPodioJuridicas(results);
       }
     } else if (searchFilter === "comerciais") {
       if (podioComerciais.length === 0) {
-        setPodioComerciais(topResults);
-      } else if (hasPodiumChanged(topResults, podioComerciais)) {
-
-        if(topResults[0]?.name !== podioComerciais[0]?.name ||
-          topResults[1]?.name !== podioComerciais[1]?.name ||
-          topResults[2]?.name !== podioComerciais[2]?.name){
-            playAudio("f1");
-            playAudio()
-        }else{
-          playAudio()
+        setPodioComerciais(results);
+      } else if (hasPodiumChanged(results, podioComerciais)) {
+        if (results[0]?.name !== podioComerciais[0]?.name ||
+          results[1]?.name !== podioComerciais[1]?.name ||
+          results[2]?.name !== podioComerciais[2]?.name) {
+          playAudio("f1");
+          playAudio();
+        } else {
+          playAudio();
         }
-        setPodioComerciais(topResults);
-        
+        setPodioComerciais(results);
       }
     }
-
+    const topResults = results.slice(0, 7);
     setTopThree(topResults);
   };
 
-  // 🔍 Verifica se houve mudança no TOP 3
   const hasPodiumChanged = (newPodium, oldPodium) => {
+    if (oldPodium.length === 0) return false;
 
-    return (
-      newPodium.length >= 3 &&
-      (newPodium[0]?.name !== oldPodium[0]?.name ||
-        newPodium[1]?.name !== oldPodium[1]?.name ||
-        newPodium[2]?.name !== oldPodium[2]?.name ||
-        newPodium[3]?.name !== oldPodium[3]?.name ||
-        newPodium[4]?.name !== oldPodium[4]?.name ||
-        newPodium[5]?.name !== oldPodium[5]?.name ||
-        newPodium[6]?.name !== oldPodium[6]?.name ||
+    return oldPodium.some((oldItem) => {
+      const newItem = newPodium.find((item) => item.name === oldItem.name);
 
-        newPodium[0]?.vendasTotais !== oldPodium[0]?.vendasTotais ||
-        newPodium[1]?.vendasTotais !== oldPodium[1]?.vendasTotais ||
-        newPodium[2]?.vendasTotais !== oldPodium[2]?.vendasTotais ||
-        newPodium[3]?.vendasTotais !== oldPodium[3]?.vendasTotais ||
-        newPodium[4]?.vendasTotais !== oldPodium[4]?.vendasTotais ||
-        newPodium[5]?.vendasTotais !== oldPodium[5]?.vendasTotais ||
-        newPodium[6]?.vendasTotais !== oldPodium[6]?.vendasTotais)
-    );
+      return newItem && newItem.vendasTotais !== oldItem.vendasTotais;
+    });
   };
 
+
   const playAudio = (audio) => {
-    if(audio =="f1"){
-      const audio = document.getElementById("passingby-audio");
-      if (audio) {
-        audio.play().catch((error) => {
+    if (audio === "f1") {
+      const audioElement = document.getElementById("passingby-audio");
+      if (audioElement) {
+        audioElement.play().catch((error) => {
           console.error("Erro ao reproduzir música:", error);
         });
       }
-
-    }else{
-      const audio = document.getElementById("cash-audio");
-      if (audio) {
-        audio.play().catch((error) => {
+    } else {
+      const audioElement = document.getElementById("cash-audio");
+      if (audioElement) {
+        audioElement.play().catch((error) => {
           console.error("Erro ao reproduzir música:", error);
         });
       }
     }
   };
+
 
 
   // regex img
@@ -599,30 +580,30 @@ function CartinhaPessoal() {
 
 
         {/* Subpódio */}
-        {!showTable && (<div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
-          <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
-            {topThree.slice(3).map((player, index) => (
-              <li
-                key={index}
-                className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
-              >
-                <img
-                  src={regexImgLink(player.imgUser)}
-                  alt={player.name}
-                  className="w-7 h-7 md:w-5 md:h-5 rounded-full object-cover"
-                />
+        {!showTable && (
+          <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+            <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
+              {topThree.slice(3).map((player, index) => (
+                <li
+                  key={index}
+                  className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
+                >
+                  <img
+                    src={regexImgLink(player.imgUser)}
+                    alt={player.name}
+                    className="w-7 h-7 md:w-5 md:h-5 rounded-full object-cover"
+                  />
 
-                <span className="font-semibold text-left flex-grow mx-2 sm:text-xl md:text-2xl lg:text-xs ">
-                  {player.name}
-                </span>
+                  <span className="font-semibold text-left flex-grow mx-2 sm:text-xl md:text-2xl lg:text-xs ">
+                    {player.name}
+                  </span>
 
-                <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>)
-
-        }
+                  <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
 
         {/* Filtro */}
@@ -772,7 +753,7 @@ function CartinhaPessoal() {
                 </button>
                 <button
                   onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
-                  className={ userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
+                  className={userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
                 >
                   Novo cadastro
                 </button>

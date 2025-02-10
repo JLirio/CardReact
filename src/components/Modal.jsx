@@ -17,8 +17,6 @@ export default function Modal({
     }, [currentUserInModal]);
 
     async function updateSales(userId, vendasA, vendasB) {
-        console.log(vendasA);
-        console.log(vendasB);
 
         try {
             const response = await api.put(`/usuarios/update/${userId}`, {
@@ -33,18 +31,15 @@ export default function Modal({
     }
 
     function handleUpdate() {
-        // Lógica para determinar se será agregado em vendasA ou vendasB
         let vendasAChange = 0;
         let vendasBChange = 0;
 
-        // Verifica o cargo do usuário para aplicar o valor em vendasA ou vendasB
         if (currentUserInModal?.cargo.toLowerCase().includes("jurídico") || currentUserInModal?.cargo.toLowerCase().includes("juridico")) {
-            vendasAChange = Number(newSalesValue); // Agrega o valor em vendasA
+            vendasAChange = Number(newSalesValue);
         } else if (currentUserInModal?.cargo.toLowerCase().includes("comercial")) {
-            vendasBChange = Number(newSalesValue); // Agrega o valor em vendasB
+            vendasBChange = Number(newSalesValue);
         }
 
-        // Envia o valor a ser adicionado/subtraído ao backend
         updateSales(currentUserInModal?.id, vendasAChange, vendasBChange);
     }
 
@@ -70,7 +65,7 @@ export default function Modal({
                     <div className="flex justify-center items-center my-2 gap-2">
                         <button
                             className="p-2 w-[60%] bg-[#e7b56a] hover:bg-[#dba24d] text-white cursor-pointer rounded-md  font-semibold text-lg transition hover:scale-[1.02]"
-                            onClick={handleUpdate} // Agora usa a função handleUpdate
+                            onClick={handleUpdate}
                         >
                             {buttonTitle}
                         </button>
