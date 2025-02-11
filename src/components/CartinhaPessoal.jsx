@@ -473,7 +473,7 @@ function CartinhaPessoal() {
 
 
         {/* Ranking Section */}
-        <div className="flex items-end justify-center  space-y-6 sm:space-x-5  mb-10 mt-6">
+        <div className="flex items-end justify-center  space-y-6 sm:space-x-5  mb-24 mt-6 max-sm:mb-48" >
           {(!topThree || topThree.length === 0) ? (
             <h1 className="text-2xl font-semibold text-gray-600">Sem vendedores cadastrados</h1>
           ) : (
@@ -581,26 +581,26 @@ function CartinhaPessoal() {
 
         {/* Subpódio */}
         {!showTable && (
-          <div className="fixed sm:text-sm md:text-base bottom-32 sm:bottom-24 md:bottom-40 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
-            <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 sm:grid-cols-4  ">
+          <div className="fixed sm:text-sm md:text-base bottom-32 sm:bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+            <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4  ">
               {topThree.slice(3).map((player, index) => (
                 <li
                   key={index}
-                  className="bg-white shadow-md p-2 sm:p-2 sm:px-3 md:px-8 px-8 lg:px-8 rounded-xl flex items-center justify-between xl:flex xl:justify-between xl:items-center"
+                  className="bg-white shadow-md py-2 sm:p-2 sm:px-3 md:px-8 px-2 lg:px-8 rounded-xl flex items-center justify-between xl:flex xl:justify-between xl:items-center"
                 >
 
 
                   <img
                     src={regexImgLink(player.imgUser)}
                     alt={player.name}
-                    className="w-7 h-7 md:w-8 md:h-8 rounded-full object-cover"
+                    className="w-7 h-7  rounded-full object-cover"
                   />
                   <div className="sm:grid lg:flex lg:justify-start lg:items-center w-64">
-                  <span className="font-semibold text-left sm:text-sm flex-grow mx-1  md:text-base lg:text-sm ">
+                  <span className="font-semibold text-left sm:text-sm/6 flex-grow mx-1 ">
                     {player.name}
                   </span>
 
-                  <span className="text-gray-600 sm:ml-2">{player.vendasTotais.toFixed(2)}</span>
+                  <span className="text-gray-600 sm:ml-2 sm:text-sm/6">{player.vendasTotais.toFixed(2)}</span>
                   </div>
                 </li>
               ))}
