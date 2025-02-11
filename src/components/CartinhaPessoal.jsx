@@ -442,7 +442,7 @@ function CartinhaPessoal() {
           </p>
           <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
         </div>
-        <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start sm:items-start md:items-start flex justify-between min-h-screen items-end">
+        <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start max-lg:items-start flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
             className=" bg-orange-500 hover:bg-orange-600 max-sm:order-2 sm:order-2 lg:order-1 sm:mt-2 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
@@ -641,7 +641,7 @@ function CartinhaPessoal() {
         <div className="flex flex-col items-center p-4  ">
 
           {showTable && (
-            <div id="app" className="shadow-lg sm:w-full max-sm:w-full max-sm:left-1 sm:left-1 overflow-hidden max-sm:overflow-auto sm:overflow-auto border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center sm:p-2 sm:text-sm md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
+            <div id="app" className="shadow-lg xl:w-sm max-lg:w-full  max-sm:w-full max-sm:left-1 max-lg:left-1 overflow-hidden max-sm:overflow-auto sm:overflow-auto   border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center sm:p-2 sm:text-sm md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
               <h1 className="text-center text-white mt-2 text-2xl md:text-3xl max-sm:text-lg font-extrabold mb-4">
                 Ranking de Vendas
               </h1>
