@@ -359,53 +359,53 @@ function CartinhaPessoal() {
         <tr
           key={user.id}
           className={
-            `hover:cursor-pointer transition duration-300 ${rowClass} `
+            `hover:cursor-pointer transition duration-300 sm:m-2 ${rowClass} `
           }>
           {/* Alterando ID para posição */}
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800 ">
+          <td className="px-4 py-2 sm:px-2 sm:py-1 border text-center font-semibold text-gray-800 ">
             {
               currentPage > 0 ?
                 pagination.slice(0, currentPage).reduce((acc, page) => acc + page.length, 0) + (index + 1) :
                 index + 1
             }
           </td>
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 sm:px-1 sm:py-1 sm:snap-x border text-center font-semibold text-gray-800">
             {user.name || "Não informado"}
           </td>
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 sm:px-2 sm:py-1 border text-center font-semibold text-gray-800">
             {user.group || "Não informado"}
           </td>
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 sm:px-2 sm:py-1 border text-center font-semibold text-gray-800">
             {(user.vendasA ?? 0).toFixed(2)}
           </td>
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 sm:px-2 sm:py-1 border text-center font-semibold text-gray-800">
             {(user.vendasB ?? 0).toFixed(2)}
           </td>
-          <td className="px-4 py-2 border text-center font-semibold text-gray-800">
+          <td className="px-4 py-2 sm:px-2 sm:py-1 border text-center font-semibold text-gray-800">
             {user.cargo || "Não informado"}
           </td>
           <td
             className={
               userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
-                ? "px-4 py-2 border flex space-x-2 justify-center"
+                ? "px-4 py-2 sm:px-1 sm:py-1 border flex space-x-2 justify-center"
                 : "hidden"
             }
           >
             <button
               onClick={() => excluirUsuarioAPI(user.id)}
-              className=" bg-[#0b0908] hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className=" bg-[#0b0908]  hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               Excluir
             </button>
             <button
               onClick={() => handleViewCartinha(user.id)}
-              className="bg-orange-500 hover:bg-yellow-400 hover:text-black text-white  font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className="bg-orange-500  hover:bg-yellow-400 hover:text-black text-white  font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               Editar
             </button>
             <button
               onClick={() => openAddSalesModal(user)}
-              className="bg-orange-400 hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className="bg-orange-400  hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
             >
               + Venda
             </button>
@@ -434,7 +434,7 @@ function CartinhaPessoal() {
         currentUserInModal={currentUserInModal}
       />
 
-      <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center  justify-center px-4">
+      <div className="bg-gradient-to-br  from-black via-orange-300 to-black min-h-screen flex flex-col items-center  justify-center ">
 
         <div className="fixed border-2 border-orange-300 left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
           <p className="mr-2 font-semibold text-white">
@@ -442,17 +442,17 @@ function CartinhaPessoal() {
           </p>
           <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
         </div>
-        <div className="fixed flex-col py-4 right-1 flex justify-between min-h-screen items-end">
+        <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start sm:items-start md:items-start flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
-            className=" bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className=" bg-orange-500 hover:bg-orange-600 max-sm:order-2 sm:order-2 lg:order-1 sm:mt-2 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
           >
             Sair
           </button>
 
           <button
             onClick={toggleTable} // Redireciona para /login
-            className=" bg-orange-400 hover:bg-yellow-600 hover:text-black text-white font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className=" bg-orange-400 max-sm:order-1 sm:order-1 lg:order-2 hover:bg-yellow-600 hover:text-black text-white font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -466,14 +466,14 @@ function CartinhaPessoal() {
                 d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
             </svg>
           </button>
-          <div>
+          <div className="lg:order-3">
 
           </div>
         </div>
 
 
         {/* Ranking Section */}
-        <div className="flex flex-wrap items-end justify-center space-y-6 md:space-y-0 md:space-x-10 mb-10 mt-6">
+        <div className="flex items-end justify-center  space-y-6 sm:space-x-5  mb-10 mt-6">
           {(!topThree || topThree.length === 0) ? (
             <h1 className="text-2xl font-semibold text-gray-600">Sem vendedores cadastrados</h1>
           ) : (
@@ -481,12 +481,12 @@ function CartinhaPessoal() {
               {/* Segundo colocado */}
               {topThree[1] && (
                 <Tilt>
-                  <div className="scale-90 hover:scale-100 hover:border-4 hover:border-white relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-2 w-full md:w-72 text-center transition cursor-pointer pulse-2">
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                  <div className="scale-90 hover:scale-100 md:scale-56 md:hover:scale-56 hover:border-4 hover:border-white relative bg-gradient-to-t from-[#8e8e8ebb] to-[#ffffffa8] rounded-xl shadow-xl p-2 sm:p-1 max-sm:p-1 w-full md:w-56 text-center transition cursor-pointer pulse-2">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 sm:w-9 sm:h-9 max-sm:w-9 max-sm:h-9 flex items-center justify-center">
                       🥈
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 mx-auto rounded-full object-cover" />
+                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[1].cargo}
@@ -494,12 +494,12 @@ function CartinhaPessoal() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <img src={regexImgLink(topThree[1].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] object-fill cursor-pointer" />
-                      <h3 className="text-xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[1].name}</h3>
+                      <img src={regexImgLink(topThree[1].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] sm:w-[120px] sm:h-[120px] max-sm:w-[100px] max-sm:h-[100px] object-fill cursor-pointer" />
+                      <h3 className="text-xl my-4 font-bold text-[#2C2C2C] sm:text-base max-sm:text-base capitalize">{topThree[1].name}</h3>
                     </div>
-                    <div className="mt-12 text-sm text-gray-700">
+                    <div className="mt-12 max-sm:mt-7 text-sm text-gray-700">
                       <div className="font-bold rounded-md p-1 bg-[#e1e0d936] shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                        <p className="text-xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                        <p className="text-xl mt-1 text-[#FFF] sm:text-base max-sm:text-base  drop-shadow-lg text-stroke">
                           {topThree[1].vendasA === topThree[1].vendasB
                             ? topThree[1].cargo.toLowerCase().includes("jurídico") || topThree[1].cargo.toLowerCase().includes("juridico")
                               ? `Jurídico: ${(topThree[1].vendasA).toFixed(2)}`
@@ -518,12 +518,12 @@ function CartinhaPessoal() {
               {/* Primeiro colocado */}
               {topThree[0] && (
                 <Tilt>
-                  <div className="scale-90 hover:scale-100 hover:border-4 relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-2 w-full md:w-80 text-center transition hover:border-white cursor-pointer mb-12 pulse-1">
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                  <div className="scale-90 hover:scale-100 md:scale-56 md:hover:scale-56 hover:border-4 relative bg-gradient-to-t from-[#ffeb04] to-[#ffdf00bb] rounded-xl shadow-xl p-2 sm:p-1 max-sm:p-1 w-full md:w-64 text-center transition hover:border-white cursor-pointer mb-12 pulse-1">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 sm:w-9 sm:h-9 max-sm:w-9 max-sm:h-9 flex items-center justify-center">
                       👑
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 mx-auto rounded-full object-cover" />
+                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[0].cargo}
@@ -531,12 +531,12 @@ function CartinhaPessoal() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <img src={regexImgLink(topThree[0].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] object-fill cursor-pointer" />
-                      <h3 className="text-xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[0].name}</h3>
+                      <img src={regexImgLink(topThree[0].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] sm:w-[120px] sm:h-[120px] max-sm:w-[100px] max-sm:h-[100px] object-fill cursor-pointer" />
+                      <h3 className="text-xl my-4 font-bold sm:text-base max-sm:text-base text-[#2C2C2C] capitalize">{topThree[0].name}</h3>
                     </div>
-                    <div className="mt-12 text-sm text-gray-700">
+                    <div className="mt-12 max-sm:mt-7 text-sm text-gray-700">
                       <div className="font-bold rounded-md p-1 bg-[#ffd9000f] shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                        <p className="text-xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                        <p className="text-xl sm:text-base max-sm:text-base mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                           {topThree[0].vendasA > 0 ? `Jurídico: ${(topThree[0].vendasA).toFixed(2)}` : `Comercial: ${(topThree[0].vendasB).toFixed(2)}`}
                         </p>
                       </div>
@@ -548,12 +548,12 @@ function CartinhaPessoal() {
               {/* Terceiro colocado */}
               {topThree[2] && (
                 <Tilt>
-                  <div className="scale-90 hover:scale-100 hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-2 w-full md:w-72 text-center transition cursor-pointer pulse-3">
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 flex items-center justify-center">
+                  <div className="scale-90 hover:scale-100 md:scale-56 md:hover:scale-56 hover:border-4 hover:border-white relative bg-gradient-to-t from-[#ba630fab] to-[#ffa042cf] rounded-xl shadow-xl p-2 sm:p-1 max-sm:p-1 w-full md:w-56 text-center transition cursor-pointer pulse-3">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-bold text-lg rounded-lg w-12 h-12 sm:w-9 sm:h-9 max-sm:w-9 max-sm:h-9 flex items-center justify-center">
                       🥉
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 mx-auto rounded-full object-cover" />
+                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[2].cargo}
@@ -561,12 +561,12 @@ function CartinhaPessoal() {
                       </div>
                     </div>
                     <div className="mt-4">
-                      <img src={regexImgLink(topThree[2].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] object-fill cursor-pointer" />
-                      <h3 className="text-xl my-4 font-bold text-[#2C2C2C] capitalize">{topThree[2].name}</h3>
+                      <img src={regexImgLink(topThree[2].imgUser)} alt="Player" className="hover:border hover:border-white mx-auto rounded-tl-2xl rounded-br-2xl shadow-lg transition hover:scale-[1.05] w-[180px] h-[180px] sm:w-[120px] sm:h-[120px] max-sm:w-[100px] max-sm:h-[100px] object-fill cursor-pointer" />
+                      <h3 className="text-xl sm:text-base max-sm:text-base my-4 font-bold text-[#2C2C2C] capitalize">{topThree[2].name}</h3>
                     </div>
-                    <div className="mt-12 text-sm text-gray-700">
+                    <div className="mt-12 max-sm:mt-7 text-sm text-gray-700">
                       <div className="font-bold rounded-md p-1 bg-[#ffd9000f] shadow-lg border-2 border-[#e1e0d936] mx-1 hover:border-white cursor-pointer">
-                        <p className="text-xl mt-1 text-[#FFF] drop-shadow-lg text-stroke">
+                        <p className="text-xl sm:text-base max-sm:text-base mt-1 text-[#FFF] drop-shadow-lg text-stroke">
                           {topThree[2].vendasA > 0 ? `Jurídico: ${(topThree[2].vendasA).toFixed(2)}` : `Comercial: ${(topThree[2].vendasB).toFixed(2)}`}
                         </p>
                       </div>
@@ -581,24 +581,27 @@ function CartinhaPessoal() {
 
         {/* Subpódio */}
         {!showTable && (
-          <div className="fixed bottom-32 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
-            <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 ">
+          <div className="fixed sm:text-sm md:text-base bottom-32 sm:bottom-24 md:bottom-40 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+            <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 sm:grid-cols-4  ">
               {topThree.slice(3).map((player, index) => (
                 <li
                   key={index}
-                  className="bg-white shadow-md p-2 px-8 rounded-xl flex items-center justify-between"
+                  className="bg-white shadow-md p-2 sm:p-2 sm:px-3 md:px-8 px-8 lg:px-8 rounded-xl flex items-center justify-between xl:flex xl:justify-between xl:items-center"
                 >
+
+
                   <img
                     src={regexImgLink(player.imgUser)}
                     alt={player.name}
-                    className="w-7 h-7 md:w-5 md:h-5 rounded-full object-cover"
+                    className="w-7 h-7 md:w-8 md:h-8 rounded-full object-cover"
                   />
-
-                  <span className="font-semibold text-left flex-grow mx-2 sm:text-xl md:text-2xl lg:text-xs ">
+                  <div className="sm:grid lg:flex lg:justify-start lg:items-center w-64">
+                  <span className="font-semibold text-left sm:text-sm flex-grow mx-1  md:text-base lg:text-sm ">
                     {player.name}
                   </span>
 
-                  <span className="text-gray-600">{player.vendasTotais.toFixed(2)}</span>
+                  <span className="text-gray-600 sm:ml-2">{player.vendasTotais.toFixed(2)}</span>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -615,8 +618,8 @@ function CartinhaPessoal() {
                 className={`relative cursor-pointer text-lg uppercase font-semibold px-4 py-2 rounded-lg 
         transition-all duration-300 sm:text-xl md:text-2xl lg:text-xs
         ${searchFilter === option.value
-                    ? "bg-black text-white"
-                    : "bg-[#0b0908] text-gray-200 hover:bg-[#0b0908] hover:text-white"
+                    ? "bg-black text-white sm:text-sm md:text-sm max-sm:text-sm"
+                    : "bg-[#0b0908] text-gray-200 hover:bg-[#0b0908] hover:text-white sm:text-sm md:text-sm max-sm:text-sm"
                   }`}
                 onClick={() => handleSelect(option.value)}
               >
@@ -635,38 +638,38 @@ function CartinhaPessoal() {
         </div>
 
         {/* table modal */}
-        <div className="flex flex-col items-center p-4">
+        <div className="flex flex-col items-center p-4  ">
 
           {showTable && (
-            <div id="app" className="shadow-lg overflow-hidden border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
-              <h1 className="text-center text-white mt-2 text-2xl md:text-3xl font-extrabold mb-4">
+            <div id="app" className="shadow-lg sm:w-full max-sm:w-full max-sm:left-1 sm:left-1 overflow-hidden max-sm:overflow-auto sm:overflow-auto border-collapse fixed inset-x-20 inset-y-20 flex-col items-center justify-center sm:p-2 sm:text-sm md:p-8 rounded-lg shadow-1xl overflow-x-auto backdrop-blur-md bg-gray-600/50">
+              <h1 className="text-center text-white mt-2 text-2xl md:text-3xl max-sm:text-lg font-extrabold mb-4">
                 Ranking de Vendas
               </h1>
-              <div className="flex flex-wrap justify-center gap-4 mb-6">
+              <div className="flex flex-wrap justify-center gap-4 mb-6 max-sm:gap-2">
                 <input
                   type="text"
                   placeholder="Filtrar por Nome"
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
-                  className="border border-gray-400 px-4 py-2 rounded-lg shadow"
+                  className="border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1 "
                 />
                 <input
                   type="text"
                   placeholder="Filtrar por Cargo"
                   value={searchCargo}
                   onChange={(e) => setSearchCargo(e.target.value)}
-                  className="border border-gray-400 px-4 py-2 rounded-lg shadow"
+                  className="border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1 "
                 />
                 <input
                   type="text"
                   placeholder="Filtrar por Equipe"
                   value={searchGroup}
                   onChange={(e) => setSearchGroup(e.target.value)}
-                  className="border border-gray-400 px-4 py-2 rounded-lg shadow"
+                  className="border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1 "
                 />
                 <select
                   id=""
-                  className="border border-gray-400 px-4 py-2 rounded-lg shadow"
+                  className="border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1 "
                   onChange={(e) => setSearchFilter(e.target.value)}
                 >
                   <option value="totais">Vendas totais</option>
@@ -681,27 +684,27 @@ function CartinhaPessoal() {
 
               {/* Tabela */}
               {filteredUsers.length > 0 ? (
-                <table className="min-w-full bg-white rounded-lg shadow-md overflow-y-scroll ">
+                <table className="min-w-full sm:max-w-[200px] bg-white max-sm:text-sm rounded-lg shadow-md overflow-y-scroll ">
                   <thead>
                     <tr className="bg-[#0b0908] text-white ">
-                      <th className="px-4 py-2 text-center font-bold">#</th>
-                      <th className="px-4 py-2 text-center font-bold">Nome</th>
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">#</th>
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">Nome</th>
                       {/* <th className="px-4 py-2 text-center font-bold">Email</th> */}
-                      <th className="px-4 py-2 text-center font-bold">Equipe</th>
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">Equipe</th>
                       {/* <th className="px-4 py-2 text-center font-bold">
                     Vendas Totais
                   </th> */}
-                      <th className="px-4 py-2 text-center font-bold">
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">
                         Juridicas
                       </th>
-                      <th className="px-4 py-2 text-center font-bold">
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">
                         Comerciais
                       </th>
-                      <th className="px-4 py-2 text-center font-bold">Cargo</th>
+                      <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">Cargo</th>
                       <th
                         className={
                           userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
-                            ? "px-4 py-2 text-center font-bold"
+                            ? "px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold"
                             : "hidden"
                         }
                       >
@@ -721,7 +724,7 @@ function CartinhaPessoal() {
               )}
 
               <div
-                className="flex justify-center items-center m-5"
+                className="flex justify-center items-center"
               >
                 <ul className="flex justify-center">
                   {
@@ -736,7 +739,7 @@ function CartinhaPessoal() {
                 </ul>
               </div>
 
-              <div className="text-center text-xl flex justify-center items-center mt-10">
+              <div className="text-center text-xl flex justify-center items-center mt-10 sm:mt-4 max-sm:mt-4">
                 <div className="border-2 border-[#dba24d] flex justify-center items-center px-2 py-1 rounded-md shadow-md">
                   <p className="mr-2 font-semibold">
                     Total Vendido:
@@ -744,7 +747,7 @@ function CartinhaPessoal() {
                   <b className="text-[#dba24d] font-semibold">{(totalJaVendido).toFixed(2)}</b>
                 </div>
               </div>
-              <div className="mt-5  flex space-x-4 justify-center">
+              <div className="mt-5  max-sm:mb-4  flex space-x-4 justify-center">
                 <button
                   onClick={exportarCSV}
                   className="bg-orange-500 hover:bg-yellow-400 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
