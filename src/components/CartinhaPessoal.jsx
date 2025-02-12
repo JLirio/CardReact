@@ -189,23 +189,48 @@ function CartinhaPessoal() {
   function filtersList() {
     const lowerName = searchName.toLowerCase();
     const lowerCargo = searchCargo.toLowerCase();
-    const lowerGroup = searchGroup.toLowerCase();
+    let lowerGroup = "";
+    if (searchGroup?.toLowerCase() !== "") {
+      lowerGroup = searchGroup.toLowerCase();
 
+    } else {
+      lowerGroup = userInfo?.group.toLowerCase();
+    }
+
+    console.log(lowerGroup);
+
+
+    // searchGroup.toLowerCase();
     let results = [];
+    let sameGroupUsers = users
+    if (lowerGroup != "admin" && lowerGroup != "all") {
+      sameGroupUsers = users.filter(
+        (user) => user.group?.toLowerCase() === lowerGroup
+      );
+    }
 
     const isCargoMatch = (user) => {
-      const cargoNormalized = user.cargo?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return cargoNormalized?.includes("juridico") || cargoNormalized?.includes("comercial") || cargoNormalized?.includes("admin") || cargoNormalized?.includes("lider") || cargoNormalized?.includes("funcionario");
+      const cargoNormalized = user.cargo
+        ?.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+      return (
+        cargoNormalized?.includes("juridico") ||
+        cargoNormalized?.includes("comercial") ||
+        cargoNormalized?.includes("admin") ||
+        cargoNormalized?.includes("lider") ||
+        cargoNormalized?.includes("funcionario")
+      );
     };
 
     if (searchFilter === "totais") {
-      results = users
+      results = sameGroupUsers
         .filter(
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
-            isCargoMatch(user) // Apenas jurídicos e comerciais
+            isCargoMatch(user)
         )
         .sort((a, b) => b.vendasTotais - a.vendasTotais);
 
@@ -213,39 +238,44 @@ function CartinhaPessoal() {
       populateTopThree(results, "totais");
 
     } else if (searchFilter === "juridicas") {
-      results = users
+      results = sameGroupUsers
         .filter(
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
-            isCargoMatch(user) && (user.cargo.toLowerCase().includes("jurídico") || user.cargo.toLowerCase().includes("juridico"))
+            isCargoMatch(user) &&
+            (user.cargo.toLowerCase().includes("jurídico") ||
+              user.cargo.toLowerCase().includes("juridico"))
         )
         .sort((a, b) => b.vendasA - a.vendasA);
 
       setFilteredUsers(results);
       populateTopThree(results, "juridicas");
-
     } else if (searchFilter === "comerciais") {
-      results = users
+      results = sameGroupUsers
         .filter(
           (user) =>
             (!searchName || user.name.toLowerCase().includes(lowerName)) &&
             (!searchCargo || user.cargo.toLowerCase().includes(lowerCargo)) &&
-            (!searchGroup || user.group?.toLowerCase().includes(lowerGroup)) &&
-            isCargoMatch(user) && user.cargo.toLowerCase().includes("comercial")
+            isCargoMatch(user) &&
+            user.cargo.toLowerCase().includes("comercial")
         )
         .sort((a, b) => b.vendasB - a.vendasB);
 
       setFilteredUsers(results);
       populateTopThree(results, "comerciais");
     }
+    console.log(results);
+
   }
 
 
   // Função para atualizar os filtros
   useEffect(() => {
-    filtersList()
+    if (userInfo?.group != "") {
+
+      filtersList()
+    }
 
   }, [searchName, searchCargo, searchGroup, searchFilter, users]); // Atualiza os filtros dinamicamente
 
@@ -486,7 +516,15 @@ function CartinhaPessoal() {
                       🥈
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
+                      <img
+                        src={
+                          topThree[1].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
+                            : topThree[1].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                              : ""
+                        }
+                        alt="Club Logo"
+                        className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover"
+                      />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[1].cargo}
@@ -523,7 +561,15 @@ function CartinhaPessoal() {
                       👑
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
+                      <img
+                        src={
+                          topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
+                            : topThree[0].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                              : ""
+                        }
+                        alt="Club Logo"
+                        className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover"
+                      />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[0].cargo}
@@ -553,7 +599,15 @@ function CartinhaPessoal() {
                       🥉
                     </div>
                     <div className="mt-6">
-                      <img src="https://i.imgur.com/AZynwEp.jpeg" alt="Club Logo" className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover" />
+                      <img
+                        src={
+                          topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
+                            : topThree[0].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                              : ""
+                        }
+                        alt="Club Logo"
+                        className="w-16 h-16 sm:w-11 sm:h-9 max-sm:w-11 max-sm:h-9 mx-auto rounded-full object-cover"
+                      />
                       <div className="flex justify-center items-center">
                         <p className="text-sm font-bold uppercase border-[#2a074652] text-gray-800 p-1 border-2 rounded-md px-4 my-2 shadow-md">
                           {topThree[2].cargo}
@@ -596,11 +650,11 @@ function CartinhaPessoal() {
                     className="w-7 h-7  rounded-full object-cover"
                   />
                   <div className="sm:grid lg:flex lg:justify-start lg:items-center w-64">
-                  <span className="font-semibold text-left sm:text-sm/6 flex-grow mx-1 ">
-                    {player.name}
-                  </span>
+                    <span className="font-semibold text-left sm:text-sm/6 flex-grow mx-1 ">
+                      {player.name}
+                    </span>
 
-                  <span className="text-gray-600 sm:ml-2 sm:text-sm/6">{player.vendasTotais.toFixed(2)}</span>
+                    <span className="text-gray-600 sm:ml-2 sm:text-sm/6">{player.vendasTotais.toFixed(2)}</span>
                   </div>
                 </li>
               ))}
@@ -665,7 +719,11 @@ function CartinhaPessoal() {
                   placeholder="Filtrar por Equipe"
                   value={searchGroup}
                   onChange={(e) => setSearchGroup(e.target.value)}
-                  className="border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1 "
+                  className={
+                    userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                      ? "border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1"
+                      : "hidden"
+                  }
                 />
                 <select
                   id=""
@@ -786,7 +844,7 @@ function CartinhaPessoal() {
     </div> */}
           </div>
         </footer>
-      </div>
+      </div >
     </>
 
 
