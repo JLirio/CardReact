@@ -74,3 +74,12 @@
         box-shadow: 0 0 0 0 rgba(217, 137, 98, 0);
     }
 }
+
+
+@keyframes blink {
+    0% { background-color: red; }
+    100% { background-color: transparent; }
+  }
+  .blinking-bg {
+    animation: blink 0.6s infinite alternate;
+  }

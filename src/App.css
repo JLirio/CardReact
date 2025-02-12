@@ -123,3 +123,10 @@ body {
   animation-duration: 5s;
 }
 
+@keyframes blink {
+  0% { background-color: red; }
+  100% { background-color: transparent; }
+}
+.blinking-bg {
+  animation: blink 1s infinite alternate;
+}

@@ -75,7 +75,7 @@ function CadastroPontos() {
 
     const senha = document.getElementById("senha").value.trim();
     const cargo = document.getElementById("cargo").value.trim();
-    const group = document.getElementById("group").value.trim();
+    const group = document.getElementById("group").value.trim().toLowerCase();;
 
     let hasError = false;
 
@@ -260,7 +260,7 @@ function CadastroPontos() {
 
               <div className="my-2">
                 <label htmlFor="cargo" className="block text-lg font-medium text-gray-700">
-                  Equipe:
+                  Empresa:
                 </label>
                 <input
                   type="text"

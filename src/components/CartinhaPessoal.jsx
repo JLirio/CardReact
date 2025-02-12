@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Usuarios from '../models/Usuario';
 import { Tilt } from "react-tilt";
 import Modal from "./Modal";
-
+import AlertModal from "./AlertaModal";
 
 function CartinhaPessoal() {
   let contReloader = 1;
@@ -23,6 +23,7 @@ function CartinhaPessoal() {
   const [searchGroup, setSearchGroup] = useState("");
 
   const [modalVisibility, setModalVisibility] = useState(false)
+  const [isModalOpenAlert, setIsModalOpenAlert] = useState(false);
   const [currentUserInModal, setCurrentUserInModal] = useState("")
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -463,15 +464,33 @@ function CartinhaPessoal() {
         closeModal={closeModal}
         currentUserInModal={currentUserInModal}
       />
+      <AlertModal
+        visible={isModalOpenAlert}
+        closeModal={() => setIsModalOpenAlert(false)}
+      />
+
 
       <div className="bg-gradient-to-br  from-black via-orange-300 to-black min-h-screen flex flex-col items-center  justify-center ">
 
-        <div className="fixed border-2 border-orange-300 left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
-          <p className="mr-2 font-semibold text-white">
-            Total Vendido:
-          </p>
-          <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
+        <div className="fixed left-1 top-1 flex px-4 py-1 rounded-md shadow-md">
+          <div className="mr-2 border-2 flex border-orange-300">
+            <p className="mr-2 font-semibold text-white">
+              Total Vendido:
+            </p>
+            <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
+          </div>
+          <button
+            className={
+            userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                ? "px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-600 transition"
+                : "hidden"
+            }
+            onClick={() => setIsModalOpenAlert(true)}
+          >
+            🚨
+          </button>
         </div>
+
         <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start max-lg:items-start flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
