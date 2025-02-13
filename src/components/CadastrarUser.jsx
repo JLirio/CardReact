@@ -41,7 +41,6 @@ function CadastrarUser() {
 
   const handleFileChange = (event) => {
     setSelectedfile(event.target.files[0]);
-    console.log(event.target.files[0]);
   }
 
   const uploadGoogleDriveFile = async () => {
@@ -68,7 +67,6 @@ function CadastrarUser() {
       formData.vendasA = parseFloat(formData.vendasA);
       formData.vendasB = parseFloat(formData.vendasB);
 
-      console.log(formData);
       const response = await api.post("/usuarios", formData);
       console.log("Usuário cadastrado com sucesso:", response.data);
       navigate("/cartinha"); // Redirecionar após o cadastro bem-sucedido

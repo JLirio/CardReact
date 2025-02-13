@@ -7,10 +7,12 @@ import Modal from "./Modal";
 import AlertModal from "./AlertaModal";
 
 function CartinhaPessoal() {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const groupU = JSON.parse(localStorage.getItem("groupUser"));
   let contReloader = 1;
   let filterTotais = false;
   const navigate = useNavigate();
-
+  const [groupUser, setGroupUser] = useState();
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -25,9 +27,15 @@ function CartinhaPessoal() {
   const [modalVisibility, setModalVisibility] = useState(false)
   const [isModalOpenAlert, setIsModalOpenAlert] = useState(false);
   const [currentUserInModal, setCurrentUserInModal] = useState("")
+  let countUserGroup = 0
 
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
+  useEffect(() => {
+    if (groupU != null && countUserGroup == 0) {
+      setGroupUser(groupU);
+      countUserGroup = 2;
+    }
+    
+  }, [])
 
   const [totalJaVendido, setTotalJaVendido] = useState(0);
 

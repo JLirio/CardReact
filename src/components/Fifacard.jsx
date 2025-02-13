@@ -21,7 +21,6 @@ function FifaCard() {
     useEffect(() => {
         if (userId) {
             getUserById(userId);
-            console.log(user);
 
         }
     }, [userId]);
@@ -29,7 +28,6 @@ function FifaCard() {
     const getUserById = async (id) => {
         try {
             const response = await api.get(`/usuarios/user/?id=${id}`);
-            console.log(response.data);
             userId = null;
             setUser(response.data);
         } catch (error) {
