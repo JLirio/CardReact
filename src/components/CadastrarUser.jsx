@@ -63,6 +63,7 @@ function CadastrarUser() {
 
     try {
       formData.imgUser = await uploadGoogleDriveFile();
+      formData.group = formData.group.toLowerCase();
       // Garantindo que os valores de vendasA e vendasB sejam convertidos para número
       formData.vendasA = parseFloat(formData.vendasA);
       formData.vendasB = parseFloat(formData.vendasB);
