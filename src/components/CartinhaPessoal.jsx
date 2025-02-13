@@ -739,7 +739,7 @@ function CartinhaPessoal() {
                 />
                 <input
                   type="text"
-                  placeholder="Filtrar por Equipe"
+                  placeholder="Filtrar por Empresa"
                   value={searchGroup}
                   onChange={(e) => setSearchGroup(e.target.value)}
                   className={
