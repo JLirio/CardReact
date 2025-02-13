@@ -74,3 +74,38 @@
         box-shadow: 0 0 0 0 rgba(217, 137, 98, 0);
     }
 }
+
+
+/* Tema para Empresa A */
+.horus {
+    background: linear-gradient(to bottom right, black, #fdba74, black);
+}
+
+.horus-btn-escuro {
+    background-color: #fb923c;
+    /* Cor equivalente ao bg-orange-500 */
+    transition: background-color 0.3s ease;
+    /* Transição suave para a cor de fundo */
+}
+
+/* Estilo para o efeito hover */
+.horus-btn-escuro:hover {
+    background-color: #f97316;
+    /* Cor equivalente ao hover:bg-orange-600 */
+}
+
+.horus-btn {
+    background-color: #f97316;
+    color: white;
+}
+
+.horus-btn:hover {
+    background-color: #d97706;
+    color: black;
+}
+
+
+/* Tema para Empresa B */
+.allide {
+    background: linear-gradient(to bottom right, #38b6ff, #bdc1c9, #38b6ff);
+}

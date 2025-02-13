@@ -13,6 +13,7 @@ const getUserInfo = async () => {
       const userData = await response.data;
       
       localStorage.setItem("userInfo", JSON.stringify(userData));
+      localStorage.setItem("groupUser", JSON.stringify(userData.group));
       return userData; // Dados do usuário
     } catch (error) {
       console.error('Failed to fetch user info', error);
