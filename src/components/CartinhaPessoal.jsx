@@ -27,6 +27,8 @@ function CartinhaPessoal() {
   const [currentUserInModal, setCurrentUserInModal] = useState("")
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
+  
   const [totalJaVendido, setTotalJaVendido] = useState(0);
 
   const [showTable, setShowTable] = useState(false);
@@ -47,9 +49,6 @@ function CartinhaPessoal() {
 
   // top 3 consts
   const [topThree, setTopThree] = useState([]);
-
-
-
 
   const populateTopThree = (results) => {
     if (searchFilter === "totais") {
@@ -128,8 +127,6 @@ function CartinhaPessoal() {
     }
   };
 
-
-
   // regex img
   const regexImgLink = (imgLink) => {
     let match = []
@@ -198,9 +195,6 @@ function CartinhaPessoal() {
       lowerGroup = userInfo?.group.toLowerCase();
     }
 
-    console.log(lowerGroup);
-
-
     // searchGroup.toLowerCase();
     let results = [];
     let sameGroupUsers = users
@@ -266,9 +260,9 @@ function CartinhaPessoal() {
       setFilteredUsers(results);
       populateTopThree(results, "comerciais");
     }
-    console.log(results);
 
   }
+
 
 
   // Função para atualizar os filtros
@@ -470,10 +464,10 @@ function CartinhaPessoal() {
       />
 
 
-      <div className="bg-gradient-to-br  from-black via-orange-300 to-black min-h-screen flex flex-col items-center  justify-center ">
+      <div className={`${groupUser} min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to`}>
 
-        <div className="fixed left-1 top-1 flex px-4 py-1 rounded-md shadow-md">
-          <div className="mr-2 border-2 flex border-orange-300">
+        <div className="fixed border-2 border-orange-300 left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
+        <div className="mr-2 border-2 flex border-orange-300">
             <p className="mr-2 font-semibold text-white">
               Total Vendido:
             </p>
@@ -490,18 +484,17 @@ function CartinhaPessoal() {
             🚨
           </button>
         </div>
-
         <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start max-lg:items-start flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
-            className=" bg-orange-500 hover:bg-orange-600 max-sm:order-2 sm:order-2 lg:order-1 sm:mt-2 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className={`${groupUser}-btn-escuro ${groupUser}-btn-escuro:hover max-sm:order-2 sm:order-2 lg:order-1 sm:mt-2 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
           >
-            Sair
+            Sair 
           </button>
 
           <button
             onClick={toggleTable} // Redireciona para /login
-            className=" bg-orange-400 max-sm:order-1 sm:order-1 lg:order-2 hover:bg-yellow-600 hover:text-black text-white font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+            className={`${groupUser}-btn ${groupUser}-btn:hover max-sm:order-1 sm:order-1 lg:order-2 font-bold px-3 py-3 mr-5 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -538,7 +531,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[1].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[1].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                            : topThree[1].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
                               : ""
                         }
                         alt="Club Logo"
@@ -583,7 +576,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                            : topThree[0].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
                               : ""
                         }
                         alt="Club Logo"
@@ -621,7 +614,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "alpha" ? "https://cdn.discordapp.com/attachments/701595674126581811/1079568749067259974/LojaPink.png?ex=67ad443f&is=67abf2bf&hm=b6faa4958aba71744e0936c00b57ea6a109a55743e154e7704c7a725c316b6a2&"
+                            : topThree[0].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
                               : ""
                         }
                         alt="Club Logo"
