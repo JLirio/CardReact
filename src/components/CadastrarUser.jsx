@@ -5,6 +5,7 @@ import { useState } from "react";
 function CadastrarUser() {
 
   const [selectedFile, setSelectedfile] = useState('');
+  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,7 +79,7 @@ function CadastrarUser() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
+    <div className={`${groupUser} min-h-screen flex flex-col items-center justify-center`}>
       <div id="app" className="bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-center text-[#0b0908] text-2xl font-bold mb-4">Cadastro</h1>
         <form
@@ -114,7 +115,7 @@ function CadastrarUser() {
               />
 
               <label htmlFor="group" className="block text-gray-700 mb-2">
-                Grupo:
+                Empresa:
               </label>
               <input
                 type="text"
@@ -143,7 +144,7 @@ function CadastrarUser() {
                       <p className="text-sm text-[#dba24d] font-semibold">Você adicionou {selectedFile.name}</p>
                     ) : (
                       <p className="text-sm text-gray-500">
-                        Arraste uma imagem ou <span className="text-[#dba24d]">Escolha do Computador</span>
+                        Arraste uma imagem ou <span className={`text-${groupUser}-darkness`}>Escolha do Computador</span>
                       </p>
                     )
                   }
@@ -208,7 +209,7 @@ function CadastrarUser() {
           </div>
 
           <div className="flex justify-center items-center flex-col">
-            <button type="submit" className="w-full bg-[#e7b56a] hover:bg-[#dba24d] text-black font-bold py-3 px-6 rounded-lg">
+            <button type="submit" className={`w-full ${groupUser}-btn-alert text-black font-bold py-3 px-6 rounded-lg`}>
               Cadastrar
             </button>
             <button

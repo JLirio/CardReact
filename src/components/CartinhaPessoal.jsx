@@ -28,7 +28,7 @@ function CartinhaPessoal() {
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const groupUser = JSON.parse(localStorage.getItem("groupUser"));
-  
+
   const [totalJaVendido, setTotalJaVendido] = useState(0);
 
   const [showTable, setShowTable] = useState(false);
@@ -418,19 +418,20 @@ function CartinhaPessoal() {
           >
             <button
               onClick={() => excluirUsuarioAPI(user.id)}
-              className=" bg-[#0b0908]  hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className={`${groupUser}-btn-black font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
             >
               Excluir
             </button>
             <button
               onClick={() => handleViewCartinha(user.id)}
-              className="bg-orange-500  hover:bg-yellow-400 hover:text-black text-white  font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className={`${groupUser}-btn-normal font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
             >
+
               Editar
             </button>
             <button
               onClick={() => openAddSalesModal(user)}
-              className="bg-orange-400  hover:bg-yellow-200 text-white hover:text-black font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+              className={`${groupUser}-btn font-bold px-3 py-1 sm:px-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
             >
               + Venda
             </button>
@@ -466,30 +467,32 @@ function CartinhaPessoal() {
 
       <div className={`${groupUser} min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gradient-from via-gradient-via to-gradient-to`}>
 
-        <div className="fixed border-2 border-orange-300 left-1 top-1 flex px-2 py-1 rounded-md shadow-md">
-        <div className="mr-2 border-2 flex border-orange-300">
-            <p className="mr-2 font-semibold text-white">
-              Total Vendido:
-            </p>
-            <b className="text-orange-300 font-semibold">{(totalJaVendido).toFixed(2)}</b>
+        <div className="fixed items-center left-1 top-1 flex px-2 py-1 rounded-md ">
+          <div>
+            <div className="mr-2 flex">
+              <p className="mr-2 font-semibold text-white">
+                Total Vendido:
+              </p>
+              <b className={`text-${groupUser} font-semibold`}>{(totalJaVendido).toFixed(2)}</b>
+            </div>
+            <button
+              className={
+                userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                  ? "px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-600 transition mt-3"
+                  : "hidden"
+              }
+              onClick={() => setIsModalOpenAlert(true)}
+            >
+              🚨
+            </button>
           </div>
-          <button
-            className={
-            userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
-                ? "px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-600 transition"
-                : "hidden"
-            }
-            onClick={() => setIsModalOpenAlert(true)}
-          >
-            🚨
-          </button>
         </div>
         <div className="fixed lg:flex-col  py-4 right-1 max-sm:items-start max-lg:items-start flex justify-between min-h-screen items-end">
           <button
             onClick={() => navigate("/")} // Redireciona para /login
             className={`${groupUser}-btn-escuro ${groupUser}-btn-escuro:hover max-sm:order-2 sm:order-2 lg:order-1 sm:mt-2 text-white font-bold px-6 py-2 mr-2 -top-4 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
           >
-            Sair 
+            Sair
           </button>
 
           <button
@@ -647,7 +650,7 @@ function CartinhaPessoal() {
 
         {/* Subpódio */}
         {!showTable && (
-          <div className="fixed sm:text-sm md:text-base bottom-32 sm:bottom-24 md:bottom-28 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 md:px-4">
+          <div className="fixed   max-sm:bottom-24   max-md:bottom-24 md:bottom-36 left-1/2 transform -translate-x-1/2 w-full max-w-7xl z-50 md:h-1 px-4">
             <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4  ">
               {topThree.slice(3).map((player, index) => (
                 <li
@@ -661,12 +664,12 @@ function CartinhaPessoal() {
                     alt={player.name}
                     className="w-7 h-7  rounded-full object-cover"
                   />
-                  <div className="sm:grid lg:flex lg:justify-start lg:items-center w-64">
-                    <span className="font-semibold text-left sm:text-sm/6 flex-grow mx-1 ">
+                  <div className="sm:grid max-sm:grid max-sm:ml-2 lg:flex lg:justify-start lg:items-center w-64">
+                    <span className="font-semibold text-left max-sm:text-sm sm:text-sm flex-grow mx-1 ">
                       {player.name}
                     </span>
 
-                    <span className="text-gray-600 sm:ml-2 sm:text-sm/6">{player.vendasTotais.toFixed(2)}</span>
+                    <span className="text-gray-600 sm:ml-2 sm:text-sm">{player.vendasTotais.toFixed(2)}</span>
                   </div>
                 </li>
               ))}
@@ -682,16 +685,16 @@ function CartinhaPessoal() {
               <li
                 key={option.value}
                 className={`relative cursor-pointer text-lg uppercase font-semibold px-4 py-2 rounded-lg 
-        transition-all duration-300 sm:text-xl md:text-2xl lg:text-xs
+        transition-all duration-300 max-md:text-sm md:text-sm  
         ${searchFilter === option.value
-                    ? "bg-black text-white sm:text-sm md:text-sm max-sm:text-sm"
-                    : "bg-[#0b0908] text-gray-200 hover:bg-[#0b0908] hover:text-white sm:text-sm md:text-sm max-sm:text-sm"
+                    ? "bg-black text-white max-md:text-sm"
+                    : "bg-[#0b0908] text-gray-200 hover:bg-[#0b0908] hover:text-white max-md:text-sm"
                   }`}
                 onClick={() => handleSelect(option.value)}
               >
                 {option.label}
                 <span
-                  className={`absolute left-0 bottom-0 h-1 w-full bg-[#dba24d] transition-transform duration-300 
+                  className={`absolute left-0 bottom-0 h-1 w-full ${groupUser}-bg-custom transition-transform duration-300 
         ${searchFilter === option.value
                       ? "transform scale-x-100"
                       : "transform scale-x-0 hover:scale-x-100"
@@ -802,7 +805,7 @@ function CartinhaPessoal() {
                       <li
                         key={index}
                         onClick={() => setCurrentPage(index)}
-                        className={`my-2 text-2xl cursor-pointer hover:border-[#dba24d] px-3 text-black border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#dba24d]' : ''}`}>{index + 1}
+                        className={`my-2 text-2xl cursor-pointer hover:border-black px-3 text-black border-2 mx-1 rounded-md ${currentPage === index ? 'font-bold text-[#dba24d]' : ''}`}>{index + 1}
                       </li>
                     ))
                   }
@@ -810,30 +813,30 @@ function CartinhaPessoal() {
               </div>
 
               <div className="text-center text-xl flex justify-center items-center mt-10 sm:mt-4 max-sm:mt-4">
-                <div className="border-2 border-[#dba24d] flex justify-center items-center px-2 py-1 rounded-md shadow-md">
-                  <p className="mr-2 font-semibold">
+                <div className=" flex justify-center items-center px-2 py-1 rounded-md shadow-md">
+                  <p className="mr-2 font-semibold text-white">
                     Total Vendido:
                   </p>
-                  <b className="text-[#dba24d] font-semibold">{(totalJaVendido).toFixed(2)}</b>
+                  <b className={`text-${groupUser} font-semibold`}>{(totalJaVendido).toFixed(2)}</b>
                 </div>
               </div>
               <div className="mt-5  max-sm:mb-4  flex space-x-4 justify-center">
                 <button
                   onClick={exportarCSV}
-                  className="bg-orange-500 hover:bg-yellow-400 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                  className={`${groupUser}-btn-alert  font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
                 >
                   Exportar como CSV
                 </button>
                 <button
                   onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
-                  className={userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? "bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110" : "hidden"}
+                  className={userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? `${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110` : "hidden"}
                 >
                   Novo cadastro
                 </button>
 
                 <button
                   onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
-                  className="bg-[#dba24d] hover:bg-yellow-600 hover:text-black text-white font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
+                  className={`${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
                 >
                   Minha cartinha
                 </button>

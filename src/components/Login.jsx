@@ -53,7 +53,7 @@ function Login() {
 
 
   return (
-    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gradient-to-br from-green-100 via-blue-300 to-white min-h-screen flex flex-col items-center justify-center">
       <div id="app" className="max-w-sm w-full bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-center text-black text-2xl font-bold mb-4">Login</h1>
         <form onSubmit={handleLogin}>

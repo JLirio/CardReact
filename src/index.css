@@ -82,7 +82,7 @@
 }
 
 .horus-btn-escuro {
-    background-color: #fb923c;
+    background-color: #f97316;
     /* Cor equivalente ao bg-orange-500 */
     transition: background-color 0.3s ease;
     /* Transição suave para a cor de fundo */
@@ -95,7 +95,7 @@
 }
 
 .horus-btn {
-    background-color: #f97316;
+    background-color: #ff7300;
     color: white;
 }
 
@@ -104,17 +104,136 @@
     color: black;
 }
 
+.horus-btn-alert {
+    background-color: #ff7300;
+    color: white;
+}
 
-/* Tema para Empresa B */
-.allide {
-    background: linear-gradient(to bottom right, #38b6ff, #bdc1c9, #38b6ff);
+.horus-btn-alert:hover {
+    background-color: #fbbf24;
+    color: black;
+}
+
+.horus-btn-normal {
+    background-color: #dba24d;
+    color: white;
+}
+
+.horus-btn-normal:hover {
+    background-color: #f59e0b;
+    color: black;
+}
+
+.horus-btn-black {
+    background-color: black;
+    color: white;
+}
+
+.horus-btn-black:hover {
+    background-color: #fbbf24;
+    color: black;
+}
+
+.text-horus {
+    color: #fdba74;
+    /* Cor laranja suave (text-orange-300) */
+}
+
+.horus-bg-custom {
+    background-color: #dba24d;
+    /* Cor de fundo no hover */
+}
+.text-horus-darkness {
+    color: #ffc012;
+    /* Cor laranja suave (text-orange-300) */
 }
 
 
+/* Tema para Empresa B */
+.allide {
+    background: linear-gradient(to bottom right, #1d6a97, #d4d7dd, #1d6a97);
+}
+
+.allide-btn-escuro {
+    background-color: #00a2ff;
+    /* Cor equivalente ao bg-orange-500 */
+    transition: background-color 0.3s ease;
+    /* Transição suave para a cor de fundo */
+}
+
+/* Estilo para o efeito hover */
+.allide-btn-escuro:hover {
+    background-color: #1d6a97;
+    /* Cor equivalente ao hover:bg-orange-600 */
+}
+
+.allide-btn {
+    background-color: #58bcf7;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+.allide-btn:hover {
+    background-color: #134f72;
+    color: black;
+}
+
+.allide-btn-alert {
+    background-color: #58bcf7;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+.allide-btn-alert:hover {
+    background-color: #93fbff;
+    color: black;
+}
+
+.allide-btn-normal {
+    background-color: #8fcbe7;
+    color: white;
+}
+
+.allide-btn-normal:hover {
+    background-color: #134f72;
+    color: white;
+}
+
+.allide-btn-black {
+    background-color: black;
+    color: white;
+}
+
+.allide-btn-black:hover {
+    background-color: #93fbff;
+    color: black;
+}
+
+.text-allide {
+    color: #d5f8fe;
+    /* Cor laranja suave (text-orange-300) */
+}
+
+.text-allide-darkness {
+    color: #2de0ff;
+    /* Cor laranja suave (text-orange-300) */
+}
+
+.allide-bg-custom {
+    background-color: #23a9f7;
+    /* Cor de fundo no hover */
+}
+
 @keyframes blink {
-    0% { background-color: red; }
-    100% { background-color: transparent; }
-  }
-  .blinking-bg {
+    0% {
+        background-color: red;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.blinking-bg {
     animation: blink 0.6s infinite alternate;
-  }
+}

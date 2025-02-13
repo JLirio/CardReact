@@ -12,6 +12,7 @@ function CadastroPontos() {
   const [isFetchig, setIsFetching] = useState(false)
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
 
   useEffect(() => {
     if (userId.id) {
@@ -130,7 +131,7 @@ function CadastroPontos() {
 
 
   return (
-    <div className="bg-gradient-to-br from-black via-orange-300 to-black min-h-screen flex flex-col items-center justify-center">
+    <div className={`${groupUser} min-h-screen flex flex-col items-center justify-center`}>
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
         <button
           onClick={() => navigate("/")} // Redireciona para /login
@@ -291,7 +292,7 @@ function CadastroPontos() {
                           <p className="text-sm text-blue-500 font-semibold">Você adicionou {selectedFile.name}</p>
                         ) : (
                           <p className="text-sm text-gray-500">
-                            Arraste uma imagem ou <span className="text-orange-300">Escolha do Computador</span>
+                            Arraste uma imagem ou <span className={`text-${groupUser}-darkness`}>Escolha do Computador</span>
                           </p>
                         )
                     }
@@ -303,7 +304,7 @@ function CadastroPontos() {
           </div>
           <button
             type="submit"
-            className={`w-full ${isFetchig ? `bg-slate-600 hover:bg-slate-600` : `bg-[#e7b56a] hover:bg-[#dba24d] text-black hover:text-white`}  text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300`}
+            className={`w-full ${isFetchig ? `bg-slate-600 hover:bg-slate-600` : `${groupUser}-btn`}  text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300`}
             disabled={isFetchig}
           >
             {isFetchig ? 'Atualizando' : 'Atualizar Cadastro'}

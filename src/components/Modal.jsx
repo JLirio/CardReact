@@ -1,3 +1,5 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
@@ -11,6 +13,7 @@ export default function Modal({
 }) {
 
     const [newSalesValue, setNewSalesValue] = useState(0);
+    const groupUser = JSON.parse(localStorage.getItem("groupUser"));
 
     useEffect(() => {
         // Dependendo do estado do modal ou do usuário, você pode fazer algum efeito colateral aqui, se necessário.
@@ -64,7 +67,7 @@ export default function Modal({
                     </div>
                     <div className="flex justify-center items-center my-2 gap-2">
                         <button
-                            className="p-2 w-[60%] bg-[#e7b56a] hover:bg-[#dba24d] text-white cursor-pointer rounded-md  font-semibold text-lg transition hover:scale-[1.02]"
+                            className={`p-2 w-[60%] ${groupUser}-btn-alert text-white cursor-pointer rounded-md  font-semibold text-lg transition hover:scale-[1.02]`}
                             onClick={handleUpdate}
                         >
                             {buttonTitle}
