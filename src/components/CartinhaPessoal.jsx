@@ -420,7 +420,7 @@ function CartinhaPessoal() {
           </td>
           <td
             className={
-              userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+              userInfo?.cargo === "admin" || userInfo?.cargo === "lider" || userInfo?.cargo === "supervisor"
                 ? "px-4 py-2 sm:px-1 sm:py-1 border flex space-x-2 justify-center"
                 : "hidden"
             }
@@ -482,7 +482,7 @@ function CartinhaPessoal() {
             </div>
             <button
               className={
-                userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                userInfo?.cargo === "admin" || userInfo?.cargo === "lider" || userInfo?.cargo === "supervisor"
                   ? "px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-600 transition mt-3"
                   : "hidden"
               }
@@ -740,7 +740,7 @@ function CartinhaPessoal() {
                   value={searchGroup}
                   onChange={(e) => setSearchGroup(e.target.value)}
                   className={
-                    userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                    userInfo?.cargo === "admin" || userInfo?.cargo === "lider" || userInfo?.cargo === "supervisor"
                       ? "border border-gray-400 px-4 py-2 rounded-lg shadow max-sm:px-2 max-sm:py-1"
                       : "hidden"
                   }
@@ -781,7 +781,7 @@ function CartinhaPessoal() {
                       <th className="px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold">Cargo</th>
                       <th
                         className={
-                          userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor"
+                          userInfo?.cargo === "admin" || userInfo?.cargo === "lider" || userInfo?.cargo === "supervisor"
                             ? "px-4 py-2 sm:px-2 max-sm:px-1 text-center font-bold"
                             : "hidden"
                         }
@@ -834,7 +834,7 @@ function CartinhaPessoal() {
                 </button>
                 <button
                   onClick={() => navigate(`/cadastrar/${groupUser}?`)} // Redireciona para /pontos sem o userId
-                  className={userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? `${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110` : "hidden"}
+                  className={userInfo?.cargo === "admin" || userInfo?.cargo === "lider" || userInfo?.cargo === "supervisor" ? `${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110` : "hidden"}
                 >
                   Novo cadastro
                 </button>

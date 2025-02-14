@@ -74,9 +74,8 @@ function CadastroPontos() {
     let vendasA = parseFloat(document.getElementById("vendasA").value.replace(',', '.').trim());
     let vendasB = parseFloat(document.getElementById("vendasB").value.replace(',', '.').trim());
 
-    const senha = document.getElementById("senha").value.trim();
-    const cargo = document.getElementById("cargo").value.trim();
-    const group = document.getElementById("group").value.trim().toLowerCase();;
+    const cargo = document.getElementById("cargo").value.trim().toLowerCase();;
+    const group = document.getElementById("group").value.trim().toLowerCase();
 
     let hasError = false;
 
@@ -106,7 +105,7 @@ function CadastroPontos() {
       group,
     };
 
-    if (senhaInput) {
+    if (senhaInput != null) {
       novoCadastro.senha = senhaInput;
     }
 
