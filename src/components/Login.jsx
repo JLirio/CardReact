@@ -11,7 +11,7 @@ const getUserInfo = async () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userData = response.data; // Removi o await desnecessário aqui
-      
+
       localStorage.setItem("userInfo", JSON.stringify(userData));
       localStorage.setItem("groupUser", JSON.stringify(userData.group));
       return userData; // Retorna os dados do usuário
@@ -41,11 +41,13 @@ function Login() {
 
       // Obtém as informações do usuário antes de navegar
       const userInfo = await getUserInfo();
-
+      if (userInfo.group == "admin") {
+        userInfo.group = "horus";
+      }
       if (userInfo && userInfo.group) {
         navigate(`/cartinha/${userInfo.group}`);
         console.log(userInfo.group);
-        
+
       } else {
         setErrorMessage("Erro ao obter informações do usuário.");
       }
