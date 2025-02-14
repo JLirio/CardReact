@@ -4,7 +4,7 @@ export default function AlertModal({ visible, closeModal }) {
     const audioRef = useRef(null); // Referência para o áudio
     useEffect(() => {
         if (visible) {
-            audioRef.current = new Audio("./alarme.mp3");
+            audioRef.current = new Audio("../public/alarme.mp3");
             audioRef.current.loop = true; // Faz o som tocar continuamente até ser parado
             audioRef.current.play();
         } else {
@@ -25,7 +25,7 @@ export default function AlertModal({ visible, closeModal }) {
                 onClick={(e) => e.stopPropagation()} // Impede que clique dentro feche a modal
             >
                 <h1 className="text-2xl font-bold text-red-600">ALERTA!</h1>
-                <img src="./danger-alert.gif" alt="Alerta" className="w-48 h-48 my-4" />
+                <img src="../public/danger-alert.gif" alt="Alerta" className="w-48 h-48 my-4" />
                 <h3 className="text-base font-bold text-red-600">NÍVEL DE VENDAS BAIXO</h3>
             </div>
         </div>
