@@ -72,7 +72,7 @@ function CadastrarUser() {
 
       const response = await api.post("/usuarios", formData);
       console.log("Usuário cadastrado com sucesso:", response.data);
-      navigate("/cartinha"); // Redirecionar após o cadastro bem-sucedido
+      navigate(`/cartinha/${groupUser}?`); // Redirecionar após o cadastro bem-sucedido
     } catch (error) {
       console.error("Erro ao cadastrar usuário:", error);
       setErrorMessage("Ocorreu um erro ao cadastrar. Tente novamente.");

@@ -123,7 +123,7 @@ function CadastroPontos() {
         console.log("Novo usuário cadastrado com sucesso!");
       }
       setIsFetching(false)
-      navigate("/cartinha");
+      navigate(`/cartinha/${groupUser}?`);
     } catch (error) {
       console.error("Erro ao salvar usuário:", error);
     }
