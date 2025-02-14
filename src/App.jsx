@@ -23,13 +23,13 @@ function App() {
         {/* Rota para Login */}
         <Route path="/" element={<Login />} />
         {/* Rota para Cadastro */}
-        <Route path="/cadastrar" element={<Cadastrar />} />
+        <Route path="/cadastrar/:group?" element={<Cadastrar />} />
         {/* Rota para Exibir Informações do Usuário */}
         <Route path="/userInf" element={<UserInf />} />
         {/* Rota para Cartinha Pessoal */}
-        <Route path="/cartinha" element={<Cartinha />} />
+        <Route path="/cartinha/:group?" element={<Cartinha />} />
         {/* Rota para Card Fifa */}
-        <Route path="/pessoal" element={<FifaCard />} />
+        <Route path="/pessoal/:group?" element={<FifaCard />} />
         {/* <Route
           path="/fifa"
           element={
@@ -40,7 +40,7 @@ function App() {
           }
         /> */}
         {/* Rota para Cadastro de Pontos com ID opcional */}
-        <Route path="/pontos/:id?" element={<CadastroPontos />} />
+        <Route path="/pontos/:id?/:group?" element={<CadastroPontos />} />
       </Routes>
     </Router>
   );

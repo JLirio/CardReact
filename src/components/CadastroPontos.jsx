@@ -12,7 +12,7 @@ function CadastroPontos() {
   const [isFetchig, setIsFetching] = useState(false)
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
+  const [groupUser, setGroupUser] = useState(userId.group || "");
 
   useEffect(() => {
     if (userId.id) {
@@ -312,7 +312,8 @@ function CadastroPontos() {
         </form>
 
         <button
-          onClick={() => navigate("/cartinha")}
+          onClick={() =>  navigate(`/cartinha/${groupUser}?`) }
+          type="button"
           className="mt-4 w-full bg-gray-500 hover:bg-gray-600 text-white text-lg font-semibold py-3 rounded-lg shadow-lg transition duration-300"
         >
           Voltar

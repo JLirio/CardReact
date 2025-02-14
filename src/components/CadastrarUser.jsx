@@ -1,11 +1,13 @@
-import { redirect, useNavigate } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import { useState } from "react";
 
 function CadastrarUser() {
 
   const [selectedFile, setSelectedfile] = useState('');
-  const groupUser = JSON.parse(localStorage.getItem("groupUser"));
+  let groupU = useParams();
+
+  const [groupUser, setGroupUser] = useState(groupU.group || "");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -213,7 +215,8 @@ function CadastrarUser() {
             </button>
             <button
               className="mt-2 w-full bg-slate-500 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg"
-              onClick={() => navigate('/cartinha')}
+              type="button"
+              onClick={() => navigate(`/cartinha/${groupUser}?`) }
             >
               Voltar
             </button>

@@ -3,20 +3,20 @@ import api from "../services/api"; // Suponha que você tenha configurado a API
 import { useState } from "react";
 
 const getUserInfo = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   if (token) {
     try {
-      const response = await api.get('/usuarios/user-info', {
+      const response = await api.get("/usuarios/user-info", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const userData = await response.data;
+      const userData = response.data; // Removi o await desnecessário aqui
       
       localStorage.setItem("userInfo", JSON.stringify(userData));
       localStorage.setItem("groupUser", JSON.stringify(userData.group));
-      return userData; // Dados do usuário
+      return userData; // Retorna os dados do usuário
     } catch (error) {
-      console.error('Failed to fetch user info', error);
+      console.error("Failed to fetch user info", error);
     }
   }
   return null;
@@ -34,17 +34,21 @@ function Login() {
 
     try {
       const response = await api.post("/usuarios/login", { email, password });
-      const { token, user } = response.data;
+      const { token } = response.data;
 
-      // Armazenar o token no localStorage
+      // Armazena o token no localStorage
       localStorage.setItem("token", token);
 
+      // Obtém as informações do usuário antes de navegar
+      const userInfo = await getUserInfo();
 
-
-      getUserInfo();
-      // Redirecionar para a página protegida (por exemplo, /cartinha)
-      navigate("/cartinha");
-
+      if (userInfo && userInfo.group) {
+        navigate(`/cartinha/${userInfo.group}`);
+        console.log(userInfo.group);
+        
+      } else {
+        setErrorMessage("Erro ao obter informações do usuário.");
+      }
     } catch (error) {
       console.error(error);
       setErrorMessage("Usuário ou senha incorretos.");

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
@@ -13,7 +13,9 @@ export default function Modal({
 }) {
 
     const [newSalesValue, setNewSalesValue] = useState(0);
-    const groupUser = JSON.parse(localStorage.getItem("groupUser"));
+    let groupU = useParams();
+
+    const [groupUser, setGroupUser] = useState(groupU.group || "");
 
     useEffect(() => {
         // Dependendo do estado do modal ou do usuário, você pode fazer algum efeito colateral aqui, se necessário.

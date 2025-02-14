@@ -2,17 +2,20 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useEffect, useState } from "react";
 import Usuarios from '../models/Usuario';
+import { useParams } from "react-router-dom";
 import { Tilt } from "react-tilt";
 import Modal from "./Modal";
 import AlertModal from "./AlertaModal";
 
 function CartinhaPessoal() {
+  let groupU = useParams();
+
+  const [groupUser, setGroupUser] = useState(groupU.group || "");
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const groupU = JSON.parse(localStorage.getItem("groupUser"));
   let contReloader = 1;
-  let filterTotais = false;
+
   const navigate = useNavigate();
-  const [groupUser, setGroupUser] = useState();
+
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -27,20 +30,9 @@ function CartinhaPessoal() {
   const [modalVisibility, setModalVisibility] = useState(false)
   const [isModalOpenAlert, setIsModalOpenAlert] = useState(false);
   const [currentUserInModal, setCurrentUserInModal] = useState("")
-  let countUserGroup = 0
-
-  useEffect(() => {
-    if (groupU != null && countUserGroup == 0) {
-      setGroupUser(groupU);
-      countUserGroup = 2;
-    }
-    
-  }, [])
-
   const [totalJaVendido, setTotalJaVendido] = useState(0);
 
   const [showTable, setShowTable] = useState(false);
-  const [podio, setPodio] = useState([])
   const [podioTotais, setPodioTotais] = useState([]);
   const [podioJuridicas, setPodioJuridicas] = useState([]);
   const [podioComerciais, setPodioComerciais] = useState([]);
@@ -177,6 +169,10 @@ function CartinhaPessoal() {
 
   // Função para buscar usuários da API
   async function getUsers() {
+    console.log(groupUser);
+    
+
+    
     try {
       const response = await api.get("/usuarios");
       setUsers(response.data);
@@ -189,7 +185,7 @@ function CartinhaPessoal() {
 
   // ver minha cartinha
   const handleViewCartinha = (searchId) => {
-    navigate(`/pontos/${searchId}`);
+    navigate(`/pontos/${searchId}/${groupUser}?`);
   };
 
   function filtersList() {
@@ -276,7 +272,7 @@ function CartinhaPessoal() {
   // Função para atualizar os filtros
   useEffect(() => {
     if (userInfo?.group != "") {
-
+      setCurrentPage(0)
       filtersList()
     }
 
@@ -364,7 +360,12 @@ function CartinhaPessoal() {
 
   const renderTableRows = () => {
     let referenceList = pagination.length > 0 ? pagination[currentPage] : filteredUsers;
+    // let referenceList = pagination.length > 0 && pagination[currentPage] 
+    // ? pagination[currentPage] 
+    // : filteredUsers;
 
+  // Se referenceList for undefined, transforme em um array vazio
+  referenceList = referenceList || [];
     // Filtra os usuários com base no searchFilter
     if (searchFilter === "juridicas") {
       referenceList = referenceList.filter(user =>
@@ -448,10 +449,6 @@ function CartinhaPessoal() {
       );
     });
   };
-
-  // 
-  // 
-  // 
 
   // pag return
   return (
@@ -836,14 +833,14 @@ function CartinhaPessoal() {
                   Exportar como CSV
                 </button>
                 <button
-                  onClick={() => navigate("/cadastrar")} // Redireciona para /pontos sem o userId
+                  onClick={() => navigate(`/cadastrar/${groupUser}?`)} // Redireciona para /pontos sem o userId
                   className={userInfo?.cargo === "Admin" || userInfo?.cargo === "Lider" || userInfo?.cargo === "Supervisor" ? `${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110` : "hidden"}
                 >
                   Novo cadastro
                 </button>
 
                 <button
-                  onClick={() => navigate("/pessoal")} // Redireciona para /pontos sem o userId
+                  onClick={() => navigate(`/pessoal/${groupUser}?`)} // Redireciona para /pontos sem o userId
                   className={`${groupUser}-btn-normal font-bold px-6 py-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110`}
                 >
                   Minha cartinha

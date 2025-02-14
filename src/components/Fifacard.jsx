@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
@@ -8,9 +8,11 @@ import { Tilt } from "react-tilt";
 import api from "../services/api";
 
 function FifaCard() {
+    let groupU = useParams();
+
+    const [groupUser, setGroupUser] = useState(groupU.group || "");
     const navigate = useNavigate();
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const groupUser = JSON.parse(localStorage.getItem("groupUser"));
     let userId = userInfo.id;
     const [user, setUser] = useState(null);
 
@@ -47,7 +49,7 @@ function FifaCard() {
         <div className={`${groupUser} min-h-screen w-full flex flex-col items-center justify-center`}>
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2  text-black font-bold text-lg rounded-full w-full h-12 flex items-end justify-end">
                 <button
-                    onClick={() => navigate("/cartinha")} // Redireciona para /login
+                    onClick={() => navigate(`/cartinha/${groupUser}?`)} // Redireciona para /login
                     className=" bg-white hover:bg-grey-500 hover:text-black text-black font-bold px-6 py-2 mr-2 rounded-full shadow-lg transform transition duration-300 hover:scale-110"
                 >
                     Voltar
