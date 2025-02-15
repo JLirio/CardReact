@@ -541,7 +541,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[1].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[1].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
+                            : topThree[1].group === "allide" ? "https://imgur.com/a/QSdIXOM"
                               : ""
                         }
                         alt="Club Logo"
@@ -586,7 +586,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
+                            : topThree[0].group === "allide" ? "https://imgur.com/a/QSdIXOM"
                               : ""
                         }
                         alt="Club Logo"
@@ -624,7 +624,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "allide" ? "https://cdn.discordapp.com/attachments/1115828357544808539/1339376722587422841/WhatsApp_Image_2025-02-12_at_10.14.20_1.jpeg?ex=67ae7f47&is=67ad2dc7&hm=b4fe0ba99a91a4cec168b9fb603bc8c631ab4b024c7fe9f448a7f4a0e1763345&"
+                            : topThree[0].group === "allide" ? "https://imgur.com/a/QSdIXOM"
                               : ""
                         }
                         alt="Club Logo"
