@@ -170,9 +170,9 @@ function CartinhaPessoal() {
   // Função para buscar usuários da API
   async function getUsers() {
     console.log(groupUser);
-    
 
-    
+
+
     try {
       const response = await api.get("/usuarios");
       setUsers(response.data);
@@ -364,8 +364,8 @@ function CartinhaPessoal() {
     // ? pagination[currentPage] 
     // : filteredUsers;
 
-  // Se referenceList for undefined, transforme em um array vazio
-  referenceList = referenceList || [];
+    // Se referenceList for undefined, transforme em um array vazio
+    referenceList = referenceList || [];
     // Filtra os usuários com base no searchFilter
     if (searchFilter === "juridicas") {
       referenceList = referenceList.filter(user =>
@@ -454,6 +454,7 @@ function CartinhaPessoal() {
   return (
 
     <>
+      <img src="/danger-alert.gif" alt="Alerta" className="w-48 h-48 my-4 hidden" />
       <audio id="cash-audio" src="./cash.mp3" hidden></audio>
       <audio id="passingby-audio" src="./f1-passingby.mp3" hidden></audio>
       <Modal
