@@ -541,7 +541,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[1].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[1].group === "allide" ? "https://imgur.com/a/QSdIXOM"
+                            : topThree[1].group === "allide" ? "https://i.imgur.com/EZ637p8.jpeg"
                               : ""
                         }
                         alt="Club Logo"
@@ -586,7 +586,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "allide" ? "https://imgur.com/a/QSdIXOM"
+                            : topThree[0].group === "allide" ? "https://i.imgur.com/EZ637p8.jpeg"
                               : ""
                         }
                         alt="Club Logo"
@@ -624,7 +624,7 @@ function CartinhaPessoal() {
                       <img
                         src={
                           topThree[0].group === "horus" ? "https://i.imgur.com/AZynwEp.jpeg"
-                            : topThree[0].group === "allide" ? "https://imgur.com/a/QSdIXOM"
+                            : topThree[0].group === "allide" ? "https://i.imgur.com/EZ637p8.jpeg"
                               : ""
                         }
                         alt="Club Logo"
