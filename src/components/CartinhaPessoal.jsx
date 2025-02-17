@@ -455,9 +455,9 @@ function CartinhaPessoal() {
 
     <>
       <img src="/danger-alert.gif" alt="Alerta" className="w-48 h-48 my-4 hidden" />
-      <audio id="cash-audio" src="./cash.mp3" hidden></audio>
-      <audio id="alert" src="./alarme.mp3" hidden></audio>
-      <audio id="passingby-audio" src="./f1-passingby.mp3" hidden></audio>
+      <audio id="cash-audio" src="/cash.mp3" hidden></audio>
+      <audio id="alert" src="/alarme.mp3" hidden></audio>
+      <audio id="passingby-audio" src="/f1-passingby.mp3" hidden></audio>
       <Modal
         visible={modalVisibility}
         title={"Adicionar Vendas"}
